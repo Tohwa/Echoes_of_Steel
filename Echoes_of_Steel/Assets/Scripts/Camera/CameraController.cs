@@ -14,6 +14,8 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float cameraMaxDist = 25f;
     [SerializeField]
+    private float cameraMinDist = 2f;
+    [SerializeField]
     private float cameraMaxTilt = 90f;
     [Range(0f, 4f)][SerializeField]
     private float cameraSpeed = 2f;
@@ -38,9 +40,11 @@ public class CameraController : MonoBehaviour
     private bool RMBstate = false;
     [SerializeField]
     private Vector2 mouseAxis;
+    private float mouseX;
+    private float mouseY;
     [SerializeField]
-    private Vector2 scroolWheelValue;
-
+    private Vector2 scrollWheelValue;
+    private float scrollValue;
     //CameraState
     public CameraStates camState = CameraStates.cameraIdle;
 
@@ -77,7 +81,7 @@ public class CameraController : MonoBehaviour
         {
             camState = CameraStates.cameraRotate;
         }
-        else if (RMBstate && !LMBstate)
+        else if (!LMBstate && RMBstate)
         {
             camState = CameraStates.cameraSteer;
         }
@@ -92,19 +96,34 @@ public class CameraController : MonoBehaviour
 
     private void CameraInput()
     {
-        if(camState != CameraStates.cameraIdle)
+        LMBstate = Input.GetKey(KeyCode.Mouse0);
+        RMBstate = Input.GetKey(KeyCode.Mouse1);
+
+        if (camState != CameraStates.cameraIdle)
         {
             if(camState == CameraStates.cameraRotate)
             {
-                currentPan += mouseAxis.x * cameraSpeed;
+                mouseX = Input.GetAxis("Mouse X") * cameraSpeed;
+                currentPan += /*mouseAxis.x * cameraSpeed*/ mouseX;
+
+                // steer interference = false
+            }
+            else if(camState == CameraStates.cameraSteer)
+            {
+                mouseX = Input.GetAxis("Mouse X") * cameraSpeed;
+                currentPan += /*mouseAxis.x * cameraSpeed*/ mouseX;
+
+                // steer interference = true
             }
 
-            currentTilt -= mouseAxis.y * cameraSpeed;
+            mouseY = Input.GetAxis("Mouse Y") * cameraSpeed;
+            currentTilt -= /*mouseAxis.y * cameraSpeed*/ mouseY;
             currentTilt = Mathf.Clamp(currentTilt, -cameraMaxTilt, cameraMaxTilt);
         }
 
-        currentDist -= scroolWheelValue.y;
-        currentDist = Mathf.Clamp(currentDist, 0, cameraMaxDist);
+        scrollValue = Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+        currentDist -= /*scrollWheelValue.y*/ scrollValue;
+        currentDist = Mathf.Clamp(currentDist, cameraMinDist, cameraMaxDist);
     }
 
     private void CameraTransformation()
@@ -113,7 +132,6 @@ public class CameraController : MonoBehaviour
         {
             case CameraStates.cameraIdle:
                 currentPan = player.transform.eulerAngles.y;
-                currentTilt = 10f;
                 break;
             case CameraStates.cameraRotate:
 
@@ -123,7 +141,11 @@ public class CameraController : MonoBehaviour
                 break;
         }
 
-        currentPan = player.transform.eulerAngles.y;
+        if(camState == CameraStates.cameraIdle)
+        {
+            currentTilt = 10f;
+        }
+
 
         transform.position = player.transform.position + Vector3.up * cameraHeight;
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentPan, transform.eulerAngles.z);
@@ -138,7 +160,7 @@ public class CameraController : MonoBehaviour
 
     public void GetScrollWheelValue(InputAction.CallbackContext ctx)
     {
-        scroolWheelValue = ctx.ReadValue<Vector2>();
+        scrollWheelValue = ctx.ReadValue<Vector2>();
     }
 
     public void GetLMBState(InputAction.CallbackContext ctx)
