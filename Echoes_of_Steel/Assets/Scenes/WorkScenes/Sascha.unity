@@ -156,6 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee72401d5540db4eb73e1b96f354e3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  moveSpeed: 100
 --- !u!54 &350769464
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -181,7 +183,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &350769465
 BoxCollider:
@@ -410,6 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraHeight: 1.75
   cameraMaxDist: 15
+  cameraMinDist: 2
   cameraMaxTilt: 90
   cameraSpeed: 2
   zoomSpeed: 2
@@ -420,7 +423,7 @@ MonoBehaviour:
   LMBstate: 0
   RMBstate: 0
   mouseAxis: {x: 0, y: 0}
-  scroolWheelValue: {x: 0, y: 0}
+  scrollWheelValue: {x: 0, y: 0}
   camState: 0
 --- !u!1 &963194225
 GameObject:
