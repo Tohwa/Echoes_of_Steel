@@ -18,6 +18,7 @@ public class PController : MonoBehaviour
     }
 
     private void OnDisable()
+
     {
         moveAction.action.Disable();
         moveAction.action.performed -= OnMove;
