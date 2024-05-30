@@ -17,9 +17,10 @@ public class CameraController : MonoBehaviour
     private float cameraMinDist = 2f;
     [SerializeField]
     private float cameraMaxTilt = 90f;
-    [Range(0f, 4f)][SerializeField]
-    private float cameraSpeed = 2f;
-    [Range(0f, 4f)][SerializeField]
+    [Range(0f, 4f)]
+    public float cameraSpeed = 2f;
+    [Range(0f, 4f)]
+    [SerializeField]
     private float zoomSpeed = 2f;
     [SerializeField]
     float currentPan;
@@ -27,6 +28,19 @@ public class CameraController : MonoBehaviour
     private float currentTilt = 10f;
     [SerializeField]
     private float currentDist = 5f;
+
+    //Smoothing Variables
+    private float panAngle;
+    private float panOffSet;
+    private bool camXAdjust;
+    private bool camYAdjust;
+    private float rotationXCushion = 3;
+    private float rotationXSpeed = 0;
+    private float rotationYSpeed = 0;
+    private float yRotationMin = 0;
+    private float yRotationMax = 20;
+    [SerializeField]
+    private float rotationDivider = 100;
 
     //References
     PlayerController player;
@@ -37,7 +51,7 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private bool LMBstate = false;
     [SerializeField]
-    private bool RMBstate = false;
+    public bool RMBstate = false;
     [SerializeField]
     private Vector2 mouseAxis;
     private float mouseX;
@@ -45,9 +59,22 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Vector2 scrollWheelValue;
     private float scrollValue;
+
     //CameraState
     public CameraStates camState = CameraStates.cameraIdle;
+    public CameraCorrectState camCorrect = CameraCorrectState.OnlyWhileMoving;
 
+    //collision
+    [SerializeField]
+    private bool collisionDebug;
+    [SerializeField]
+    private float collisionCushion = 0.35f;
+    [SerializeField]
+    private float adjustedDistance;
+    [SerializeField]
+    private LayerMask collisionMask;
+    private Ray camRay;
+    private RaycastHit hit;
     #endregion
 
     public enum CameraStates
@@ -57,11 +84,24 @@ public class CameraController : MonoBehaviour
         cameraSteer
     }
 
+    public enum CameraCorrectState
+    {
+        OnlyWhileMoving,
+        OnlyHorizontalWhileMoving,
+        AlwaysAdjust,
+        NeverAdjust
+    }
+
+    private void Awake()
+    {
+        transform.SetParent(null);
+    }
+
     private void Start()
     {
-        
+
         player = FindObjectOfType<PlayerController>();
-        
+
         mainCamera = Camera.main;
 
         transform.position = player.transform.position + Vector3.up * cameraHeight;
@@ -77,43 +117,87 @@ public class CameraController : MonoBehaviour
         {
             camState = CameraStates.cameraIdle;
         }
-        else if(LMBstate && !RMBstate)
+        else if (RMBstate)
         {
             camState = CameraStates.cameraRotate;
         }
-        else if (!LMBstate && RMBstate)
-        {
-            camState = CameraStates.cameraSteer;
-        }
 
+        CheckCollision();
         CameraInput();
     }
 
     private void LateUpdate()
     {
+        panAngle = Vector3.SignedAngle(transform.forward, player.transform.forward, Vector3.up);
+
+        switch (camCorrect)
+        {
+            case CameraCorrectState.OnlyWhileMoving:
+                if (player.rb.velocity.magnitude > 0)
+                {
+                    CameraXAdjust();
+                    CameraYAdjust();
+                }
+                break;
+            case CameraCorrectState.OnlyHorizontalWhileMoving:
+                if (player.rb.velocity.magnitude > 0)
+                {
+                    CameraXAdjust();
+                }
+                break;
+            case CameraCorrectState.AlwaysAdjust:
+                CameraXAdjust();
+                CameraYAdjust();
+                break;
+            case CameraCorrectState.NeverAdjust:
+                CameraNeverAdjust();
+                break;
+        }
+
         CameraTransformation();
+    }
+
+    private void CheckCollision()
+    {
+        float camDistance = currentDist + collisionCushion;
+        camRay.origin = transform.position;
+        camRay.direction = -tilt.forward;
+
+        if(Physics.Raycast(camRay, out hit, camDistance, collisionMask))
+        {
+            adjustedDistance = Vector3.Distance(camRay.origin, hit.point) - collisionCushion;
+        }
+        else
+        {
+            adjustedDistance = currentDist;
+        }
+
+        if(collisionDebug)
+        {
+            Debug.DrawLine(camRay.origin, camRay.origin + camRay.direction * camDistance, Color.black);
+        }
     }
 
     private void CameraInput()
     {
-        LMBstate = Input.GetKey(KeyCode.Mouse0);
         RMBstate = Input.GetKey(KeyCode.Mouse1);
 
         if (camState != CameraStates.cameraIdle)
         {
-            if(camState == CameraStates.cameraRotate)
+            if (camState == CameraStates.cameraRotate)
             {
+                if (camCorrect != CameraCorrectState.NeverAdjust && !camXAdjust)
+                {
+                    camXAdjust = true;
+                }
+
+                if(camCorrect != CameraCorrectState.OnlyHorizontalWhileMoving && !camYAdjust)
+                {
+                    camYAdjust = true;
+                }
+
                 mouseX = Input.GetAxis("Mouse X") * cameraSpeed;
                 currentPan += /*mouseAxis.x * cameraSpeed*/ mouseX;
-
-                // steer interference = false
-            }
-            else if(camState == CameraStates.cameraSteer)
-            {
-                mouseX = Input.GetAxis("Mouse X") * cameraSpeed;
-                currentPan += /*mouseAxis.x * cameraSpeed*/ mouseX;
-
-                // steer interference = true
             }
 
             mouseY = Input.GetAxis("Mouse Y") * cameraSpeed;
@@ -126,31 +210,81 @@ public class CameraController : MonoBehaviour
         currentDist = Mathf.Clamp(currentDist, cameraMinDist, cameraMaxDist);
     }
 
-    private void CameraTransformation()
+    private void CameraNeverAdjust()
     {
         switch (camState)
         {
             case CameraStates.cameraIdle:
-                currentPan = player.transform.eulerAngles.y;
+                currentPan = player.transform.eulerAngles.y - panOffSet;
                 break;
             case CameraStates.cameraRotate:
-
-                break;
-            case CameraStates.cameraSteer:
-
+                panOffSet = panAngle;
                 break;
         }
+    }
 
-        if(camState == CameraStates.cameraIdle)
+    private void CameraXAdjust()
+    {
+        if (camState != CameraStates.cameraRotate)
         {
-            currentTilt = 10f;
+            if (camXAdjust)
+            {
+                rotationXSpeed += Time.deltaTime;
+
+                if (Mathf.Abs(panAngle) > rotationXCushion)
+                {
+                    currentPan = Mathf.Lerp(currentPan, currentPan + panAngle, rotationXSpeed / rotationDivider);
+                }
+                else
+                {
+                    camXAdjust = false;
+                }
+            }
+            else
+            {
+                if(rotationXSpeed > 0)
+                {
+                    rotationXSpeed = 0;
+                }
+
+                currentPan = player.transform.eulerAngles.y;
+            }
         }
+    }
 
+    private void CameraYAdjust()
+    {
+        if (camState != CameraStates.cameraRotate)
+        {
+            if (camYAdjust)
+            {
+                rotationYSpeed += Time.deltaTime;
 
+                if (currentTilt >= yRotationMax || currentTilt <= yRotationMin)
+                {
+                    currentTilt = Mathf.Lerp(currentTilt, yRotationMax / 2, rotationYSpeed / rotationDivider);
+                }
+                else if(currentTilt < yRotationMax && currentTilt > yRotationMin)
+                {
+                    camYAdjust = false;
+                }
+            }
+            else
+            {
+                if (rotationYSpeed > 0)
+                {
+                    rotationYSpeed = 0;
+                }
+            }
+        }
+    }
+
+    private void CameraTransformation()
+    {
         transform.position = player.transform.position + Vector3.up * cameraHeight;
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentPan, transform.eulerAngles.z);
         tilt.eulerAngles = new Vector3(currentTilt, tilt.eulerAngles.y, tilt.eulerAngles.z);
-        mainCamera.transform.position = transform.position + tilt.forward * -currentDist;
+        mainCamera.transform.position = transform.position + tilt.forward * -adjustedDistance;
     }
 
     public void GetMouseAxis(InputAction.CallbackContext ctx)
