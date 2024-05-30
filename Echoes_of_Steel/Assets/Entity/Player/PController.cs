@@ -7,11 +7,12 @@ using UnityEngine.InputSystem;
 
 public class PController : MonoBehaviour
 {
+    public Transform cameraTransform;
+    public LayerMask Ground;
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
-    public Transform cameraTransform;
+    public bool isGrounded;
 
-    private CharacterController characterController;
     private CapsuleCollider capsuleCollider;
     private Vector3 moveDirection;
     private Vector2 inputVector;
@@ -28,37 +29,24 @@ public class PController : MonoBehaviour
     {
         Move();
         GroundCheck();
-        
+
     }
 
-    private void GroundCheck()
+    public bool GroundCheck()
     {
-        Physics.CheckCapsule(
-            capsuleCollider.bounds.center, new Vector3(capsuleCollider.bounds.center.x, capsuleCollider.bounds.min.y - 0.1f, capsuleCollider.bounds.center.z),
-            0.18f);
+        if (Physics.CheckCapsule(capsuleCollider.bounds.center, new Vector3(capsuleCollider.bounds.center.x, capsuleCollider.bounds.min.y - 0.1f, capsuleCollider.bounds.center.z), 0.18f, Ground))
+        {
+            return isGrounded;
+        }
+        else 
+        {
+            return isGrounded = false;
+        }
     }
 
     private void Move()
     {
-        // Update the movement direction based on input
-        Vector3 forward = cameraTransform.forward;
-        Vector3 right = cameraTransform.right;
 
-        forward.y = 0f;
-        right.y = 0f;
-
-        forward.Normalize();
-        right.Normalize();
-
-        moveDirection = forward * inputVector.y + right * inputVector.x;
-        moveDirection *= moveSpeed;
-
-
-
-        //moveDirection.y = verticalVelocity;
-
-        // Move the character
-        characterController.Move(moveDirection * Time.deltaTime);
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -70,18 +58,18 @@ public class PController : MonoBehaviour
     {
         if (context.performed)
         {
-            // Apply gravity
-            if (characterController.isGrounded)
-            {
-                verticalVelocity = -10f; // Small negative value to keep the character grounded
+            //// Apply gravity
+            //if (characterController.isGrounded)
+            //{
+            //    verticalVelocity = -10f; // Small negative value to keep the character grounded
 
-                // Jump
-                if (jump)
-                {
-                    verticalVelocity = jumpForce;
-                    jump = false;
-                }
-            }
+            //    // Jump
+            //    if (jump)
+            //    {
+            //        verticalVelocity = jumpForce;
+            //        jump = false;
+            //    }
+            //}
 
             //else
             //{
