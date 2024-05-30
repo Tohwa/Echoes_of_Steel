@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 66a7a0836bccbbe41b8946f61b7d662d, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -316,9 +316,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18bba22c72de36749a03fd3d947fbeab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 164506340}
+  Ground:
+    serializedVersion: 2
+    m_Bits: 0
   moveSpeed: 5
   jumpForce: 5
-  cameraTransform: {fileID: 164506340}
+  isGrounded: 0
 --- !u!143 &164506342
 CharacterController:
   m_ObjectHideFlags: 0
@@ -357,7 +361,7 @@ GameObject:
   - component: {fileID: 507854557}
   - component: {fileID: 507854556}
   - component: {fileID: 507854555}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -697,7 +701,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c2b238ba6eaecdd41be266ee5cec60de, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -736,8 +740,8 @@ Transform:
   m_GameObject: {fileID: 1154278675}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8, z: 0}
-  m_LocalScale: {x: 7.29, y: 2.33, z: 6.86}
+  m_LocalPosition: {x: 0, y: 3.95, z: 0}
+  m_LocalScale: {x: 7.29, y: 8.61, z: 6.86}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
