@@ -32,6 +32,7 @@ public class PController : MonoBehaviour
 
     }
 
+    //Creates a capsule below the player to check if he is grounded
     public bool GroundCheck()
     {
         if (Physics.CheckCapsule(capsuleCollider.bounds.center, new Vector3(capsuleCollider.bounds.center.x, capsuleCollider.bounds.min.y - 0.1f, capsuleCollider.bounds.center.z), 0.18f, Ground))
