@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,7 +11,11 @@ public class CameraController : MonoBehaviour
 
     //Camera Variables
     [SerializeField]
-    private float cameraHeight = 1.75f;
+    private float cameraPlayerHeight = 1.75f;
+    [SerializeField]
+    private float cameraChildHeight = 2f;
+    [SerializeField]
+    private float cameraChildOffset = 0.25f;
     [SerializeField]
     private float cameraMaxDist = 25f;
     [SerializeField]
@@ -63,6 +68,7 @@ public class CameraController : MonoBehaviour
     //CameraState
     public CameraStates camState = CameraStates.cameraIdle;
     public CameraCorrectState camCorrect = CameraCorrectState.OnlyWhileMoving;
+    public CameraBasePosition basePosition = CameraBasePosition.PlayerPosition;
 
     //collision
     [SerializeField]
@@ -92,6 +98,12 @@ public class CameraController : MonoBehaviour
         NeverAdjust
     }
 
+    public enum CameraBasePosition
+    {
+        PlayerPosition,
+        ChildPosition
+    }
+
     private void Awake()
     {
         transform.SetParent(null);
@@ -104,11 +116,22 @@ public class CameraController : MonoBehaviour
 
         mainCamera = Camera.main;
 
-        transform.position = player.transform.position + Vector3.up * cameraHeight;
-        transform.rotation = player.transform.rotation;
+        if (basePosition == CameraBasePosition.PlayerPosition)
+        {
+            transform.position = player.transform.position + Vector3.up * cameraPlayerHeight;
+            transform.rotation = player.transform.rotation;
+        }
+        else if (basePosition == CameraBasePosition.ChildPosition)
+        {
+            //transform.position = player.transform.position + Vector3.up * cameraChildHeight;
+            transform.position = new Vector3(player.transform.position.x + 0f + cameraChildOffset, player.transform.position.y + 1f, player.transform.position.z + 0f) * cameraChildHeight;
+
+            transform.rotation = player.transform.rotation;
+        }
 
         tilt.eulerAngles = new Vector3(currentTilt, transform.eulerAngles.y, transform.eulerAngles.z);
         mainCamera.transform.position += tilt.forward * -currentDist;
+
     }
 
     private void Update()
@@ -163,7 +186,7 @@ public class CameraController : MonoBehaviour
         camRay.origin = transform.position;
         camRay.direction = -tilt.forward;
 
-        if(Physics.Raycast(camRay, out hit, camDistance, collisionMask))
+        if (Physics.Raycast(camRay, out hit, camDistance, collisionMask))
         {
             adjustedDistance = Vector3.Distance(camRay.origin, hit.point) - collisionCushion;
         }
@@ -172,7 +195,7 @@ public class CameraController : MonoBehaviour
             adjustedDistance = currentDist;
         }
 
-        if(collisionDebug)
+        if (collisionDebug)
         {
             Debug.DrawLine(camRay.origin, camRay.origin + camRay.direction * camDistance, Color.black);
         }
@@ -191,7 +214,7 @@ public class CameraController : MonoBehaviour
                     camXAdjust = true;
                 }
 
-                if(camCorrect != CameraCorrectState.OnlyHorizontalWhileMoving && !camYAdjust)
+                if (camCorrect != CameraCorrectState.OnlyHorizontalWhileMoving && !camYAdjust)
                 {
                     camYAdjust = true;
                 }
@@ -242,7 +265,7 @@ public class CameraController : MonoBehaviour
             }
             else
             {
-                if(rotationXSpeed > 0)
+                if (rotationXSpeed > 0)
                 {
                     rotationXSpeed = 0;
                 }
@@ -264,7 +287,7 @@ public class CameraController : MonoBehaviour
                 {
                     currentTilt = Mathf.Lerp(currentTilt, yRotationMax / 2, rotationYSpeed / rotationDivider);
                 }
-                else if(currentTilt < yRotationMax && currentTilt > yRotationMin)
+                else if (currentTilt < yRotationMax && currentTilt > yRotationMin)
                 {
                     camYAdjust = false;
                 }
@@ -281,7 +304,15 @@ public class CameraController : MonoBehaviour
 
     private void CameraTransformation()
     {
-        transform.position = player.transform.position + Vector3.up * cameraHeight;
+        if (basePosition == CameraBasePosition.PlayerPosition)
+        {
+            transform.position = player.transform.position + Vector3.up * cameraPlayerHeight;
+        }
+        else if (basePosition == CameraBasePosition.ChildPosition)
+        {
+            transform.position = new Vector3(player.transform.position.x + cameraChildOffset, player.transform.position.y, player.transform.position.z) + Vector3.up * cameraChildHeight;
+        }
+
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentPan, transform.eulerAngles.z);
         tilt.eulerAngles = new Vector3(currentTilt, tilt.eulerAngles.y, tilt.eulerAngles.z);
         mainCamera.transform.position = transform.position + tilt.forward * -adjustedDistance;
