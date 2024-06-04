@@ -115,7 +115,7 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
 
-        //player = FindObjectOfType<PlayerController>();
+        //player = FindObjectOfType<PController>();
 
         mainCamera = Camera.main;
 
@@ -329,11 +329,6 @@ public class CameraController : MonoBehaviour
     public void GetScrollWheelValue(InputAction.CallbackContext ctx)
     {
         scrollWheelValue = ctx.ReadValue<Vector2>();
-    }
-
-    public void GetLMBState(InputAction.CallbackContext ctx)
-    {
-        LMBstate = ctx.performed;
     }
 
     public void GetRMBState(InputAction.CallbackContext ctx)
