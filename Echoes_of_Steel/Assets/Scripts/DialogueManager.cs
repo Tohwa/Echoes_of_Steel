@@ -5,19 +5,52 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
+    public static DialogueManager instance;
+
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private Animator animator;
+    [SerializeField] private float dialogueSpeed;
 
     private Queue<string> sentences;
-    private Dialogue dialogue;
+    private DialogueAsset dialogue;
+    private bool skipLineTriggered;
+    private bool lineFinished;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     private void Start()
     {
         sentences = new Queue<string>();
     }
 
-    public void StartDialogue(Dialogue _dialogue)
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if(!lineFinished)
+            {
+
+            SkipLine();
+            }
+            else if(lineFinished)
+            {
+                DisplayNextSentence();
+            }
+        }
+    }
+
+    public void StartDialogue(DialogueAsset _dialogue)
     {
         animator.SetBool("IsOpen", true);
 
@@ -57,17 +90,34 @@ public class DialogueManager : MonoBehaviour
         //dialogueText.text = sentence;
         StopAllCoroutines();
         StartCoroutine(TypeSentece(sentence));
+
     }
 
     IEnumerator TypeSentece(string sentence)
     {
+        skipLineTriggered = false;
+        lineFinished = false;
         dialogueText.text = "";
 
         foreach (char letter in sentence.ToCharArray())
         {
+            if(skipLineTriggered)
+            {
+                dialogueText.text = sentence;
+                break;
+            }
             dialogueText.text += letter;
-            yield return null;
+            
+            yield return new WaitForSeconds(1 / dialogueSpeed);
+            
         }
+        lineFinished = true;
+
+    }
+
+    private void SkipLine()
+    {
+        skipLineTriggered = true;
     }
 
     private void EndDialogue()

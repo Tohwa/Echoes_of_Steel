@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Dialogue
+[CreateAssetMenu]
+public class DialogueAsset : ScriptableObject
 {
     public string mainCharName;
     public string sideCharName;
-
-    [TextArea(3, 10)]
+    [TextArea]
     public string[] sentences;
 }
