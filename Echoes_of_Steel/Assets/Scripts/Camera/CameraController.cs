@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
+
+    //Rigidbody wieder auskommentieren und accessible machen UND das true entfernen!
+
     #region Fields
 
     //Camera Variables
@@ -48,7 +51,7 @@ public class CameraController : MonoBehaviour
     private float rotationDivider = 100;
 
     //References
-    PlayerController player;
+    PController player;
     public Transform tilt;
     Camera mainCamera;
 
@@ -112,7 +115,7 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
 
-        player = FindObjectOfType<PlayerController>();
+        //player = FindObjectOfType<PController>();
 
         mainCamera = Camera.main;
 
@@ -156,14 +159,14 @@ public class CameraController : MonoBehaviour
         switch (camCorrect)
         {
             case CameraCorrectState.OnlyWhileMoving:
-                if (player.rb.velocity.magnitude > 0)
+                if (/*player.rb.velocity.magnitude > 0*/ true)
                 {
                     CameraXAdjust();
                     CameraYAdjust();
                 }
                 break;
             case CameraCorrectState.OnlyHorizontalWhileMoving:
-                if (player.rb.velocity.magnitude > 0)
+                if (/*player.rb.velocity.magnitude > 0*/true)
                 {
                     CameraXAdjust();
                 }
@@ -326,11 +329,6 @@ public class CameraController : MonoBehaviour
     public void GetScrollWheelValue(InputAction.CallbackContext ctx)
     {
         scrollWheelValue = ctx.ReadValue<Vector2>();
-    }
-
-    public void GetLMBState(InputAction.CallbackContext ctx)
-    {
-        LMBstate = ctx.performed;
     }
 
     public void GetRMBState(InputAction.CallbackContext ctx)
