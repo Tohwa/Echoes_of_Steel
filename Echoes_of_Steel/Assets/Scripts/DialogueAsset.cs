@@ -5,8 +5,20 @@ using UnityEngine;
 [CreateAssetMenu]
 public class DialogueAsset : ScriptableObject
 {
-    public string mainCharName;
-    public string sideCharName;
+    public Dialogue[] sentences;
+    public Character[] characters;
+}
+
+[System.Serializable]
+public class Dialogue
+{
+    public int characterId;
     [TextArea]
-    public string[] sentences;
+    public string dialogue;
+}
+
+[System.Serializable]
+public class Character
+{
+    public string name;
 }

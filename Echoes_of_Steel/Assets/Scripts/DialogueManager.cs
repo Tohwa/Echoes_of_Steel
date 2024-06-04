@@ -12,10 +12,11 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private float dialogueSpeed;
 
-    private Queue<string> sentences;
     private DialogueAsset dialogue;
     private bool skipLineTriggered;
     private bool lineFinished;
+    private static bool isActive;
+    private int dialogueIndex;
 
     private void Awake()
     {
@@ -29,14 +30,9 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        sentences = new Queue<string>();
-    }
-
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && isActive)
         {
             if(!lineFinished)
             {
@@ -52,45 +48,31 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(DialogueAsset _dialogue)
     {
+        isActive = true;
         animator.SetBool("IsOpen", true);
 
         dialogue = _dialogue;
-
-        sentences.Clear();
-
-        foreach (string sentence in dialogue.sentences)
-        {
-            sentences.Enqueue(sentence);
-        }
 
         DisplayNextSentence();
     }
 
     public void DisplayNextSentence()
     {
-        if(sentences.Count == 0)
+        if(dialogueIndex > dialogue.sentences.Length - 1)
         {
             EndDialogue();
             return;
         }
 
-        string sentence = sentences.Dequeue();
+        Dialogue currentDialogue = dialogue.sentences[dialogueIndex];
 
-        if (sentence.StartsWith('m'))
-        {
-            sentence = sentence.Substring(1);
-            nameText.text = dialogue.mainCharName;
-        }
-        else if (sentence.StartsWith('s'))
-        {
-            sentence = sentence.Substring(1);
-            nameText.text = dialogue.sideCharName;
-        }
+        Character currentCharacter = dialogue.characters[currentDialogue.characterId];
+        nameText.text = currentCharacter.name;
 
-        //dialogueText.text = sentence;
         StopAllCoroutines();
-        StartCoroutine(TypeSentece(sentence));
+        StartCoroutine(TypeSentece(currentDialogue.dialogue));
 
+        dialogueIndex++;
     }
 
     IEnumerator TypeSentece(string sentence)
@@ -122,6 +104,8 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
+        isActive = false;
+        dialogueIndex = 0;
         animator.SetBool("IsOpen", false);
     }
 }

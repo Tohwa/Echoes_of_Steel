@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 192cf014dd24a3d4fb3639894cb2cf60, type: 3}
+  m_Name: DialogueIntro
+  m_EditorClassIdentifier: 
+  sentences:
+  - characterId: 0
+    dialogue: Facial recognition successful. Setting up new administrator
+  - characterId: 0
+    dialogue: "Primary systems \u2013 functional. Weapon system \u2013 ERROR, PROTOCOL
+      NOT FOUND. Scanner \u2013 functional. Electromagnetic field \u2013 stable.
+      Memory storage \u2013 CORRUPTED, NO MEMORY FOUND. Searching for administrator"
+  - characterId: 0
+    dialogue: Administrator found. Initiating Safety Protocol
+  - characterId: 1
+    dialogue: Do you want me to climb that?
+  - characterId: 0
+    dialogue: Affirmitive.
+  - characterId: 1
+    dialogue: What should I call you?
+  - characterId: 0
+    dialogue: "Searching name data storage \u2013 ERROR storage is empty.\nCannot
+      comply with question.\r\n"
+  - characterId: 1
+    dialogue: What about ROBOT? That sounds nice.
+  - characterId: 0
+    dialogue: Adding new name to storage. Unit name is now ROBOT.
+  - characterId: 1
+    dialogue: ROBOT, maybe you can help me find other people.
+  - characterId: 0
+    dialogue: 'New order received: Find other human life.'
+  characters:
+  - name: Robot
+  - name: Child
