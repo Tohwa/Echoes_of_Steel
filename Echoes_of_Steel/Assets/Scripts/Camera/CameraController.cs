@@ -1,43 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-
-    //Rigidbody wieder auskommentieren und accessible machen UND das true entfernen!
-
     #region Fields
 
-    //Camera Variables
-    [SerializeField]
-    private float cameraPlayerHeight = 1.75f;
-    [SerializeField]
-    private float cameraChildHeight = 2f;
-    [SerializeField]
-    private float cameraChildOffset = 0.25f;
-    [SerializeField]
-    private float cameraMaxDist = 25f;
-    [SerializeField]
-    private float cameraMinDist = 2f;
-    [SerializeField]
-    private float cameraMaxTilt = 90f;
-    [Range(0f, 4f)]
-    public float cameraSpeed = 2f;
-    [Range(0f, 4f)]
-    [SerializeField]
-    private float zoomSpeed = 2f;
-    [SerializeField]
-    float currentPan;
-    [SerializeField]
-    private float currentTilt = 10f;
-    [SerializeField]
-    private float currentDist = 5f;
+    [SerializeField] private float cameraPlayerHeight = 1.75f;
+    [SerializeField] private float cameraChildHeight = 2f;
+    [SerializeField] private float cameraChildOffset = 0.25f;
+    [SerializeField] private float cameraMaxDist = 25f;
+    [SerializeField] private float cameraMinDist = 2f;
+    [SerializeField] private float cameraMaxTilt = 90f;
+    [Range(0f, 4f)] public float cameraSpeed = 2f;
+    [Range(0f, 4f)][SerializeField] private float zoomSpeed = 2f;
+    [SerializeField] float currentPan;
+    [SerializeField] private float currentTilt = 10f;
+    [SerializeField] private float currentDist = 5f;
 
-    //Smoothing Variables
     private float panAngle;
     private float panOffSet;
     private bool camXAdjust;
@@ -47,41 +28,28 @@ public class CameraController : MonoBehaviour
     private float rotationYSpeed = 0;
     private float yRotationMin = 0;
     private float yRotationMax = 20;
-    [SerializeField]
-    private float rotationDivider = 100;
+    [SerializeField] private float rotationDivider = 100;
 
-    //References
-    PController player;
+    private PController player;
     public Transform tilt;
-    Camera mainCamera;
+    private Camera mainCamera;
 
-    //input Variables
-    [SerializeField]
-    private bool LMBstate = false;
-    [SerializeField]
-    public bool RMBstate = false;
-    [SerializeField]
-    private Vector2 mouseAxis;
+    [SerializeField] private bool LMBstate = false;
+    [SerializeField] public bool RMBstate = false;
+    [SerializeField] private Vector2 mouseAxis;
     private float mouseX;
     private float mouseY;
-    [SerializeField]
-    private Vector2 scrollWheelValue;
+    [SerializeField] private Vector2 scrollWheelValue;
     private float scrollValue;
 
-    //CameraState
     public CameraStates camState = CameraStates.cameraIdle;
     public CameraCorrectState camCorrect = CameraCorrectState.OnlyWhileMoving;
     public CameraBasePosition basePosition = CameraBasePosition.PlayerPosition;
 
-    //collision
-    [SerializeField]
-    private bool collisionDebug;
-    [SerializeField]
-    private float collisionCushion = 0.35f;
-    [SerializeField]
-    private float adjustedDistance;
-    [SerializeField]
-    private LayerMask collisionMask;
+    [SerializeField] private bool collisionDebug;
+    [SerializeField] private float collisionCushion = 0.35f;
+    [SerializeField] private float adjustedDistance;
+    [SerializeField] private LayerMask collisionMask;
     private Ray camRay;
     private RaycastHit hit;
     #endregion
@@ -114,9 +82,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-
-        //player = FindObjectOfType<PController>();
-
+        player = FindObjectOfType<PController>();
         mainCamera = Camera.main;
 
         if (basePosition == CameraBasePosition.PlayerPosition)
@@ -126,15 +92,12 @@ public class CameraController : MonoBehaviour
         }
         else if (basePosition == CameraBasePosition.ChildPosition)
         {
-            //transform.position = player.transform.position + Vector3.up * cameraChildHeight;
-            transform.position = new Vector3(player.transform.position.x + 0f + cameraChildOffset, player.transform.position.y + 1f, player.transform.position.z + 0f) * cameraChildHeight;
-
+            transform.position = new Vector3(player.transform.position.x + cameraChildOffset, player.transform.position.y, player.transform.position.z) + Vector3.up * cameraChildHeight;
             transform.rotation = player.transform.rotation;
         }
 
         tilt.eulerAngles = new Vector3(currentTilt, transform.eulerAngles.y, transform.eulerAngles.z);
         mainCamera.transform.position += tilt.forward * -currentDist;
-
     }
 
     private void Update()
@@ -159,14 +122,14 @@ public class CameraController : MonoBehaviour
         switch (camCorrect)
         {
             case CameraCorrectState.OnlyWhileMoving:
-                if (/*player.rb.velocity.magnitude > 0*/ true)
+                if (player.isMoving)
                 {
                     CameraXAdjust();
                     CameraYAdjust();
                 }
                 break;
             case CameraCorrectState.OnlyHorizontalWhileMoving:
-                if (/*player.rb.velocity.magnitude > 0*/true)
+                if (player.isMoving)
                 {
                     CameraXAdjust();
                 }
@@ -223,16 +186,16 @@ public class CameraController : MonoBehaviour
                 }
 
                 mouseX = Input.GetAxis("Mouse X") * cameraSpeed;
-                currentPan += /*mouseAxis.x * cameraSpeed*/ mouseX;
+                currentPan += mouseX;
             }
 
             mouseY = Input.GetAxis("Mouse Y") * cameraSpeed;
-            currentTilt -= /*mouseAxis.y * cameraSpeed*/ mouseY;
+            currentTilt -= mouseY;
             currentTilt = Mathf.Clamp(currentTilt, -cameraMaxTilt, cameraMaxTilt);
         }
 
         scrollValue = Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
-        currentDist -= /*scrollWheelValue.y*/ scrollValue;
+        currentDist -= scrollValue;
         currentDist = Mathf.Clamp(currentDist, cameraMinDist, cameraMaxDist);
     }
 
@@ -329,6 +292,11 @@ public class CameraController : MonoBehaviour
     public void GetScrollWheelValue(InputAction.CallbackContext ctx)
     {
         scrollWheelValue = ctx.ReadValue<Vector2>();
+    }
+
+    public void GetLMBState(InputAction.CallbackContext ctx)
+    {
+        LMBstate = ctx.performed;
     }
 
     public void GetRMBState(InputAction.CallbackContext ctx)
