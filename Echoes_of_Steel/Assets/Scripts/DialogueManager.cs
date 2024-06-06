@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager instance;
 
+    [SerializeField] private GameObject dialogueBox;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private Image charImage;
     [SerializeField] private Animator animator;
     [SerializeField] private float dialogueSpeed;
 
@@ -49,6 +52,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(DialogueAsset _dialogue)
     {
         isActive = true;
+        //dialogueBox.SetActive(true);
         animator.SetBool("IsOpen", true);
 
         dialogue = _dialogue;
@@ -68,6 +72,7 @@ public class DialogueManager : MonoBehaviour
 
         Character currentCharacter = dialogue.characters[currentDialogue.characterId];
         nameText.text = currentCharacter.name;
+        charImage.sprite = currentCharacter.sprite;
 
         StopAllCoroutines();
         StartCoroutine(TypeSentece(currentDialogue.dialogue));
@@ -107,5 +112,6 @@ public class DialogueManager : MonoBehaviour
         isActive = false;
         dialogueIndex = 0;
         animator.SetBool("IsOpen", false);
+        //dialogueBox.SetActive(false);
     }
 }

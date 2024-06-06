@@ -21,4 +21,5 @@ public class Dialogue
 public class Character
 {
     public string name;
+    public Sprite sprite;
 }
