@@ -161,4 +161,23 @@ public class PController : MonoBehaviour
 
         return isGrounded;
     }
+
+    private void OnDrawGizmos()
+    {
+        if (capsuleCollider == null)
+        {
+            capsuleCollider = GetComponent<CapsuleCollider>();
+        }
+
+        // Draw the CapsuleCollider bounds
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(capsuleCollider.bounds.center, capsuleCollider.bounds.size);
+
+        // Draw the GroundCheck ray
+        Gizmos.color = Color.red;
+        Vector3 rayOrigin = capsuleCollider.bounds.center;
+        rayOrigin.y = capsuleCollider.bounds.min.y + 0.1f; // Start the ray from just above the bottom of the collider
+        float rayLength = 0.2f;
+        Gizmos.DrawLine(rayOrigin, rayOrigin + Vector3.down * rayLength);
+    }
 }
