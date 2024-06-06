@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PController : MonoBehaviour
@@ -10,7 +8,6 @@ public class PController : MonoBehaviour
     public InputAction movement;
     public InputAction jump;
     public InputAction dash;
-
     public LayerMask Ground;
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
@@ -21,6 +18,7 @@ public class PController : MonoBehaviour
     private CapsuleCollider capsuleCollider;
     private Rigidbody rb;
     private Vector2 moveInput;
+    private Camera mainCamera;
 
     public float dashSpeed = 20f; // Speed during dash
     public float dashDuration = 0.2f; // Duration of dash
@@ -28,16 +26,19 @@ public class PController : MonoBehaviour
     private float dashTime;
     private bool isDashing;
     private float lastDashTime;
+    public bool isMoving;
 
     private void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
         rb = GetComponent<Rigidbody>();
+        mainCamera = Camera.main;
     }
 
     private void Update()
     {
         GroundCheck();
+        isMoving = moveInput != Vector2.zero;
     }
 
     private void FixedUpdate()
@@ -83,7 +84,18 @@ public class PController : MonoBehaviour
 
     private void Move()
     {
-        Vector3 movementVector = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * Time.fixedDeltaTime;
+        Vector3 forward = mainCamera.transform.forward;
+        Vector3 right = mainCamera.transform.right;
+
+        forward.y = 0;
+        right.y = 0;
+
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 movementVector = forward * moveInput.y + right * moveInput.x;
+        movementVector *= moveSpeed * Time.fixedDeltaTime;
+
         rb.MovePosition(rb.position + movementVector);
     }
 
@@ -92,7 +104,6 @@ public class PController : MonoBehaviour
         if (isGrounded || curJumps > 0)
         {
             curJumps--;
-            //ForceMode ist interesant für mehr arten den Robo springen zu lassen NTS!
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
@@ -111,7 +122,18 @@ public class PController : MonoBehaviour
     {
         if (Time.time < dashTime)
         {
-            Vector3 dashDirection = new Vector3(moveInput.x, 0, moveInput.y).normalized;
+            Vector3 forward = mainCamera.transform.forward;
+            Vector3 right = mainCamera.transform.right;
+
+            forward.y = 0;
+            right.y = 0;
+
+            forward.Normalize();
+            right.Normalize();
+
+            Vector3 dashDirection = forward * moveInput.y + right * moveInput.x;
+            dashDirection.Normalize();
+
             rb.MovePosition(rb.position + dashDirection * dashSpeed * Time.fixedDeltaTime);
         }
         else
@@ -120,7 +142,7 @@ public class PController : MonoBehaviour
         }
     }
 
-    //Creates a capsule below the player to check if he is grounded
+
     public bool GroundCheck()
     {
         float rayLength = 0.2f; // Adjust the length of the ray as needed
@@ -138,5 +160,24 @@ public class PController : MonoBehaviour
         }
 
         return isGrounded;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (capsuleCollider == null)
+        {
+            capsuleCollider = GetComponent<CapsuleCollider>();
+        }
+
+        // Draw the CapsuleCollider bounds
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(capsuleCollider.bounds.center, capsuleCollider.bounds.size);
+
+        // Draw the GroundCheck ray
+        Gizmos.color = Color.red;
+        Vector3 rayOrigin = capsuleCollider.bounds.center;
+        rayOrigin.y = capsuleCollider.bounds.min.y + 0.1f; // Start the ray from just above the bottom of the collider
+        float rayLength = 0.2f;
+        Gizmos.DrawLine(rayOrigin, rayOrigin + Vector3.down * rayLength);
     }
 }
