@@ -8482,9 +8482,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1175591615239218377, guid: d716bda548ec24540b183c9dbf14ebaa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2609399378405543261, guid: d716bda548ec24540b183c9dbf14ebaa, type: 3}
+      propertyPath: m_TerrainData
+      value: 
+      objectReference: {fileID: 15600000, guid: 43ed0e032001e494385d63b7dd6af8b6, type: 2}
     - target: {fileID: 5445386110910283249, guid: d716bda548ec24540b183c9dbf14ebaa, type: 3}
       propertyPath: m_Name
       value: Level2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6174482712405262409, guid: d716bda548ec24540b183c9dbf14ebaa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7854311947502237165, guid: d716bda548ec24540b183c9dbf14ebaa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8524,6 +8536,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7854311947502237165, guid: d716bda548ec24540b183c9dbf14ebaa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9013757323031551723, guid: d716bda548ec24540b183c9dbf14ebaa, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
