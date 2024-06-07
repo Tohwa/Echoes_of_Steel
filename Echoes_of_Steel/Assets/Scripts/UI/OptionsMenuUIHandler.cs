@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class OptionsMenuUIHandler : MonoBehaviour
 {
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject optionsMenu;
+
     [SerializeField] private AudioMixer mainMixer;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private TMP_Dropdown qualityDropdown;
@@ -60,9 +63,27 @@ public class OptionsMenuUIHandler : MonoBehaviour
         //volumeSlider.value = volumeValue;
     }
 
-    public void SetVolume(float _volume)
+    public void SetMasterVolume(float _volume)
     {
-        mainMixer.SetFloat("volume", Mathf.Log10(_volume) * 20);
+        mainMixer.SetFloat("masterVolume", Mathf.Log10(_volume) * 20);
+        volumeValue = _volume;
+    }
+
+    public void SetMusicVolume(float _volume)
+    {
+        mainMixer.SetFloat("musicVolume", Mathf.Log10(_volume) * 20);
+        volumeValue = _volume;
+    }
+
+    public void SetSFXVolume(float _volume)
+    {
+        mainMixer.SetFloat("SFXVolume", Mathf.Log10(_volume) * 20);
+        volumeValue = _volume;
+    }
+
+    public void SetUIVolume(float _volume)
+    {
+        mainMixer.SetFloat("UIVolume", Mathf.Log10(_volume) * 20);
         volumeValue = _volume;
     }
 
@@ -83,4 +104,11 @@ public class OptionsMenuUIHandler : MonoBehaviour
         Screen.fullScreen = _toggleFullscreen;
         toggleFullscreen = _toggleFullscreen;
     }
+
+    public void BackToMenu()
+    {
+        optionsMenu.SetActive(false);
+        mainMenu.SetActive(true);
+    }
+
 }
