@@ -10,8 +10,8 @@ public class MeshDestroy : MonoBehaviour
     private Vector2 edgeUV = Vector2.zero;
     private Plane edgePlane = new Plane();
 
-    public int CutCascades = 1;
-    public float ExplodeForce = 1;
+    public int CutCascades = 3;
+    public float ExplodeForce = 50;
 
     // Update is called once per frame
     void Update()
