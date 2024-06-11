@@ -19,6 +19,9 @@ public class OptionsMenuUIHandler : MonoBehaviour
     [SerializeField] private Toggle fullscreenToggle;
     [SerializeField] private Slider volumeSlider;
 
+    [SerializeField] private TextMeshProUGUI testText;
+    [SerializeField] private List<string> resOptions;
+
     private Resolution[] resolutions;
     private List<Resolution> compatibleResolutions = new List<Resolution>();
     private bool resolutionSet;
@@ -31,7 +34,7 @@ public class OptionsMenuUIHandler : MonoBehaviour
     {
         resolutions = Screen.resolutions;
 
-        List<string> resOptions = new List<string>();
+        resOptions = new List<string>();
         int curResolutionIndex = 0;
 
         for (int i = 0; i < resolutions.Length; i++)
@@ -57,6 +60,8 @@ public class OptionsMenuUIHandler : MonoBehaviour
             resolutionSet = true;
         }
         resolutionDropdown.RefreshShownValue();
+
+        testText.text = resOptions[resolutionIndex];
     }
 
     private void Update()
@@ -128,6 +133,20 @@ public class OptionsMenuUIHandler : MonoBehaviour
     {
         Screen.fullScreen = _toggleFullscreen;
         toggleFullscreen = _toggleFullscreen;
+    }
+
+    public void ChangeTextValue()
+    {
+        
+
+        testText.text = resOptions[resolutionIndex - 1];
+        resolutionIndex--;
+    }
+
+    public void ApplyChanges()
+    {
+        SetResolution(resolutionIndex);
+
     }
 
     public void BackToMenu()
