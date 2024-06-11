@@ -9,6 +9,9 @@ public class OptionsMenuUIHandler : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsMenu;
+    [SerializeField] private GameObject generalMenu;
+    [SerializeField] private GameObject audioMenu;
+    [SerializeField] private GameObject graphicsMenu;
 
     [SerializeField] private AudioMixer mainMixer;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
@@ -34,11 +37,12 @@ public class OptionsMenuUIHandler : MonoBehaviour
         for (int i = 0; i < resolutions.Length; i++)
         {
             string resOption = resolutions[i].width + "x" + resolutions[i].height;
-            if(resOption == "1280x720" || resOption == "1600x900" || resOption == "1920x1080")
-            {
+            //if(resOption == "1280x720" || resOption == "1600x900" || resOption == "1920x1080")
+            //{
                 compatibleResolutions.Add(resolutions[i]);
                 resOptions.Add(resOption);
-            }
+            //}
+
 
             if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
             {
@@ -61,6 +65,27 @@ public class OptionsMenuUIHandler : MonoBehaviour
         //qualityDropdown.value = qualityIndex;
         //fullscreenToggle.isOn = toggleFullscreen;
         //volumeSlider.value = volumeValue;
+    }
+
+    public void OpenGeneralSettings()
+    {
+        generalMenu.SetActive(true);
+        audioMenu.SetActive(false);
+        graphicsMenu.SetActive(false);
+    }
+
+    public void OpenAudioSettings()
+    {
+        audioMenu.SetActive(true);
+        generalMenu.SetActive(false);
+        graphicsMenu.SetActive(false);
+    }
+
+    public void OpenGraphicsSettings()
+    {
+        graphicsMenu.SetActive(true);
+        generalMenu.SetActive(false);
+        audioMenu.SetActive(false);
     }
 
     public void SetMasterVolume(float _volume)
@@ -108,6 +133,9 @@ public class OptionsMenuUIHandler : MonoBehaviour
     public void BackToMenu()
     {
         optionsMenu.SetActive(false);
+        generalMenu.SetActive(false);
+        audioMenu.SetActive(false);
+        graphicsMenu.SetActive(false);
         mainMenu.SetActive(true);
     }
 
