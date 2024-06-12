@@ -135,12 +135,23 @@ public class OptionsMenuUIHandler : MonoBehaviour
         toggleFullscreen = _toggleFullscreen;
     }
 
-    public void ChangeTextValue()
+    public void ResValueUp()
     {
-        
+        if(resolutionIndex < compatibleResolutions.Count - 1)
+        {
 
-        testText.text = resOptions[resolutionIndex - 1];
-        resolutionIndex--;
+        resolutionIndex++;
+        testText.text = resOptions[resolutionIndex];
+        }
+    }
+
+    public void ResValueDown()
+    {
+        if (resolutionIndex > 0)
+        {
+            resolutionIndex--;
+            testText.text = resOptions[resolutionIndex];
+        }
     }
 
     public void ApplyChanges()
