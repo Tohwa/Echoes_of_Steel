@@ -82,6 +82,9 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         player = FindObjectOfType<PController>();
         mainCamera = Camera.main;
 
@@ -102,14 +105,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (!LMBstate && !RMBstate)
-        {
-            camState = CameraStates.cameraIdle;
-        }
-        else if (RMBstate)
-        {
-            camState = CameraStates.cameraRotate;
-        }
+        camState = CameraStates.cameraRotate;
 
         CheckCollision();
         CameraInput();
@@ -169,30 +165,12 @@ public class CameraController : MonoBehaviour
 
     private void CameraInput()
     {
-        RMBstate = Input.GetKey(KeyCode.Mouse1);
+        mouseX = Input.GetAxis("Mouse X") * cameraSpeed;
+        currentPan += mouseX;
 
-        if (camState != CameraStates.cameraIdle)
-        {
-            if (camState == CameraStates.cameraRotate)
-            {
-                if (camCorrect != CameraCorrectState.NeverAdjust && !camXAdjust)
-                {
-                    camXAdjust = true;
-                }
-
-                if (camCorrect != CameraCorrectState.OnlyHorizontalWhileMoving && !camYAdjust)
-                {
-                    camYAdjust = true;
-                }
-
-                mouseX = Input.GetAxis("Mouse X") * cameraSpeed;
-                currentPan += mouseX;
-            }
-
-            mouseY = Input.GetAxis("Mouse Y") * cameraSpeed;
-            currentTilt -= mouseY;
-            currentTilt = Mathf.Clamp(currentTilt, -cameraMaxTilt, cameraMaxTilt);
-        }
+        mouseY = Input.GetAxis("Mouse Y") * cameraSpeed;
+        currentTilt -= mouseY;
+        currentTilt = Mathf.Clamp(currentTilt, -cameraMaxTilt, cameraMaxTilt);
 
         scrollValue = Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
         currentDist -= scrollValue;
@@ -201,15 +179,7 @@ public class CameraController : MonoBehaviour
 
     private void CameraNeverAdjust()
     {
-        switch (camState)
-        {
-            case CameraStates.cameraIdle:
-                currentPan = player.transform.eulerAngles.y - panOffSet;
-                break;
-            case CameraStates.cameraRotate:
-                panOffSet = panAngle;
-                break;
-        }
+        currentPan = player.transform.eulerAngles.y - panOffSet;
     }
 
     private void CameraXAdjust()
@@ -284,23 +254,23 @@ public class CameraController : MonoBehaviour
         mainCamera.transform.position = transform.position + tilt.forward * -adjustedDistance;
     }
 
-    public void GetMouseAxis(InputAction.CallbackContext ctx)
-    {
-        mouseAxis = ctx.ReadValue<Vector2>();
-    }
+    //public void GetMouseAxis(InputAction.CallbackContext ctx)
+    //{
+    //    mouseAxis = ctx.ReadValue<Vector2>();
+    //}
 
-    public void GetScrollWheelValue(InputAction.CallbackContext ctx)
-    {
-        scrollWheelValue = ctx.ReadValue<Vector2>();
-    }
+    //public void GetScrollWheelValue(InputAction.CallbackContext ctx)
+    //{
+    //    scrollWheelValue = ctx.ReadValue<Vector2>();
+    //}
 
-    public void GetLMBState(InputAction.CallbackContext ctx)
-    {
-        LMBstate = ctx.performed;
-    }
+    //public void GetLMBState(InputAction.CallbackContext ctx)
+    //{
+    //    LMBstate = ctx.performed;
+    //}
 
-    public void GetRMBState(InputAction.CallbackContext ctx)
-    {
-        RMBstate = ctx.performed;
-    }
+    //public void GetRMBState(InputAction.CallbackContext ctx)
+    //{
+    //    RMBstate = ctx.performed;
+    //}
 }
