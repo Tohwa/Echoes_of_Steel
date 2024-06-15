@@ -9,17 +9,22 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager instance;
 
     [SerializeField] private GameObject dialogueBox;
+    [SerializeField] private GameObject choices;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI choiceOneText;
+    [SerializeField] private TextMeshProUGUI choiceTwoText;
     [SerializeField] private Image charImage;
     [SerializeField] private Animator animator;
     [SerializeField] private float dialogueSpeed;
 
-    private DialogueAsset dialogue;
+    private DialogueAsset[] dialogueAssets;
+    private DialogueAsset currentDialogueAsset;
     private bool skipLineTriggered;
     private bool lineFinished;
     private static bool isActive;
     private int dialogueIndex;
+    private int dialogueAssetIndex;
 
     private void Awake()
     {
@@ -49,28 +54,31 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(DialogueAsset _dialogue)
+    public void StartDialogue(DialogueAsset[] _dialogues)
     {
         isActive = true;
         //dialogueBox.SetActive(true);
         animator.SetBool("IsOpen", true);
 
-        dialogue = _dialogue;
+        choices.SetActive(false);
+
+        dialogueAssets = _dialogues;
+        currentDialogueAsset = dialogueAssets[dialogueAssetIndex];
 
         DisplayNextSentence();
     }
 
     public void DisplayNextSentence()
     {
-        if(dialogueIndex > dialogue.sentences.Length - 1)
+        if(dialogueIndex > currentDialogueAsset.sentences.Length - 1)
         {
             EndDialogue();
             return;
         }
 
-        Dialogue currentDialogue = dialogue.sentences[dialogueIndex];
+        Dialogue currentDialogue = currentDialogueAsset.sentences[dialogueIndex];
 
-        Character currentCharacter = dialogue.characters[currentDialogue.characterId];
+        Character currentCharacter = currentDialogueAsset.characters[currentDialogue.characterId];
         nameText.text = currentCharacter.name;
         charImage.sprite = currentCharacter.sprite;
 
@@ -109,9 +117,62 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
+        if(currentDialogueAsset.isChoiceDialogue)
+        {
+            choices.SetActive(true);
+            if(dialogueAssetIndex == 0)
+            {
+                choiceOneText.text = dialogueAssets[1].sentences[0].dialogue;
+                choiceTwoText.text = dialogueAssets[2].sentences[0].dialogue;
+            }
+            else
+            {
+                choiceOneText.text = dialogueAssets[3].sentences[0].dialogue;
+                choiceTwoText.text = dialogueAssets[4].sentences[0].dialogue;
+            }
+        }
+        if (currentDialogueAsset.isEndDialogue)
+        {
+
         isActive = false;
-        dialogueIndex = 0;
         animator.SetBool("IsOpen", false);
+        }
+        dialogueIndex = 0;
+        lineFinished = false;
         //dialogueBox.SetActive(false);
+    }
+
+    public void ChoiceOne()
+    {
+        if(dialogueAssetIndex == 1)
+        {
+            dialogueAssetIndex += 2;
+        }
+        else
+        {
+
+            dialogueAssetIndex++;
+        }
+
+        currentDialogueAsset = dialogueAssets[dialogueAssetIndex];
+        choices.SetActive(false);
+        DisplayNextSentence();
+    }
+
+    public void ChoiceTwo()
+    {
+        if (dialogueAssetIndex == 1)
+        {
+            dialogueAssetIndex += 3;
+        }
+        else
+        {
+
+            dialogueAssetIndex += 2;
+        }
+
+        currentDialogueAsset = dialogueAssets[dialogueAssetIndex];
+        choices.SetActive(false);
+        DisplayNextSentence();
     }
 }
