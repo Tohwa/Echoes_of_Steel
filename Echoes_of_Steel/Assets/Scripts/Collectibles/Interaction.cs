@@ -16,7 +16,10 @@ public class Interaction : MonoBehaviour
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
-            Interact();
+            if (!interactionStatus.HasInteracted(gameObject.name))
+            {
+                Interact();
+            }
         }
     }
 
@@ -24,6 +27,7 @@ public class Interaction : MonoBehaviour
     {
         Debug.Log("Interagiert mit: " + gameObject.name);
         interactionStatus.AddInteractedObject(gameObject.name);
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
