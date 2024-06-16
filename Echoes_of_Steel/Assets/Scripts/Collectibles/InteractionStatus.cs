@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "InteractionStatus", menuName = "ScriptableObjects/InteractionStatus", order = 1)]
 public class InteractionStatus : ScriptableObject
 {
-    private HashSet<string> interactedObjects = new HashSet<string>();
+    [SerializeField]private HashSet<string> interactedObjects = new HashSet<string>();
 
     public void AddInteractedObject(string objectName)
     {
