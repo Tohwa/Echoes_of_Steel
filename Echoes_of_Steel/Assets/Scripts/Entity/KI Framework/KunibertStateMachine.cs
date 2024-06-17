@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 
-public class KStateMachine : MonoBehaviour
+public class KunibertStateMachine : MonoBehaviour
 {
     private AState currentState;
     [HideInInspector]

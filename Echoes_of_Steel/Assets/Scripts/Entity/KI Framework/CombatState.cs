@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class CombatState : AState
 {
-    private KStateMachine pStateMachine;
+    private KunibertStateMachine kStateMachine;
 
-    public CombatState(KStateMachine psm)
+    public CombatState(KunibertStateMachine ksm)
     {
-        pStateMachine = psm;
+        kStateMachine = ksm;
     }
 
     public override void UpdateState()
@@ -21,7 +21,7 @@ public class CombatState : AState
     {
         if (true)
         {
-            pStateMachine.ChangeState(pStateMachine.combatState);
+            kStateMachine.ChangeState(kStateMachine.combatState);
         }
     }
 }
