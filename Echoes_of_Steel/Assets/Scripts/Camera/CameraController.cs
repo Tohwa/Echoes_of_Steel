@@ -34,7 +34,6 @@ public class CameraController : MonoBehaviour
     public Transform tilt;
     private Camera mainCamera;
 
-    [SerializeField] private bool LMBstate = false;
     [SerializeField] public bool RMBstate = false;
     [SerializeField] private Vector2 mouseAxis;
     private float mouseX;
