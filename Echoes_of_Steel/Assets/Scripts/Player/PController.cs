@@ -13,6 +13,7 @@ public class PController : MonoBehaviour
     public InputAction dash;
     public InputAction shoot;
     public InputAction hover;
+    public InputAction interact;
 
     [Header("Framework Variables")]
     public Camera mainCamera;
@@ -62,6 +63,9 @@ public class PController : MonoBehaviour
     public float hoverGravityScale = 0.1f; // The gravity scale to use while hovering
     public float hoverFallSpeed = 2f;
     private bool isHovering;
+
+    [Header("Interactable Variables")]
+    private IInteractable interactable;
 
     #endregion
 
@@ -115,6 +119,7 @@ public class PController : MonoBehaviour
         dash.Enable();
         shoot.Enable();
         hover.Enable();
+        interact.Enable();
 
         jump.performed += OnJumpInput;
         movement.performed += OnMovementInput;
@@ -122,6 +127,7 @@ public class PController : MonoBehaviour
         dash.performed += OnDashInput;
         hover.performed += OnHoverHold;
         hover.canceled += OnHoverRelease;
+        interact.performed += OnInteractInput;
     }
     void OnDisable()
     {
@@ -130,6 +136,7 @@ public class PController : MonoBehaviour
         dash.Disable();
         shoot.Disable();
         hover.Disable();
+        interact.Disable();
 
         movement.performed -= OnMovementInput;
         movement.canceled -= OnMovementInput;
@@ -137,6 +144,7 @@ public class PController : MonoBehaviour
         dash.performed -= OnDashInput;
         hover.performed -= OnHoverHold;
         hover.canceled -= OnHoverRelease;
+        interact.performed -= OnInteractInput;
     }
 
     private void OnMovementInput(InputAction.CallbackContext context)
@@ -269,6 +277,34 @@ public class PController : MonoBehaviour
             rb.velocity = hoverVelocity;
         }
     }
+
+    private void OnInteractInput(InputAction.CallbackContext context)
+    {
+
+        if (interactable != null && !DialogueManager.isActive)
+        {
+            interactable.Interact();
+            Debug.Log("Interacted with object");
+        }
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Interactable"))
+        {
+            interactable = other.gameObject.GetComponent<IInteractable>();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Interactable"))
+        {
+            interactable = null;
+        }
+    }
+
 
     private void WeaponHandler()
     {
