@@ -89,19 +89,23 @@ public class PController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDashing)
+        if (!DialogueManager.isActive)
         {
-            Dash();
-        }
-        else
-        {
-            Move();
-        }
+            if (isDashing)
+            {
+                Dash();
+            }
+            else
+            {
+                Move();
+            }
 
-        if (isJumping)
-        {
-            PerformJump();
+            if (isJumping)
+            {
+                PerformJump();
+            }
         }
+        
     }
 
     void OnEnable()

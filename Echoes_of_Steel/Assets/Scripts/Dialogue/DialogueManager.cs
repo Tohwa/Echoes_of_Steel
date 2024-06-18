@@ -22,7 +22,7 @@ public class DialogueManager : MonoBehaviour
     private DialogueAsset currentDialogueAsset;
     private bool skipLineTriggered;
     private bool lineFinished;
-    private static bool isActive;
+    public static bool isActive;
     private int dialogueIndex;
     private int dialogueAssetIndex;
 

@@ -865,7 +865,7 @@ GameObject:
   - component: {fileID: 8896524740872317}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -981,22 +981,23 @@ MonoBehaviour:
       m_Action: Dash
       m_Flags: 0
     m_Flags: 0
-  shooting:
-    m_Name: Shooting
+  shoot:
+    m_Name: Shoot
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 37dcfd38-a61d-4e09-95fb-e0af82dbee31
+    m_Id: a495c2c8-e07a-421a-8f44-7fb57338af55
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 4efd4c00-1bd3-4045-a6e1-226d8b4b7706
-      m_Path: <Mouse>/leftButton
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Shooting
-      m_Flags: 0
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  hover:
+    m_Name: Hover
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d3d1ddb4-73ec-4538-ae39-109dd7aa8973
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
     m_Flags: 0
   mainCamera: {fileID: 0}
   Ground:
@@ -1006,17 +1007,22 @@ MonoBehaviour:
   isGrounded: 0
   moveSpeed: 5
   rotationSpeed: 10
+  acceleration: 10
+  deceleration: 10
   jumpForce: 5
-  maxJumps: 2
-  curJumps: 0
+  jumpCooldown: 0.1
+  coyoteTime: 0.1
+  jumpBufferTime: 0.1
   dashSpeed: 20
   dashDuration: 0.2
   dashCooldown: 1
+  weaponDamage: 2
   fireCooldown: 0.1
   automatic: 1
   bulletPool: {fileID: 11400000, guid: 65e53de100fed2f4c8c3cc79e4fd9c87, type: 2}
-  weaponDamage: 2
   bulletSpawn: {fileID: 9137197474644078911}
+  hoverGravityScale: 0.1
+  hoverFallSpeed: 2
 --- !u!54 &5311059686347370333
 Rigidbody:
   m_ObjectHideFlags: 0
