@@ -3,9 +3,9 @@ using UnityEngine.InputSystem;
 
 public class PatrolState : AState
 {
-    private KStateMachine kStateMachine;
+    private KunibertStateMachine kStateMachine;
 
-    public PatrolState(KStateMachine ksm)
+    public PatrolState(KunibertStateMachine ksm)
     {
         kStateMachine = ksm;
     }
@@ -13,7 +13,6 @@ public class PatrolState : AState
     public override void UpdateState()
     {
         CheckStateCondition();
-        //OnMove();
     }
 
     private void CheckStateCondition()
@@ -26,11 +25,11 @@ public class PatrolState : AState
 
     public override void EnterState()
     {
-        Debug.Log("Entered Exploration State");
+        Debug.Log("Entered Patrol State");
     }
 
     public override void ExitState()
     {
-        Debug.Log("Exited Exploration State");
+        Debug.Log("Exited Patrol State");
     }
 }

@@ -1180,7 +1180,7 @@ GameObject:
   - component: {fileID: 284432264118733402}
   m_Layer: 0
   m_Name: sm_robocop_lp (2)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1226,11 +1226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18bba22c72de36749a03fd3d947fbeab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ground:
-    serializedVersion: 2
-    m_Bits: 64
-  isMoving: 0
-  isGrounded: 0
   movement:
     m_Name: Movement
     m_Type: 0
@@ -1347,16 +1342,43 @@ MonoBehaviour:
       m_Action: Shooting
       m_Flags: 0
     m_Flags: 0
+  grapplingHook:
+    m_Name: Grappling Hook
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d8bda06f-5926-4310-b773-8f68c1ffac6f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  mainCamera: {fileID: 0}
+  Ground:
+    serializedVersion: 2
+    m_Bits: 64
+  isMoving: 0
+  isGrounded: 0
   moveSpeed: 5
+  rotationSpeed: 10
   jumpForce: 5
   maxJumps: 2
+  curJumps: 0
   dashSpeed: 20
   dashDuration: 0.2
   dashCooldown: 1
   fireCooldown: 0.5
+  automatic: 0
   bulletPool: {fileID: 11400000, guid: 65e53de100fed2f4c8c3cc79e4fd9c87, type: 2}
   weaponDamage: 2
   bulletSpawn: {fileID: 0}
+  maxGrappleDistance: 0
+  grappleDelayTime: 0
+  grapplingCd: 0
+  overshootYAxis: 0
+  whatIsGrappable:
+    serializedVersion: 2
+    m_Bits: 0
+  gunTip: {fileID: 0}
+  lr: {fileID: 0}
 --- !u!54 &3579647859345524224
 Rigidbody:
   m_ObjectHideFlags: 0
