@@ -880,7 +880,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.01, z: 5.98}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5366949613835398319}
@@ -988,7 +988,15 @@ MonoBehaviour:
     m_Id: a495c2c8-e07a-421a-8f44-7fb57338af55
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: bb08f08b-33d2-4f72-b20e-d085a382b6a4
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Shoot
+      m_Flags: 0
     m_Flags: 0
   hover:
     m_Name: Hover
@@ -997,7 +1005,15 @@ MonoBehaviour:
     m_Id: d3d1ddb4-73ec-4538-ae39-109dd7aa8973
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 27b45477-90cf-47be-bb3f-b2c10989eab5
+      m_Path: <Keyboard>/ctrl
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Hover
+      m_Flags: 0
     m_Flags: 0
   mainCamera: {fileID: 0}
   Ground:
@@ -1005,16 +1021,16 @@ MonoBehaviour:
     m_Bits: 64
   isMoving: 0
   isGrounded: 0
-  moveSpeed: 5
+  moveSpeed: 15
   rotationSpeed: 10
   acceleration: 10
   deceleration: 10
-  jumpForce: 5
+  jumpForce: 10
   jumpCooldown: 0.1
   coyoteTime: 0.1
   jumpBufferTime: 0.1
   dashSpeed: 20
-  dashDuration: 0.2
+  dashDuration: 0.3
   dashCooldown: 1
   weaponDamage: 2
   fireCooldown: 0.1
