@@ -1325,28 +1325,20 @@ MonoBehaviour:
       m_Action: Dash
       m_Flags: 8
     m_Flags: 0
-  shooting:
-    m_Name: Shooting
+  shoot:
+    m_Name: Shoot
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 37dcfd38-a61d-4e09-95fb-e0af82dbee31
+    m_Id: 33470569-8b08-49ab-a199-ddf11c136d8d
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 4efd4c00-1bd3-4045-a6e1-226d8b4b7706
-      m_Path: <Mouse>/leftButton
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Shooting
-      m_Flags: 0
+    m_SingletonActionBindings: []
     m_Flags: 0
-  grapplingHook:
-    m_Name: Grappling Hook
+  hover:
+    m_Name: Hover
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: d8bda06f-5926-4310-b773-8f68c1ffac6f
+    m_Id: f099408f-83ff-4389-b21b-77729af8a614
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -1359,26 +1351,22 @@ MonoBehaviour:
   isGrounded: 0
   moveSpeed: 5
   rotationSpeed: 10
+  acceleration: 10
+  deceleration: 10
   jumpForce: 5
-  maxJumps: 2
-  curJumps: 0
+  jumpCooldown: 0.1
+  coyoteTime: 0.1
+  jumpBufferTime: 0.1
   dashSpeed: 20
   dashDuration: 0.2
   dashCooldown: 1
+  weaponDamage: 2
   fireCooldown: 0.5
   automatic: 0
   bulletPool: {fileID: 11400000, guid: 65e53de100fed2f4c8c3cc79e4fd9c87, type: 2}
-  weaponDamage: 2
   bulletSpawn: {fileID: 0}
-  maxGrappleDistance: 0
-  grappleDelayTime: 0
-  grapplingCd: 0
-  overshootYAxis: 0
-  whatIsGrappable:
-    serializedVersion: 2
-    m_Bits: 0
-  gunTip: {fileID: 0}
-  lr: {fileID: 0}
+  hoverGravityScale: 0.1
+  hoverFallSpeed: 2
 --- !u!54 &3579647859345524224
 Rigidbody:
   m_ObjectHideFlags: 0

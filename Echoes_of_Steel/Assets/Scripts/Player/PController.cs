@@ -13,6 +13,7 @@ public class PController : MonoBehaviour
     public InputAction dash;
     public InputAction shoot;
     public InputAction hover;
+    public InputAction interact;
 
     [Header("Framework Variables")]
     public Camera mainCamera;
