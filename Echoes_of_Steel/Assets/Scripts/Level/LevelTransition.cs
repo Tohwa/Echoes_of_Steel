@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelTransition : MonoBehaviour
 {
+    [SerializeField] private LoadingScreen loadScreen;
+
     private void OnTriggerEnter(Collider other)
     {
         Scene scene = SceneManager.GetActiveScene();
@@ -14,11 +16,11 @@ public class LevelTransition : MonoBehaviour
         {
             if (scene.buildIndex == 1)
             {
-                SceneManager.LoadScene("Level Two");
+                loadScreen.LoadScene(2);
             }
             else if (scene.buildIndex == 2)
             {
-                SceneManager.LoadScene("Level Three");
+                loadScreen.LoadScene(3);
             }
             else if(scene.buildIndex == 3)
             {
@@ -39,7 +41,7 @@ public class LevelTransition : MonoBehaviour
                     GameManager.Instance.endingFour = true;
                 }
 
-                SceneManager.LoadScene("EndingScreen");
+                loadScreen.LoadScene(4); ;
             }
         }
     }
