@@ -39,7 +39,7 @@ public class LevelTransition : MonoBehaviour
                     GameManager.Instance.endingFour = true;
                 }
 
-                SceneManager.LoadScene("Ending Screen");
+                SceneManager.LoadScene("EndingScreen");
             }
         }
     }
