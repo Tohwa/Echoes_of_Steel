@@ -8,6 +8,11 @@ public class LevelTransition : MonoBehaviour
 {
     [SerializeField] private LoadingScreen loadScreen;
 
+    private void Start()
+    {
+        loadScreen = GameObject.FindObjectOfType<LoadingScreen>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Scene scene = SceneManager.GetActiveScene();

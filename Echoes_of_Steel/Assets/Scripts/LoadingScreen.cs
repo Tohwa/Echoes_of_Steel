@@ -11,6 +11,15 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] private Image loadingBarFill;
     [SerializeField] private TMP_Text progressText;
 
+    private void Start()
+    {
+        GameObject canvas = GameObject.FindGameObjectWithTag("UI");
+
+        loadingScreen = canvas.transform.GetChild(2).gameObject;
+        loadingBarFill = loadingScreen.transform.GetChild(0).gameObject.GetComponent<Image>();
+        progressText = loadingScreen.transform.GetChild(2).gameObject.GetComponent<TMP_Text>();
+    }
+
     public void LoadScene(int _sceneId)
     {
         StartCoroutine(LoadSceneAsync(_sceneId));
@@ -25,7 +34,7 @@ public class LoadingScreen : MonoBehaviour
         while(!operation.isDone)
         {
             float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
-            float progressPercentage = progressValue * 100;
+            float progressPercentage = Mathf.Round(progressValue * 100);
 
             loadingBarFill.fillAmount = progressValue;
             progressText.text = progressPercentage.ToString() + "%";
