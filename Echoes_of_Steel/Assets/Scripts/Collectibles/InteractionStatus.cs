@@ -19,4 +19,9 @@ public class InteractionStatus : ScriptableObject
     {
         return interactedObjects.Contains(objectName);
     }
+
+    public int GetInteractionCount()
+    {
+        return interactedObjects.Count;
+    }
 }

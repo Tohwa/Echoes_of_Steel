@@ -8,9 +8,13 @@ public class InitPlayer : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject cameraPrefab;
 
+    [SerializeField] private InteractionStatus interactionStatus;
+
     void Start()
     {
         GameObject.Instantiate(playerPrefab, playerSpawn.position, playerSpawn.rotation);
         GameObject.Instantiate(cameraPrefab, playerSpawn.position, playerSpawn.rotation);
+
+        Debug.Log("You have interacted with: " + interactionStatus.GetInteractionCount());
     }
 }

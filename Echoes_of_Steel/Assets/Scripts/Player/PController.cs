@@ -308,19 +308,22 @@ public class PController : MonoBehaviour
 
     private void WeaponHandler()
     {
-        if (automatic)
+        if(!DialogueManager.isActive)
         {
-            if (shoot.ReadValue<float>() > 0.1f && Time.time >= lastFireTime + fireCooldown)
+            if (automatic)
+            {
+                if (shoot.ReadValue<float>() > 0.1f && Time.time >= lastFireTime + fireCooldown)
+                {
+                    lastFireTime = Time.time;
+                    Shoot();
+                }
+            }
+            else if (shoot.triggered && Time.time >= lastFireTime + fireCooldown)
             {
                 lastFireTime = Time.time;
                 Shoot();
             }
-        }
-        else if (shoot.triggered && Time.time >= lastFireTime + fireCooldown)
-        {
-            lastFireTime = Time.time;
-            Shoot();
-        }
+        }   
     }
     private void Shoot()
     {
