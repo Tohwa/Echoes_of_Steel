@@ -14,6 +14,9 @@ public class EndingScreenHandler : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         if (GameManager.Instance.endingOne)
         {
             firstEnding.SetActive(true);

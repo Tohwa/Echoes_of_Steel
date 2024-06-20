@@ -12,6 +12,9 @@ public class InitPlayer : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         GameObject.Instantiate(playerPrefab, playerSpawn.position, playerSpawn.rotation);
         GameObject.Instantiate(cameraPrefab, playerSpawn.position, playerSpawn.rotation);
 
