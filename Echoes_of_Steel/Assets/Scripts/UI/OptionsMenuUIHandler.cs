@@ -192,7 +192,6 @@ public class OptionsMenuUIHandler : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        GameManager.Instance.gamePaused = false;
         SceneManager.LoadScene(0);
     }
 

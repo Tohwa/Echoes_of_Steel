@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (DialogueManager.isActive || gamePaused)
+        if (gamePaused || DialogueManager.isActive)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -46,11 +46,13 @@ public class GameManager : MonoBehaviour
         {
             pauseMenu.SetActive(true);
             gamePaused = true;
+            
         }
         else
         {
             pauseMenu.SetActive(false);
             gamePaused = false;
+            
         }
     }
 }

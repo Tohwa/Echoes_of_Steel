@@ -44,7 +44,7 @@ public class DialogueManager : MonoBehaviour
             Destroy(this);
             return;
         }
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
     }
 
     private void Update()
@@ -62,7 +62,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        //if(isActive)
+        //if (isActive)
         //{
         //    Cursor.lockState = CursorLockMode.None;
         //    Cursor.visible = true;
@@ -237,12 +237,14 @@ public class DialogueManager : MonoBehaviour
             journalAnimator.SetBool("IsOpen", true);
             panelObject.SetActive(true);
             journalIsOpen = true;
+            
         }
         else
         {
             journalAnimator.SetBool("IsOpen", false);
             panelObject.SetActive(false);
             journalIsOpen = false;
+            
         }
     }
 }
