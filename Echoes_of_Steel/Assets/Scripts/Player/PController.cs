@@ -14,6 +14,7 @@ public class PController : MonoBehaviour
     public InputAction shoot;
     public InputAction hover;
     public InputAction interact;
+    public InputAction journal;
 
     [Header("Framework Variables")]
     public Camera mainCamera;
@@ -66,6 +67,11 @@ public class PController : MonoBehaviour
 
     [Header("Interactable Variables")]
     private IInteractable interactable;
+
+    [Header("Journal Variables")]
+    public Animator journalAnimator;
+    public GameObject panelObject;
+    private bool journalIsOpen;
 
     #endregion
 
@@ -120,6 +126,7 @@ public class PController : MonoBehaviour
         shoot.Enable();
         hover.Enable();
         interact.Enable();
+        journal.Enable();
 
         jump.performed += OnJumpInput;
         movement.performed += OnMovementInput;
@@ -128,6 +135,7 @@ public class PController : MonoBehaviour
         hover.performed += OnHoverHold;
         hover.canceled += OnHoverRelease;
         interact.performed += OnInteractInput;
+        journal.performed += OnJournalInput;
     }
     void OnDisable()
     {
@@ -137,6 +145,7 @@ public class PController : MonoBehaviour
         shoot.Disable();
         hover.Disable();
         interact.Disable();
+        journal.Disable();
 
         movement.performed -= OnMovementInput;
         movement.canceled -= OnMovementInput;
@@ -145,6 +154,7 @@ public class PController : MonoBehaviour
         hover.performed -= OnHoverHold;
         hover.canceled -= OnHoverRelease;
         interact.performed -= OnInteractInput;
+        journal.performed -= OnJournalInput;
     }
 
     private void OnMovementInput(InputAction.CallbackContext context)
@@ -303,6 +313,22 @@ public class PController : MonoBehaviour
         if (other.gameObject.CompareTag("Interactable"))
         {
             interactable = null;
+        }
+    }
+
+    private void OnJournalInput(InputAction.CallbackContext context)
+    {
+        if (!journalIsOpen)
+        {
+            journalAnimator.SetBool("IsOpen", true);
+            panelObject.SetActive(true);
+            journalIsOpen = true;
+        }
+        else
+        {
+            journalAnimator.SetBool("IsOpen", false);
+            panelObject.SetActive(false);
+            journalIsOpen = false;
         }
     }
 

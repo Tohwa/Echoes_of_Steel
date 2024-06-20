@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private GameObject choices;
+    [SerializeField] private GameObject panelObject;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI choiceOneText;
@@ -61,6 +62,7 @@ public class DialogueManager : MonoBehaviour
         isActive = true;
         //dialogueBox.SetActive(true);
         boxAnimator.SetBool("IsOpen", true);
+        panelObject.SetActive(true);
 
         choices.SetActive(false);
 
@@ -147,6 +149,7 @@ public class DialogueManager : MonoBehaviour
             isActive = false;
             imageAnimator.SetBool("IsOpen", false);
             boxAnimator.SetBool("IsOpen", false);
+            panelObject.SetActive(false);
         }
         dialogueIndex = 0;
         lineFinished = false;
