@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 0ddb6e0b1d900fb4899b7dea37a7b003
+  m_OcclusionCullingData: {fileID: 36300000, guid: c4d5a83f6c6401c4db0e257afd916be3, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -1020,7 +1020,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 11868126605198897, guid: db93ef2060d5bcb439f60e7ba07cf941, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1520153573231566837, guid: db93ef2060d5bcb439f60e7ba07cf941, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1077,6 +1077,14 @@ PrefabInstance:
     - target: {fileID: 4360299989161244126, guid: db93ef2060d5bcb439f60e7ba07cf941, type: 3}
       propertyPath: loadScreen
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584617014208218381, guid: db93ef2060d5bcb439f60e7ba07cf941, type: 3}
+      propertyPath: m_FadeMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584617014208218381, guid: db93ef2060d5bcb439f60e7ba07cf941, type: 3}
+      propertyPath: m_AnimateCrossFading
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6612619389252501366, guid: db93ef2060d5bcb439f60e7ba07cf941, type: 3}
       propertyPath: cameraPrefab
