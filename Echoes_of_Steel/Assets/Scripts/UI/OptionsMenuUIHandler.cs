@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class OptionsMenuUIHandler : MonoBehaviour
@@ -17,11 +18,11 @@ public class OptionsMenuUIHandler : MonoBehaviour
     //[SerializeField] private TMP_Dropdown resolutionDropdown;
     //[SerializeField] private TMP_Dropdown qualityDropdown;
     [SerializeField] private Toggle fullscreenToggle;
-    [SerializeField] private Slider volumeSlider;
+    //[SerializeField] private Slider volumeSlider;
 
     [SerializeField] private TextMeshProUGUI resText;
     [SerializeField] private TextMeshProUGUI qualityText;
-    [SerializeField] private List<string> resOptions;
+    private List<string> resOptions;
 
     private Resolution[] resolutions;
     private List<Resolution> compatibleResolutions = new List<Resolution>();
@@ -187,6 +188,12 @@ public class OptionsMenuUIHandler : MonoBehaviour
         audioMenu.SetActive(false);
         graphicsMenu.SetActive(false);
         mainMenu.SetActive(true);
+    }
+
+    public void BackToMainMenu()
+    {
+        GameManager.Instance.gamePaused = false;
+        SceneManager.LoadScene(0);
     }
 
 }

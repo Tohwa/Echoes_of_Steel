@@ -1049,6 +1049,23 @@ MonoBehaviour:
       m_Action: Journal
       m_Flags: 0
     m_Flags: 0
+  pause:
+    m_Name: Pause
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f7e21188-9a3e-4273-b96a-ee680f28e4b9
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 126de245-b363-407c-a801-f051c3ff3cbe
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pause
+      m_Flags: 0
+    m_Flags: 0
   mainCamera: {fileID: 0}
   Ground:
     serializedVersion: 2
@@ -1072,8 +1089,6 @@ MonoBehaviour:
   bulletPool: {fileID: 11400000, guid: 65e53de100fed2f4c8c3cc79e4fd9c87, type: 2}
   bulletSpawn: {fileID: 9137197474644078911}
   hoverFallSpeed: 2
-  journalAnimator: {fileID: 0}
-  panelObject: {fileID: 0}
 --- !u!54 &5311059686347370333
 Rigidbody:
   m_ObjectHideFlags: 0

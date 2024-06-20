@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 302255717349108379, guid: 341f34a4910f65c4b8ad4438d610dbaf, type: 3}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 1241345562}
     - target: {fileID: 6584385613397658173, guid: 341f34a4910f65c4b8ad4438d610dbaf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -919,6 +923,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4bbdda8be98c2f14b835a6a03d71ac00, type: 2}
   - {fileID: 11400000, guid: 1b15ff56519306c46a4e69ee4440419e, type: 2}
   - {fileID: 11400000, guid: 00089cf93957a584cbf01f6d877387f7, type: 2}
+--- !u!1 &1241345562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1488648293991033504, guid: 55f9abe806f0a1b4d852177082eac71e, type: 3}
+  m_PrefabInstance: {fileID: 965348019}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1438169416 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4952697571408421260, guid: 55f9abe806f0a1b4d852177082eac71e, type: 3}
