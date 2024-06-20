@@ -985,7 +985,7 @@ MonoBehaviour:
     m_Name: Shoot
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: a495c2c8-e07a-421a-8f44-7fb57338af55
+    m_Id: 7f71ad55-12b9-4971-8e86-76b9f239cb09
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
@@ -1024,12 +1024,29 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: eac1d0e9-3ae6-4c03-894f-02954c6c56c2
-      m_Path: <Keyboard>/e
+      m_Id: f4c57037-c860-4ddd-9ae2-d4a0af9add11
+      m_Path: <Mouse>/leftButton
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Interact
+      m_Action: Shoot
+      m_Flags: 0
+    m_Flags: 0
+  hover:
+    m_Name: Hover
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c20aa03f-b73f-4fea-b815-f8c149c6def7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 4e036dde-ab10-4b6a-a90d-450caa85567d
+      m_Path: <Keyboard>/space
+      m_Interactions: Hold
+      m_Processors: 
+      m_Groups: 
+      m_Action: Hover
       m_Flags: 0
     m_Flags: 0
   mainCamera: {fileID: 0}
