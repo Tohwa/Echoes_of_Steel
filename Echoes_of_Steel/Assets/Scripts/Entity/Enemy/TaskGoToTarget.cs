@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 using BehaviorTree;
 
 public class TaskGoToTarget : Node
@@ -17,15 +14,33 @@ public class TaskGoToTarget : Node
     {
         Transform target = (Transform)GetData("target");
 
+        if (target == null)
+        {
+            state = NodeState.FAILURE;
+            return state;
+        }
+
+        // Check if the target is out of FOV range
+        if (Vector3.Distance(_transform.position, target.position) > GuardBT.fovRange)
+        {
+            ClearData("target");
+            state = NodeState.FAILURE;
+            return state;
+        }
+
         if (Vector3.Distance(_transform.position, target.position) > 0.01f)
         {
+            Vector3 direction = (target.position - _transform.position).normalized;
+            direction.y = 0; // Prevent rotation on the X axis
+
             _transform.position = Vector3.MoveTowards(
                 _transform.position, target.position, GuardBT.speed * Time.deltaTime);
-            _transform.LookAt(target.position);
+
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            _transform.rotation = Quaternion.Slerp(_transform.rotation, lookRotation, Time.deltaTime * GuardBT.speed);
         }
 
         state = NodeState.RUNNING;
         return state;
     }
-
 }
