@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 using BehaviorTree;
 
 public class TaskAttack : Node
 {
     //private Animator _animator;
 
+    private Transform _transform;
     private Transform _lastTarget;
     private EnemyManager _enemyManager;
 
@@ -16,16 +14,30 @@ public class TaskAttack : Node
 
     public TaskAttack(Transform transform)
     {
+        _transform = transform;
         //_animator = transform.GetComponent<Animator>();
     }
 
     public override NodeState Evaluate()
     {
         Transform target = (Transform)GetData("target");
+        if (target == null)
+        {
+            state = NodeState.FAILURE;
+            return state;
+        }
+
         if (target != _lastTarget)
         {
             _enemyManager = target.GetComponent<EnemyManager>();
             _lastTarget = target;
+        }
+
+        // Check if the target is out of attack range
+        if (Vector3.Distance(_transform.position, target.position) > GuardBT.attackRange)
+        {
+            state = NodeState.FAILURE;
+            return state;
         }
 
         _attackCounter += Time.deltaTime;
@@ -37,6 +49,8 @@ public class TaskAttack : Node
                 ClearData("target");
                 //_animator.SetBool("Attacking", false);
                 //_animator.SetBool("Walking", true);
+                state = NodeState.SUCCESS;
+                return state;
             }
             else
             {
@@ -47,5 +61,4 @@ public class TaskAttack : Node
         state = NodeState.RUNNING;
         return state;
     }
-
 }

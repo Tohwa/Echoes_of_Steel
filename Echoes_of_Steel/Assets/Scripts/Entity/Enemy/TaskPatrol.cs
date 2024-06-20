@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 using BehaviorTree;
 
 public class TaskPatrol : Node
@@ -19,7 +16,7 @@ public class TaskPatrol : Node
     public TaskPatrol(Transform transform, Transform[] waypoints)
     {
         _transform = transform;
-        _animator = transform.GetComponent<Animator>();
+        //_animator = transform.GetComponent<Animator>();
         _waypoints = waypoints;
     }
 
@@ -31,7 +28,7 @@ public class TaskPatrol : Node
             if (_waitCounter >= _waitTime)
             {
                 _waiting = false;
-                _animator.SetBool("Walking", true);
+                //_animator.SetBool("Walking", true);
             }
         }
         else
@@ -44,18 +41,21 @@ public class TaskPatrol : Node
                 _waiting = true;
 
                 _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Length;
-                _animator.SetBool("Walking", false);
+                //_animator.SetBool("Walking", false);
             }
             else
             {
+                Vector3 direction = (wp.position - _transform.position).normalized;
+                direction.y = 0; // Prevent rotation on the X axis
+
                 _transform.position = Vector3.MoveTowards(_transform.position, wp.position, GuardBT.speed * Time.deltaTime);
-                _transform.LookAt(wp.position);
+
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                _transform.rotation = Quaternion.Slerp(_transform.rotation, lookRotation, Time.deltaTime * GuardBT.speed);
             }
         }
-
 
         state = NodeState.RUNNING;
         return state;
     }
-
 }
