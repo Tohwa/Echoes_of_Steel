@@ -64,6 +64,9 @@ public class PController : MonoBehaviour
     public float hoverFallSpeed = 2f;
     private bool isHovering;
 
+    [Header("Interactable Variables")]
+    private IInteractable interactable;
+
     #endregion
 
     private void Start()
@@ -90,19 +93,23 @@ public class PController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDashing)
+        if (!DialogueManager.isActive)
         {
-            Dash();
-        }
-        else
-        {
-            Move();
-        }
+            if (isDashing)
+            {
+                Dash();
+            }
+            else
+            {
+                Move();
+            }
 
-        if (isJumping)
-        {
-            PerformJump();
+            if (isJumping)
+            {
+                PerformJump();
+            }
         }
+        
     }
 
     void OnEnable()
@@ -112,6 +119,7 @@ public class PController : MonoBehaviour
         dash.Enable();
         shoot.Enable();
         hover.Enable();
+        interact.Enable();
 
         jump.performed += OnJumpInput;
         movement.performed += OnMovementInput;
@@ -119,6 +127,7 @@ public class PController : MonoBehaviour
         dash.performed += OnDashInput;
         hover.performed += OnHoverHold;
         hover.canceled += OnHoverRelease;
+        interact.performed += OnInteractInput;
     }
     void OnDisable()
     {
@@ -127,6 +136,7 @@ public class PController : MonoBehaviour
         dash.Disable();
         shoot.Disable();
         hover.Disable();
+        interact.Disable();
 
         movement.performed -= OnMovementInput;
         movement.canceled -= OnMovementInput;
@@ -134,6 +144,7 @@ public class PController : MonoBehaviour
         dash.performed -= OnDashInput;
         hover.performed -= OnHoverHold;
         hover.canceled -= OnHoverRelease;
+        interact.performed -= OnInteractInput;
     }
 
     private void OnMovementInput(InputAction.CallbackContext context)
@@ -266,6 +277,34 @@ public class PController : MonoBehaviour
             rb.velocity = hoverVelocity;
         }
     }
+
+    private void OnInteractInput(InputAction.CallbackContext context)
+    {
+
+        if (interactable != null && !DialogueManager.isActive)
+        {
+            interactable.Interact();
+            Debug.Log("Interacted with object");
+        }
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Interactable"))
+        {
+            interactable = other.gameObject.GetComponent<IInteractable>();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Interactable"))
+        {
+            interactable = null;
+        }
+    }
+
 
     private void WeaponHandler()
     {

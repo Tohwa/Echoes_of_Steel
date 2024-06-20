@@ -22,7 +22,7 @@ public class DialogueManager : MonoBehaviour
     private DialogueAsset currentDialogueAsset;
     private bool skipLineTriggered;
     private bool lineFinished;
-    private static bool isActive;
+    public static bool isActive;
     private int dialogueIndex;
     private int dialogueAssetIndex;
 
@@ -120,20 +120,21 @@ public class DialogueManager : MonoBehaviour
         if(currentDialogueAsset.isChoiceDialogue)
         {
             choices.SetActive(true);
-            if(dialogueAssetIndex == 0)
-            {
-                choiceOneText.text = dialogueAssets[1].sentences[0].dialogue;
-                choiceTwoText.text = dialogueAssets[2].sentences[0].dialogue;
-            }
-            else
-            {
-                choiceOneText.text = dialogueAssets[3].sentences[0].dialogue;
-                choiceTwoText.text = dialogueAssets[4].sentences[0].dialogue;
-            }
+
+            choiceOneText.text = DisplayChoice(0);
+            choiceTwoText.text = DisplayChoice(1);
+            
+                
+                
+            
         }
         if (currentDialogueAsset.isEndDialogue)
         {
 
+        //test prupose only
+        dialogueAssetIndex = 0;
+        currentDialogueAsset = dialogueAssets[dialogueAssetIndex];
+        //
         isActive = false;
         animator.SetBool("IsOpen", false);
         }
@@ -174,5 +175,24 @@ public class DialogueManager : MonoBehaviour
         currentDialogueAsset = dialogueAssets[dialogueAssetIndex];
         choices.SetActive(false);
         DisplayNextSentence();
+    }
+
+    private string DisplayChoice(int _index)
+    {
+        string chosenAnswer;
+        string[] choice1 = {"Obey order", "Execute protocol", "Carry out program"};
+        string[] choice2 = { "Question own protocol", "Search for answer", "Investigate own program" };
+
+
+        if (_index == 0)
+        {
+            chosenAnswer = choice1[Random.Range(0, 3)];
+        }
+        else
+        {
+            chosenAnswer = choice2[Random.Range(0, 3)];
+        }
+
+        return chosenAnswer;
     }
 }

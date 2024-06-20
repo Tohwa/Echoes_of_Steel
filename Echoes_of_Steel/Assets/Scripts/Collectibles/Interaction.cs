@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Interaction : MonoBehaviour
 {
-    public InteractionStatus interactionStatus;
+    [SerializeField] private InteractionStatus interactionStatus;
+    [SerializeField] private DialogueTrigger DiaTrigger; 
     private bool isPlayerInRange;
 
     void Start()
@@ -27,6 +28,8 @@ public class Interaction : MonoBehaviour
     {
         Debug.Log("Interagiert mit: " + gameObject.name);
         interactionStatus.AddInteractedObject(gameObject.name);
+        Cursor.lockState = CursorLockMode.None;
+        DiaTrigger.TriggerDialogue();
         gameObject.SetActive(false);
     }
 
