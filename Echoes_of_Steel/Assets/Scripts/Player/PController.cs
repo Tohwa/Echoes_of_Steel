@@ -67,11 +67,6 @@ public class PController : MonoBehaviour
     [Header("Interactable Variables")]
     private IInteractable interactable;
 
-    [Header("Journal Variables")]
-    public Animator journalAnimator;
-    public GameObject panelObject;
-    private bool journalIsOpen;
-
     #endregion
 
     private void Start()
@@ -317,18 +312,7 @@ public class PController : MonoBehaviour
 
     private void OnJournalInput(InputAction.CallbackContext context)
     {
-        if (!journalIsOpen)
-        {
-            journalAnimator.SetBool("IsOpen", true);
-            panelObject.SetActive(true);
-            journalIsOpen = true;
-        }
-        else
-        {
-            journalAnimator.SetBool("IsOpen", false);
-            panelObject.SetActive(false);
-            journalIsOpen = false;
-        }
+        DialogueManager.instance.OpenJournal();
     }
 
 

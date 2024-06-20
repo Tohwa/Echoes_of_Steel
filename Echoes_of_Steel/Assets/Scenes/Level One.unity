@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.12076032, g: 0.18643649, b: 0.3352496, a: 1}
+  m_IndirectSpecularColor: {r: 0.12076026, g: 0.18643647, b: 0.33524987, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -258,7 +258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1990059020652518320, guid: c542b6bc8d2e51c449c9ae93835326ff, type: 3}
       propertyPath: m_Name
-      value: Poster #1
+      value: Poster 1
       objectReference: {fileID: 0}
     - target: {fileID: 6833253922054325731, guid: c542b6bc8d2e51c449c9ae93835326ff, type: 3}
       propertyPath: DiaTrigger
@@ -713,6 +713,10 @@ PrefabInstance:
       propertyPath: imageAnimator
       value: 
       objectReference: {fileID: 904801526}
+    - target: {fileID: 1853573121901608797, guid: 21dbd57c86ced734681ad898c04e5eed, type: 3}
+      propertyPath: journalAnimator
+      value: 
+      objectReference: {fileID: 1930550243}
     - target: {fileID: 2818264664089800476, guid: 21dbd57c86ced734681ad898c04e5eed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -864,7 +868,7 @@ PrefabInstance:
       objectReference: {fileID: 1098615418}
     - target: {fileID: 8690186026679165403, guid: 6650d39e4eef4234ea10bcba9e439d5d, type: 3}
       propertyPath: m_Name
-      value: Memory #1
+      value: Memory 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -918,6 +922,11 @@ MonoBehaviour:
 --- !u!1 &1438169416 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4952697571408421260, guid: 55f9abe806f0a1b4d852177082eac71e, type: 3}
+  m_PrefabInstance: {fileID: 965348019}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1930550243 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 481098064537532411, guid: 55f9abe806f0a1b4d852177082eac71e, type: 3}
   m_PrefabInstance: {fileID: 965348019}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1951264103 stripped
