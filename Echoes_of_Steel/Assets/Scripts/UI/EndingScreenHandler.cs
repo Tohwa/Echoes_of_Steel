@@ -10,6 +10,8 @@ public class EndingScreenHandler : MonoBehaviour
     [SerializeField] private GameObject thirdEnding;
     [SerializeField] private GameObject fourthEnding;
 
+    [SerializeField] private LoadingScreen loadingScreen;
+
     private void Start()
     {
         if (GameManager.Instance.endingOne)
@@ -32,6 +34,6 @@ public class EndingScreenHandler : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        loadingScreen.LoadScene(0);
     }
 }
