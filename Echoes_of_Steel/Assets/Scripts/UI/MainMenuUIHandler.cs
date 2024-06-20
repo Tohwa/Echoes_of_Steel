@@ -8,9 +8,11 @@ public class MainMenuUIHandler : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsMenu;
 
+    [SerializeField] private LoadingScreen loadingScreen;
+
     public void StartGame()
     {
-        SceneManager.LoadScene("MainScene");
+        loadingScreen.LoadScene(1);
     }
 
     public void OpenOptionsMenu()

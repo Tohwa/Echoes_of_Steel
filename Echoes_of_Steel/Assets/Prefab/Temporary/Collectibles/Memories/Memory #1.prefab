@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: -3033667219593020291, guid: c3728df6360337247bf9cf0125ccb45e, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -117,10 +117,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1831341410540670779}
   - component: {fileID: 7521189656617766474}
-  - component: {fileID: 248722894866151397}
+  - component: {fileID: 5119025618390516529}
+  - component: {fileID: 6954895052057861084}
   m_Layer: 0
   m_Name: Memory #1
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,7 +164,34 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 12.972551, y: 6.3282847, z: 14.986237}
   m_Center: {x: -0.020511627, y: 2.6641424, z: 0.0895195}
---- !u!114 &248722894866151397
+--- !u!54 &5119025618390516529
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8690186026679165403}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &6954895052057861084
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,10 +200,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8690186026679165403}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04bd93ca3d326bd42a8f9f7b872841f9, type: 3}
+  m_Script: {fileID: 11500000, guid: d5ea8617c557a3646a4637e1cb11d17a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactionStatus: {fileID: 11400000, guid: 9c696e5848e2bce48bf9b7349ede628b, type: 2}
+  dialogueTrigger: {fileID: 0}
 --- !u!1001 &543582308540576547
 PrefabInstance:
   m_ObjectHideFlags: 0
