@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 using BehaviorTree;
 
 public class CheckEnemyInFOVRange : Node
 {
     private static int _enemyLayerMask = 1 << 6;
-
     private Transform _transform;
     //private Animator _animator;
 

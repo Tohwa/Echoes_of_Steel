@@ -12,6 +12,7 @@ namespace BehaviorTree
 
         protected override Node SetupTree()
         {
+            TaskPatrol patrolNode = new TaskPatrol(transform, waypoints);
             Node root = new Selector(new List<Node>
         {
             new Sequence(new List<Node>
@@ -24,7 +25,7 @@ namespace BehaviorTree
                 new CheckEnemyInFOVRange(transform),
                 new TaskGoToTarget(transform),
             }),
-            new TaskPatrol(transform, waypoints),
+            patrolNode,
         });
 
             return root;
