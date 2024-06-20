@@ -61,7 +61,6 @@ public class PController : MonoBehaviour
     private Transform pCamera;
 
     [Header("Hover Variables")]
-    public float hoverGravityScale = 0.1f; // The gravity scale to use while hovering
     public float hoverFallSpeed = 2f;
     private bool isHovering;
 
