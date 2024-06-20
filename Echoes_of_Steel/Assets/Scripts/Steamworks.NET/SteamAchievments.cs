@@ -7,7 +7,6 @@ using UnityEngine;
 public class SteamAchievment : MonoBehaviour
 {
     [SerializeField] InteractionStatus interactionStatus;
-    private bool wasPlaying = false;
 
     void Start()
     {
