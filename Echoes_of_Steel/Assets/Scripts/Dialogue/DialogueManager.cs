@@ -15,7 +15,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI choiceOneText;
     [SerializeField] private TextMeshProUGUI choiceTwoText;
     [SerializeField] private Image charImage;
-    [SerializeField] private Animator animator;
+    [SerializeField] private Image memoryImage;
+    [SerializeField] private Animator boxAnimator;
+    [SerializeField] private Animator imageAnimator;
     [SerializeField] private float dialogueSpeed;
 
     private DialogueAsset[] dialogueAssets;
@@ -28,7 +30,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -42,12 +44,12 @@ public class DialogueManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && isActive)
         {
-            if(!lineFinished)
+            if (!lineFinished)
             {
 
-            SkipLine();
+                SkipLine();
             }
-            else if(lineFinished)
+            else if (lineFinished)
             {
                 DisplayNextSentence();
             }
@@ -58,7 +60,7 @@ public class DialogueManager : MonoBehaviour
     {
         isActive = true;
         //dialogueBox.SetActive(true);
-        animator.SetBool("IsOpen", true);
+        boxAnimator.SetBool("IsOpen", true);
 
         choices.SetActive(false);
 
@@ -70,17 +72,24 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        if(dialogueIndex > currentDialogueAsset.sentences.Length - 1)
+        if (dialogueIndex > currentDialogueAsset.sentences.Length - 1)
         {
             EndDialogue();
             return;
         }
 
+        if(dialogueAssetIndex == 0 && dialogueIndex == 4)
+        {
+            memoryImage.sprite = currentDialogueAsset.memoryImage;
+            imageAnimator.SetBool("IsOpen", true);
+        }
         Dialogue currentDialogue = currentDialogueAsset.sentences[dialogueIndex];
 
         Character currentCharacter = currentDialogueAsset.characters[currentDialogue.characterId];
         nameText.text = currentCharacter.name;
         charImage.sprite = currentCharacter.sprite;
+
+
 
         StopAllCoroutines();
         StartCoroutine(TypeSentece(currentDialogue.dialogue));
@@ -96,15 +105,15 @@ public class DialogueManager : MonoBehaviour
 
         foreach (char letter in sentence.ToCharArray())
         {
-            if(skipLineTriggered)
+            if (skipLineTriggered)
             {
                 dialogueText.text = sentence;
                 break;
             }
             dialogueText.text += letter;
-            
+
             yield return new WaitForSeconds(1 / dialogueSpeed);
-            
+
         }
         lineFinished = true;
 
@@ -117,26 +126,27 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
-        if(currentDialogueAsset.isChoiceDialogue)
+        if (currentDialogueAsset.isChoiceDialogue)
         {
             choices.SetActive(true);
 
             choiceOneText.text = DisplayChoice(0);
             choiceTwoText.text = DisplayChoice(1);
-            
-                
-                
-            
+
+
+
+
         }
         if (currentDialogueAsset.isEndDialogue)
         {
 
-        //test prupose only
-        dialogueAssetIndex = 0;
-        currentDialogueAsset = dialogueAssets[dialogueAssetIndex];
-        //
-        isActive = false;
-        animator.SetBool("IsOpen", false);
+            //test prupose only
+            dialogueAssetIndex = 0;
+            currentDialogueAsset = dialogueAssets[dialogueAssetIndex];
+            //
+            isActive = false;
+            imageAnimator.SetBool("IsOpen", false);
+            boxAnimator.SetBool("IsOpen", false);
         }
         dialogueIndex = 0;
         lineFinished = false;
@@ -145,7 +155,7 @@ public class DialogueManager : MonoBehaviour
 
     public void ChoiceOne()
     {
-        if(dialogueAssetIndex == 1)
+        if (dialogueAssetIndex == 1)
         {
             dialogueAssetIndex += 2;
         }
@@ -180,7 +190,7 @@ public class DialogueManager : MonoBehaviour
     private string DisplayChoice(int _index)
     {
         string chosenAnswer;
-        string[] choice1 = {"Obey order", "Execute protocol", "Carry out program"};
+        string[] choice1 = { "Obey order", "Execute protocol", "Carry out program" };
         string[] choice2 = { "Question own protocol", "Search for answer", "Investigate own program" };
 
 

@@ -293,6 +293,7 @@ public class PController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Interactable"))
         {
+            Debug.Log("Collided");
             interactable = other.gameObject.GetComponent<IInteractable>();
         }
     }
