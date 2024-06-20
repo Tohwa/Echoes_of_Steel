@@ -107,7 +107,10 @@ public class CameraController : MonoBehaviour
         camState = CameraStates.cameraRotate;
 
         CheckCollision();
-        CameraInput();
+        if (!DialogueManager.isActive && !GameManager.Instance.gamePaused)
+        {
+            CameraInput();
+        }
     }
 
     private void LateUpdate()
