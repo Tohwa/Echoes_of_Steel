@@ -45,7 +45,7 @@ public class LevelTransition : MonoBehaviour
                     GameManager.Instance.endingFour = true;
                 }
 
-                loadScreen.LoadScene(4); ;
+                loadScreen.LoadScene(4);
             }
         }
     }
