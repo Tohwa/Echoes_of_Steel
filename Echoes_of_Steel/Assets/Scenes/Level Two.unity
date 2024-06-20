@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.19557694, g: 0.23695657, b: 0.310541, a: 1}
+  m_IndirectSpecularColor: {r: 0.19557647, g: 0.23695676, b: 0.3105412, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -323,8 +323,16 @@ PrefabInstance:
       value: -1.7415161
       objectReference: {fileID: 0}
     - target: {fileID: 5124772304587630293, guid: 16ca1cd14d8417e4cbf4c5266f44e54c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.21698
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124772304587630293, guid: 16ca1cd14d8417e4cbf4c5266f44e54c, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.83758545
+      objectReference: {fileID: 0}
+    - target: {fileID: 5529306552067604858, guid: 16ca1cd14d8417e4cbf4c5266f44e54c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.21716309
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -468,6 +476,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 578086762}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!95 &599882517 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 481098064537532411, guid: 55f9abe806f0a1b4d852177082eac71e, type: 3}
+  m_PrefabInstance: {fileID: 787220736}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1949,7 +1962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8690186026679165403, guid: 6650d39e4eef4234ea10bcba9e439d5d, type: 3}
       propertyPath: m_Name
-      value: Memory #3
+      value: Memory 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2199,7 +2212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8690186026679165403, guid: 6650d39e4eef4234ea10bcba9e439d5d, type: 3}
       propertyPath: m_Name
-      value: Memory #2
+      value: Memory 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2288,6 +2301,10 @@ PrefabInstance:
       propertyPath: imageAnimator
       value: 
       objectReference: {fileID: 1299324483}
+    - target: {fileID: 1853573121901608797, guid: 21dbd57c86ced734681ad898c04e5eed, type: 3}
+      propertyPath: journalAnimator
+      value: 
+      objectReference: {fileID: 599882517}
     - target: {fileID: 2818264664089800476, guid: 21dbd57c86ced734681ad898c04e5eed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2331,6 +2348,10 @@ PrefabInstance:
     - target: {fileID: 6969451538340180495, guid: 21dbd57c86ced734681ad898c04e5eed, type: 3}
       propertyPath: m_Name
       value: DialogueManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969451538340180495, guid: 21dbd57c86ced734681ad898c04e5eed, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
