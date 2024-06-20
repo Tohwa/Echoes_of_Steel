@@ -9,6 +9,7 @@ namespace BehaviorTree
         SUCCESS,
         FAILURE
     }
+
     public class Node
     {
         protected NodeState state;
@@ -16,22 +17,19 @@ namespace BehaviorTree
         public Node parent;
         protected List<Node> children = new List<Node>();
 
-        private Dictionary<string, object> dataContext = new Dictionary<string, object>();
+        private Dictionary<string, object> _dataContext = new Dictionary<string, object>();
 
         public Node()
         {
             parent = null;
         }
-        
         public Node(List<Node> children)
         {
             foreach (Node child in children)
-            {
-                Attach(child);
-            }
+                _Attach(child);
         }
 
-        private void Attach(Node node)
+        private void _Attach(Node node)
         {
             node.parent = this;
             children.Add(node);
@@ -41,13 +39,13 @@ namespace BehaviorTree
 
         public void SetData(string key, object value)
         {
-            dataContext[key] = value;
+            _dataContext[key] = value;
         }
 
         public object GetData(string key)
         {
             object value = null;
-            if (dataContext.TryGetValue(key, out value))
+            if (_dataContext.TryGetValue(key, out value))
                 return value;
 
             Node node = parent;
@@ -63,9 +61,9 @@ namespace BehaviorTree
 
         public bool ClearData(string key)
         {
-            if (dataContext.ContainsKey(key))
+            if (_dataContext.ContainsKey(key))
             {
-                dataContext.Remove(key);
+                _dataContext.Remove(key);
                 return true;
             }
 
@@ -80,4 +78,5 @@ namespace BehaviorTree
             return false;
         }
     }
+
 }
