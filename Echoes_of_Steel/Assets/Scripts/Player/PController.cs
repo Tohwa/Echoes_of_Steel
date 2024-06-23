@@ -15,6 +15,7 @@ public class PController : MonoBehaviour
     public InputAction hover;
     public InputAction interact;
     public InputAction journal;
+    public InputAction pause;
 
     [Header("Framework Variables")]
     public Camera mainCamera;
@@ -67,11 +68,6 @@ public class PController : MonoBehaviour
     [Header("Interactable Variables")]
     private IInteractable interactable;
 
-    [Header("Journal Variables")]
-    public Animator journalAnimator;
-    public GameObject panelObject;
-    private bool journalIsOpen;
-
     #endregion
 
     private void Start()
@@ -87,7 +83,11 @@ public class PController : MonoBehaviour
         isMoving = moveInput != Vector2.zero;
 
         HandleJumpBuffering();
+        if (!GameManager.Instance.gamePaused)
+        {
+
         WeaponHandler();
+        }
 
         if (isHovering)
         {
@@ -98,7 +98,7 @@ public class PController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!DialogueManager.isActive)
+        if (!DialogueManager.isActive && !GameManager.Instance.gamePaused)
         {
             if (isDashing)
             {
@@ -126,6 +126,7 @@ public class PController : MonoBehaviour
         hover.Enable();
         interact.Enable();
         journal.Enable();
+        pause.Enable();
 
         jump.performed += OnJumpInput;
         movement.performed += OnMovementInput;
@@ -135,6 +136,7 @@ public class PController : MonoBehaviour
         hover.canceled += OnHoverRelease;
         interact.performed += OnInteractInput;
         journal.performed += OnJournalInput;
+        pause.performed += OnPauseInput;
     }
     void OnDisable()
     {
@@ -145,6 +147,7 @@ public class PController : MonoBehaviour
         hover.Disable();
         interact.Disable();
         journal.Disable();
+        pause.Disable();
 
         movement.performed -= OnMovementInput;
         movement.canceled -= OnMovementInput;
@@ -154,6 +157,7 @@ public class PController : MonoBehaviour
         hover.canceled -= OnHoverRelease;
         interact.performed -= OnInteractInput;
         journal.performed -= OnJournalInput;
+        pause.performed -= OnPauseInput;
     }
 
     private void OnMovementInput(InputAction.CallbackContext context)
@@ -317,20 +321,13 @@ public class PController : MonoBehaviour
 
     private void OnJournalInput(InputAction.CallbackContext context)
     {
-        if (!journalIsOpen)
-        {
-            journalAnimator.SetBool("IsOpen", true);
-            panelObject.SetActive(true);
-            journalIsOpen = true;
-        }
-        else
-        {
-            journalAnimator.SetBool("IsOpen", false);
-            panelObject.SetActive(false);
-            journalIsOpen = false;
-        }
+        DialogueManager.instance.OpenJournal();
     }
 
+    private void OnPauseInput(InputAction.CallbackContext context)
+    {
+        GameManager.Instance.PauseGame();
+    }
 
     private void WeaponHandler()
     {

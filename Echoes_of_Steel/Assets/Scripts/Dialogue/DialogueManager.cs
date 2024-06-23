@@ -19,15 +19,19 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Image memoryImage;
     [SerializeField] private Animator boxAnimator;
     [SerializeField] private Animator imageAnimator;
+    [SerializeField] private Animator journalAnimator;
     [SerializeField] private float dialogueSpeed;
 
     private DialogueAsset[] dialogueAssets;
     private DialogueAsset currentDialogueAsset;
     private bool skipLineTriggered;
     private bool lineFinished;
+    private bool journalIsOpen;
     public static bool isActive;
     private int dialogueIndex;
     private int dialogueAssetIndex;
+
+    
 
     private void Awake()
     {
@@ -38,7 +42,9 @@ public class DialogueManager : MonoBehaviour
         else
         {
             Destroy(this);
+            return;
         }
+        //DontDestroyOnLoad(this);
     }
 
     private void Update()
@@ -56,16 +62,16 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        if(isActive)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
+        //if (isActive)
+        //{
+        //    Cursor.lockState = CursorLockMode.None;
+        //    Cursor.visible = true;
+        //}
+        //else
+        //{
+        //    Cursor.lockState = CursorLockMode.Locked;
+        //    Cursor.visible = false;
+        //}
     }
 
     public void StartDialogue(DialogueAsset[] _dialogues)
@@ -222,5 +228,23 @@ public class DialogueManager : MonoBehaviour
         }
 
         return chosenAnswer;
+    }
+
+    public void OpenJournal()
+    {
+        if (!journalIsOpen)
+        {
+            journalAnimator.SetBool("IsOpen", true);
+            panelObject.SetActive(true);
+            journalIsOpen = true;
+            
+        }
+        else
+        {
+            journalAnimator.SetBool("IsOpen", false);
+            panelObject.SetActive(false);
+            journalIsOpen = false;
+            
+        }
     }
 }
