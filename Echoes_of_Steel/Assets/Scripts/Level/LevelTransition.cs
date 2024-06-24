@@ -28,19 +28,19 @@ public class LevelTransition : MonoBehaviour
             }
             else if(scene.buildIndex == 3)
             {
-                if(GameManager.Instance.corruptionMeter >= -40 && GameManager.Instance.corruptionMeter < -20)
+                if(GameManager.Instance.corruptionMeter >= 0 && GameManager.Instance.corruptionMeter < 20)
                 {
                     GameManager.Instance.endingOne = true;
                 }
-                else if (GameManager.Instance.corruptionMeter >= -20 && GameManager.Instance.corruptionMeter < 0)
+                else if (GameManager.Instance.corruptionMeter >= 20 && GameManager.Instance.corruptionMeter < 40)
                 {
                     GameManager.Instance.endingTwo = true;
                 }
-                else if (GameManager.Instance.corruptionMeter >= 0 && GameManager.Instance.corruptionMeter < 20)
+                else if (GameManager.Instance.corruptionMeter >= 49 && GameManager.Instance.corruptionMeter < 60)
                 {
                     GameManager.Instance.endingThree = true;
                 }
-                else if (GameManager.Instance.corruptionMeter >= 20 && GameManager.Instance.corruptionMeter < 40)
+                else if (GameManager.Instance.corruptionMeter >= 60 && GameManager.Instance.corruptionMeter < 80)
                 {
                     GameManager.Instance.endingFour = true;
                 }

@@ -185,7 +185,7 @@ public class DialogueManager : MonoBehaviour
             dialogueAssetIndex++;
         }
 
-        GameManager.Instance.corruptionMeter += 20;
+        GameManager.Instance.corruptionMeter += 10;
 
         currentDialogueAsset = dialogueAssets[dialogueAssetIndex];
         choices.SetActive(false);
@@ -203,8 +203,6 @@ public class DialogueManager : MonoBehaviour
 
             dialogueAssetIndex += 2;
         }
-
-        GameManager.Instance.corruptionMeter -= 20;
 
         currentDialogueAsset = dialogueAssets[dialogueAssetIndex];
         choices.SetActive(false);
