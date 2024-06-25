@@ -36,17 +36,15 @@ public class LoadingScreen : MonoBehaviour
 
         if (useArtificialLoadingScreen)
         {
-            yield return StartCoroutine(ArtificialLoadingScreen());
+            yield return StartCoroutine(ArtificialLoadingScreen(_sceneId));
         }
         else
         {
             yield return StartCoroutine(NormalLoadingScreen(_sceneId));
         }
-
-        loadingScreen.SetActive(false);
     }
 
-    IEnumerator ArtificialLoadingScreen()
+    IEnumerator ArtificialLoadingScreen(int _sceneId)
     {
         float elapsedTime = 0f;
 
@@ -55,6 +53,12 @@ public class LoadingScreen : MonoBehaviour
             elapsedTime += Time.deltaTime;
             float progress = Mathf.Clamp01(elapsedTime / artificialLoadingDuration);
             UpdateLoadingUI(progress);
+
+            if(elapsedTime >= artificialLoadingDuration)
+            {
+                SceneManager.LoadSceneAsync(_sceneId);
+            }
+
             yield return null;
         }
     }
