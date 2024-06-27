@@ -12,13 +12,13 @@ public class LoadingScreen : MonoBehaviour
     #region Variables
 
     [Header("GameObject Variables")]
-    [SerializeField] private GameObject loadingScreen;
+    private GameObject loadingScreen;
 
     [Header("Image Variables")]
-    [SerializeField] private Image progressBar;
+    private Image progressBar;
 
     [Header("TMP Variables")]
-    [SerializeField] private TMP_Text progressText;
+    private TMP_Text progressText;
     
     [Header("float Variables")]
     [SerializeField] private float artificialLoadingDuration = 3f;
