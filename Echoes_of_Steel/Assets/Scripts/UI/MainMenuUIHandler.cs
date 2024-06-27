@@ -28,4 +28,9 @@ public class MainMenuUIHandler : MonoBehaviour
 #endif
         Application.Quit();
     }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.gamePaused = false;
+    }
 }
