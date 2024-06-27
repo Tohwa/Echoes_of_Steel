@@ -2609,11 +2609,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 484979163}
   m_CullTransparentMesh: 1
---- !u!1 &572726896 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2745793735635824221, guid: 16ca1cd14d8417e4cbf4c5266f44e54c, type: 3}
-  m_PrefabInstance: {fileID: 1267794779}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &629699856
 GameObject:
   m_ObjectHideFlags: 0
@@ -5322,7 +5317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f55fa50d09edd4e43843387c6cb3bd7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingScreen: {fileID: 572726896}
+  loadingScreen: {fileID: 0}
   progressBar: {fileID: 0}
   progressText: {fileID: 827993002}
   artificialLoadingDuration: 0.5

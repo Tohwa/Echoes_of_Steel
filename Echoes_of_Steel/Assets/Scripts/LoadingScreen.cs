@@ -27,11 +27,32 @@ public class LoadingScreen : MonoBehaviour
 
     void Start()
     {
-        GameObject canvas = GameObject.FindGameObjectWithTag("UI");
+        if(loadingScreen == null)
+        {
+            loadingScreen = transform.Find("LoadingScreen").gameObject;
+        }
+        else
+        {
+            Debug.LogError("LoadingScreen Object could not be found!");
+        }
 
-        loadingScreen = canvas.transform.GetChild(2).gameObject;
-        progressBar = loadingScreen.transform.GetChild(0).gameObject.GetComponent<Image>();
-        progressText = loadingScreen.transform.GetChild(2).gameObject.GetComponent<TMP_Text>();   
+        if(loadingScreen != null)
+        {
+            progressBar = loadingScreen.GetComponentInChildren<Image>();
+            progressText = loadingScreen.GetComponentInChildren<TMP_Text>();
+        }
+        else
+        {
+            if(progressBar == null)
+            {
+                Debug.LogError("Image Component could not be found!");
+            }
+
+            if(progressText == null)
+            {
+                Debug.LogError("TMP_Text Component could not be found!");
+            }
+        }
     }
 
     public void LoadScene(int _sceneId)
