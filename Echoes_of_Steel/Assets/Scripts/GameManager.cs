@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    #region Variables
+
+    [Header("Singleton")]
     public static GameManager Instance;
-    public GameObject pauseMenu;
+
+    [Header("Integer Variables")]
     public int corruptionMeter = 0;
 
+    [Header("boolean Variables")]
     public bool endingOne = false;
     public bool endingTwo = false;
     public bool endingThree = false;
     public bool endingFour = false;
     public bool gamePaused = false;
+
+    #endregion
 
     private void Awake()
     {
@@ -37,22 +44,6 @@ public class GameManager : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-        }
-    }
-
-    public void PauseGame()
-    {
-        if (!gamePaused)
-        {
-            pauseMenu.SetActive(true);
-            gamePaused = true;
-            
-        }
-        else
-        {
-            pauseMenu.SetActive(false);
-            gamePaused = false;
-            
         }
     }
 }
