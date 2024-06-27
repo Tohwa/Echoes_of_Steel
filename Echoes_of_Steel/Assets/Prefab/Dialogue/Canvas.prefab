@@ -1522,6 +1522,7 @@ GameObject:
   - component: {fileID: 252502851016502239}
   - component: {fileID: 1105075010777739373}
   - component: {fileID: 5727006763831556720}
+  - component: {fileID: 5733129587128440887}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: UI
@@ -1631,8 +1632,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 0}
-  loadingBarFill: {fileID: 0}
+  progressBar: {fileID: 0}
   progressText: {fileID: 0}
+  useArtificialLoadingScreen: 0
+  artificialLoadingDuration: 3
 --- !u!114 &1105075010777739373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1674,6 +1677,19 @@ MonoBehaviour:
   fullscreenToggle: {fileID: 3931937858541972632}
   resText: {fileID: 325668594302969487}
   qualityText: {fileID: 3193470335629051537}
+--- !u!114 &5733129587128440887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4093490790917110360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed8ff209f49024478f70219d89613b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 1488648293991033504}
 --- !u!1 &4228023008284347352
 GameObject:
   m_ObjectHideFlags: 0
@@ -3212,6 +3228,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1488648293991033504 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1921826537602021768, guid: 723c59dc21b93154c86181f1e94ad37e, type: 3}
+  m_PrefabInstance: {fileID: 1009666898247045928}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1832958657894068943 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1687992798747091431, guid: 723c59dc21b93154c86181f1e94ad37e, type: 3}
