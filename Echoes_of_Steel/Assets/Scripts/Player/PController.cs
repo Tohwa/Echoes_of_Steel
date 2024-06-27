@@ -68,6 +68,9 @@ public class PController : MonoBehaviour
     [Header("Interactable Variables")]
     private IInteractable interactable;
 
+    [Header("PauseMenuHandler Variable")]
+    public PauseMenuHandler pauseMenuHandler;
+
     #endregion
 
     private void Start()
@@ -76,6 +79,7 @@ public class PController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         mainCamera = Camera.main;
         pCamera = Camera.main.transform;
+        pauseMenuHandler = FindObjectOfType<PauseMenuHandler>();
     }
     private void Update()
     {
@@ -326,7 +330,7 @@ public class PController : MonoBehaviour
 
     private void OnPauseInput(InputAction.CallbackContext context)
     {
-        GameManager.Instance.PauseGame();
+        pauseMenuHandler.PauseGame();
     }
 
     private void WeaponHandler()

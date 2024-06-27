@@ -9,20 +9,50 @@ using Image = UnityEngine.UI.Image;
 
 public class LoadingScreen : MonoBehaviour
 {
-    [SerializeField] private GameObject loadingScreen;
-    [SerializeField] private Image progressBar;
-    [SerializeField] private TMP_Text progressText;
+    #region Variables
 
-    [SerializeField] private bool useArtificialLoadingScreen;
-    [SerializeField] private float artificialLoadingDuration = 3f; // Dauer des künstlichen Ladebildschirms in Sekunden
+    [Header("GameObject Variables")]
+    private GameObject loadingScreen;
+
+    [Header("Image Variables")]
+    private Image progressBar;
+
+    [Header("TMP Variables")]
+    private TMP_Text progressText;
+    
+    [Header("float Variables")]
+    [SerializeField] private float artificialLoadingDuration = 3f;
+
+    #endregion
 
     void Start()
     {
-        GameObject canvas = GameObject.FindGameObjectWithTag("UI");
+        if(loadingScreen == null)
+        {
+            loadingScreen = transform.Find("LoadingScreen").gameObject;
+        }
+        else
+        {
+            Debug.LogError("LoadingScreen Object could not be found!");
+        }
 
-        loadingScreen = canvas.transform.GetChild(2).gameObject;
-        progressBar = loadingScreen.transform.GetChild(0).gameObject.GetComponent<Image>();
-        progressText = loadingScreen.transform.GetChild(2).gameObject.GetComponent<TMP_Text>();   
+        if(loadingScreen != null)
+        {
+            progressBar = loadingScreen.GetComponentInChildren<Image>();
+            progressText = loadingScreen.GetComponentInChildren<TMP_Text>();
+        }
+        else
+        {
+            if(progressBar == null)
+            {
+                Debug.LogError("Image Component could not be found!");
+            }
+
+            if(progressText == null)
+            {
+                Debug.LogError("TMP_Text Component could not be found!");
+            }
+        }
     }
 
     public void LoadScene(int _sceneId)
@@ -33,46 +63,39 @@ public class LoadingScreen : MonoBehaviour
     IEnumerator LoadSceneAsync(int _sceneId)
     {
         loadingScreen.SetActive(true);
+        float loadStartTime = Time.time;
 
-        if (useArtificialLoadingScreen)
-        {
-            yield return StartCoroutine(ArtificialLoadingScreen(_sceneId));
-        }
-        else
-        {
-            yield return StartCoroutine(NormalLoadingScreen(_sceneId));
-        }
-    }
-
-    IEnumerator ArtificialLoadingScreen(int _sceneId)
-    {
-        float elapsedTime = 0f;
-
-        while (elapsedTime < artificialLoadingDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            float progress = Mathf.Clamp01(elapsedTime / artificialLoadingDuration);
-            UpdateLoadingUI(progress);
-
-            if(elapsedTime >= artificialLoadingDuration)
-            {
-                SceneManager.LoadSceneAsync(_sceneId);
-            }
-
-            yield return null;
-        }
-    }
-
-    IEnumerator NormalLoadingScreen(int _sceneId)
-    {
         AsyncOperation operation = SceneManager.LoadSceneAsync(_sceneId);
+        operation.allowSceneActivation = false;
 
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
             UpdateLoadingUI(progress);
+
+            if (operation.progress >= 0.9f)
+            {
+                break;
+            }
+
             yield return null;
         }
+
+        float actualLoadTime = Time.time - loadStartTime;
+
+        if (actualLoadTime < artificialLoadingDuration)
+        {
+            float remainingTime = artificialLoadingDuration - actualLoadTime;
+
+            for (float t = 0; t < remainingTime; t += Time.deltaTime)
+            {
+                float progress = Mathf.Clamp01((actualLoadTime + t) / artificialLoadingDuration);
+                UpdateLoadingUI(progress);
+                yield return null;
+            }
+        }
+
+        operation.allowSceneActivation = true;
     }
 
     void UpdateLoadingUI(float progress)
