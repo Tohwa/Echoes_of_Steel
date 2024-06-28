@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class OptionsMenuUIHandler : MonoBehaviour
@@ -14,19 +15,21 @@ public class OptionsMenuUIHandler : MonoBehaviour
     [SerializeField] private GameObject graphicsMenu;
 
     [SerializeField] private AudioMixer mainMixer;
-    [SerializeField] private TMP_Dropdown resolutionDropdown;
-    [SerializeField] private TMP_Dropdown qualityDropdown;
+    //[SerializeField] private TMP_Dropdown resolutionDropdown;
+    //[SerializeField] private TMP_Dropdown qualityDropdown;
     [SerializeField] private Toggle fullscreenToggle;
-    [SerializeField] private Slider volumeSlider;
+    //[SerializeField] private Slider volumeSlider;
 
-    [SerializeField] private TextMeshProUGUI testText;
-    [SerializeField] private List<string> resOptions;
+    [SerializeField] private TextMeshProUGUI resText;
+    [SerializeField] private TextMeshProUGUI qualityText;
+    private List<string> resOptions;
 
     private Resolution[] resolutions;
     private List<Resolution> compatibleResolutions = new List<Resolution>();
+    private string[] qualities = {"Very Low", "Low", "Medium", "High", "Very High", "Ultra"};
     private bool resolutionSet;
     private int resolutionIndex;
-    private int qualityIndex;
+    private int qualityIndex = 0;
     private bool toggleFullscreen = true;
     private float volumeValue = 1f;
 
@@ -40,36 +43,36 @@ public class OptionsMenuUIHandler : MonoBehaviour
         for (int i = 0; i < resolutions.Length; i++)
         {
             string resOption = resolutions[i].width + "x" + resolutions[i].height;
-            //if(resOption == "1280x720" || resOption == "1600x900" || resOption == "1920x1080")
-            //{
+            if(resOption == "1280x720" || resOption == "1600x900" || resOption == "1920x1080")
+            {
                 compatibleResolutions.Add(resolutions[i]);
                 resOptions.Add(resOption);
+            }
+
+
+            //if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            //{
+            //    curResolutionIndex = i;
             //}
-
-
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+        }
+        for (int i = 0; i < compatibleResolutions.Count; i++)
+        {
+            if (compatibleResolutions[i].width == Screen.currentResolution.width && compatibleResolutions[i].height == Screen.currentResolution.height)
             {
                 curResolutionIndex = i;
             }
         }
-        resolutionDropdown.AddOptions(resOptions);
+        //resolutionDropdown.AddOptions(resOptions);
         if (!resolutionSet)
         {
             resolutionIndex = curResolutionIndex;
-            resolutionDropdown.value = resolutionIndex;
+            //resolutionDropdown.value = resolutionIndex;
             resolutionSet = true;
         }
-        resolutionDropdown.RefreshShownValue();
+        //resolutionDropdown.RefreshShownValue();
 
-        testText.text = resOptions[resolutionIndex];
-    }
-
-    private void Update()
-    {
-        //resolutionDropdown.value = resolutionIndex;
-        //qualityDropdown.value = qualityIndex;
-        //fullscreenToggle.isOn = toggleFullscreen;
-        //volumeSlider.value = volumeValue;
+        resText.text = resOptions[resolutionIndex];
+        qualityText.text = qualities[qualityIndex];
     }
 
     public void OpenGeneralSettings()
@@ -141,7 +144,7 @@ public class OptionsMenuUIHandler : MonoBehaviour
         {
 
         resolutionIndex++;
-        testText.text = resOptions[resolutionIndex];
+        resText.text = resOptions[resolutionIndex];
         }
     }
 
@@ -150,14 +153,32 @@ public class OptionsMenuUIHandler : MonoBehaviour
         if (resolutionIndex > 0)
         {
             resolutionIndex--;
-            testText.text = resOptions[resolutionIndex];
+            resText.text = resOptions[resolutionIndex];
+        }
+    }
+
+    public void QualityValueUp()
+    {
+        if(qualityIndex < 6)
+        {
+            qualityIndex++;
+            qualityText.text = qualities[qualityIndex];
+        }
+    }
+
+    public void QualityValueDown()
+    {
+        if(qualityIndex > 0)
+        {
+            qualityIndex--;
+            qualityText.text = qualities[qualityIndex];
         }
     }
 
     public void ApplyChanges()
     {
         SetResolution(resolutionIndex);
-
+        SetQuality(qualityIndex);
     }
 
     public void BackToMenu()
@@ -167,6 +188,11 @@ public class OptionsMenuUIHandler : MonoBehaviour
         audioMenu.SetActive(false);
         graphicsMenu.SetActive(false);
         mainMenu.SetActive(true);
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
 }

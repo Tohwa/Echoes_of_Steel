@@ -7,6 +7,10 @@ public class DialogueAsset : ScriptableObject
 {
     public Dialogue[] sentences;
     public Character[] characters;
+    public Sprite memoryImage;
+    public bool isChoiceDialogue;
+    public bool isEndDialogue;
+
 }
 
 [System.Serializable]

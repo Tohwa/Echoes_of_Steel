@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,11 @@ public class PController : MonoBehaviour
     public InputAction movement;
     public InputAction jump;
     public InputAction dash;
-    public InputAction shooting;
-    public InputAction grapplingHook;
+    public InputAction shoot;
+    public InputAction hover;
+    public InputAction interact;
+    public InputAction journal;
+    public InputAction pause;
 
     [Header("Framework Variables")]
     public Camera mainCamera;
@@ -22,123 +26,52 @@ public class PController : MonoBehaviour
     public bool isMoving;
     public bool isGrounded;
 
-    [Header("Simple Move and Jump Variables")]
+    [Header("Move Variables")]
     public float moveSpeed = 5f;
     public float rotationSpeed = 10f;
+    public float acceleration = 10f;
+    public float deceleration = 10f;
+    private Vector3 currentVelocity;
+
+    [Header("Jump Variables")]
     public float jumpForce = 5f;
-    public float maxJumps = 2f;
-    public float curJumps;
+    private bool canDoubleJump;
+    private bool isJumping;
+    public float jumpCooldown = 0.1f;
+    private float lastJumpTime;
+    public float coyoteTime = 0.1f;
+    public float jumpBufferTime = 0.1f;
+    private float lastGroundedTime;
+    private float jumpBufferCounter;
 
     [Header("Dash Variables")]
-    public float dashSpeed = 20f; // Speed during dash
-    public float dashDuration = 0.2f; // Duration of dash
-    public float dashCooldown = 1f; // Cooldown between dashes
+    public float dashSpeed = 20f;
+    public float dashDuration = 0.2f;
+    public float dashCooldown = 1f;
     private float dashTime;
     private bool isDashing;
     private float lastDashTime;
 
     [Header("Weapon Variables")]
+    public float weaponDamage;
     public float fireCooldown = 0.5f;
     private float lastFireTime;
     public bool automatic;
     public GameObjectPool bulletPool;
-    public float weaponDamage;
     public Transform bulletSpawn;
     private Transform pCamera;
 
-    [Header("Grapple Variables")]
-    public float maxGrappleDistance;
-    public float grappleDelayTime;
-    public float grapplingCd;
-    private float grapplingCdTimer;
-    public float overshootYAxis;
-    private bool grappling;
-    private bool grappleFreeze;
-    private bool activeGrapple;
-    public LayerMask whatIsGrappable;
-    private Vector3 velocityToSet;
-    public Transform gunTip;
-    public LineRenderer lr;
+    [Header("Hover Variables")]
+    public float hoverFallSpeed = 2f;
+    private bool isHovering;
 
+    [Header("Interactable Variables")]
+    private IInteractable interactable;
 
-    private Vector3 grapplePoint;
+    [Header("PauseMenuHandler Variable")]
+    public PauseMenuHandler pauseMenuHandler;
+
     #endregion
-
-
-    private void OnGrappleInput(InputAction.CallbackContext context)
-    {
-        if (grapplingCdTimer > 0) return;
-
-        grappling = true;
-
-        grappleFreeze = true;
-
-        RaycastHit hit;
-        if (Physics.Raycast(gunTip.position, gunTip.forward, out hit, maxGrappleDistance, whatIsGrappable))
-        {
-            grapplePoint = hit.point;
-            Invoke(nameof(ExecuteGrapple), grappleDelayTime);
-        }
-        else
-        {
-            grapplePoint = gunTip.position + gunTip.forward * maxGrappleDistance;
-            Invoke(nameof(StopGrapple), grappleDelayTime);
-        }
-
-        lr.enabled = true;
-        lr.SetPosition(1, grapplePoint);
-    }
-    private void ExecuteGrapple()
-    {
-        rb.velocity = Vector3.zero;
-
-        Vector3 lowestPoint = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z);
-
-        float grapplePointRelativeYPos = grapplePoint.y - lowestPoint.y;
-        float highestPointOnArc = grapplePointRelativeYPos + overshootYAxis;
-
-        if (grapplePointRelativeYPos < 0)
-        {
-            highestPointOnArc = overshootYAxis;
-        }
-
-        JumpToPosition(grapplePoint, highestPointOnArc);
-
-        Invoke(nameof(StopGrapple), 1f);
-    }
-    private void StopGrapple()
-    {
-        grappling = false;
-
-        grappleFreeze = false;
-
-        grapplingCdTimer = grapplingCd;
-
-        lr.enabled = false;
-    }
-    public void JumpToPosition(Vector3 targetPosition, float trajectoryHeight)
-    {
-        activeGrapple = true;
-
-        velocityToSet = CalculateGrappleJumpVelocity(transform.position, targetPosition, trajectoryHeight);
-        Invoke(nameof(SetVelocity), 0.1f);
-    }
-    private void SetVelocity()
-    {
-        rb.velocity = velocityToSet;
-    }
-    public Vector3 CalculateGrappleJumpVelocity(Vector3 startPoint, Vector3 endPoint, float trajectoryHeight)
-    {
-        float gravity = Physics.gravity.y;
-        float displacementY = endPoint.y - startPoint.y;
-        Vector3 displacementXZ = new Vector3(endPoint.x - startPoint.x, 0f, endPoint.z - startPoint.z);
-
-        Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * trajectoryHeight);
-        Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * trajectoryHeight / gravity)
-            + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));
-
-        return velocityXZ + velocityY;
-    }
 
     private void Start()
     {
@@ -146,71 +79,90 @@ public class PController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         mainCamera = Camera.main;
         pCamera = Camera.main.transform;
+        pauseMenuHandler = FindObjectOfType<PauseMenuHandler>();
     }
     private void Update()
     {
         GroundCheck();
         isMoving = moveInput != Vector2.zero;
 
-        if (grapplingCdTimer > 0)
+        HandleJumpBuffering();
+        if (!GameManager.Instance.gamePaused)
         {
-            grapplingCdTimer -= Time.deltaTime;
-        }
-
-        //if (grappleFreeze)
-        //{
-        //rb.velocity = Vector3.zero;
-        //}
 
         WeaponHandler();
+        }
+
+        if (isHovering)
+        {
+            Hover();
+        }
     }
+
+
     private void FixedUpdate()
     {
-        if (isDashing)
+        if (!DialogueManager.isActive && !GameManager.Instance.gamePaused)
         {
-            Dash();
+            if (isDashing)
+            {
+                Dash();
+            }
+            else
+            {
+                Move();
+            }
+
+            if (isJumping)
+            {
+                PerformJump();
+            }
         }
-        else
-        {
-            Move();
-        }
+        
     }
-    private void LateUpdate()
-    {
-        if (grappling)
-        {
-            lr.SetPosition(0, gunTip.position);
-        }
-    }
+
     void OnEnable()
     {
         movement.Enable();
         jump.Enable();
         dash.Enable();
-        shooting.Enable();
-        grapplingHook.Enable();
+        shoot.Enable();
+        hover.Enable();
+        interact.Enable();
+        journal.Enable();
+        pause.Enable();
 
         jump.performed += OnJumpInput;
         movement.performed += OnMovementInput;
         movement.canceled += OnMovementInput;
         dash.performed += OnDashInput;
-        grapplingHook.performed += OnGrappleInput;
+        hover.performed += OnHoverHold;
+        hover.canceled += OnHoverRelease;
+        interact.performed += OnInteractInput;
+        journal.performed += OnJournalInput;
+        pause.performed += OnPauseInput;
     }
     void OnDisable()
     {
         movement.Disable();
         jump.Disable();
         dash.Disable();
-        shooting.Disable();
-        grapplingHook.Disable();
+        shoot.Disable();
+        hover.Disable();
+        interact.Disable();
+        journal.Disable();
+        pause.Disable();
 
         movement.performed -= OnMovementInput;
         movement.canceled -= OnMovementInput;
         jump.performed -= OnJumpInput;
         dash.performed -= OnDashInput;
-        grapplingHook.performed -= OnGrappleInput;
+        hover.performed -= OnHoverHold;
+        hover.canceled -= OnHoverRelease;
+        interact.performed -= OnInteractInput;
+        journal.performed -= OnJournalInput;
+        pause.performed -= OnPauseInput;
     }
-
 
     private void OnMovementInput(InputAction.CallbackContext context)
     {
@@ -227,28 +179,66 @@ public class PController : MonoBehaviour
         forward.Normalize();
         right.Normalize();
 
-        Vector3 movementVector = forward * moveInput.y + right * moveInput.x;
-        movementVector *= moveSpeed * Time.fixedDeltaTime;
+        Vector3 targetVelocity = (forward * moveInput.y + right * moveInput.x) * moveSpeed;
 
-        if (movementVector != Vector3.zero)
+        if (moveInput != Vector2.zero)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(movementVector);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * rotationSpeed);
+            currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, acceleration * Time.deltaTime);
+        }
+        else
+        {
+            currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, deceleration * Time.deltaTime);
         }
 
-        rb.MovePosition(rb.position + movementVector);
+        if (currentVelocity != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(currentVelocity);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
+
+        rb.MovePosition(rb.position + currentVelocity * Time.fixedDeltaTime);
     }
 
     private void OnJumpInput(InputAction.CallbackContext context)
     {
-        Jump();
+        isJumping = true;
     }
-    private void Jump()
+    private void HandleJumpBuffering()
     {
-        if (isGrounded || curJumps > 0)
+        if (isGrounded)
         {
-            curJumps--;
+            lastGroundedTime = Time.time;
+            canDoubleJump = true; // Reset double jump ability when grounded
+        }
+
+        if (jump.triggered)
+        {
+            jumpBufferCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+
+        if (jumpBufferCounter > 0 && (isGrounded || (Time.time - lastGroundedTime <= coyoteTime)))
+        {
+            isJumping = true;
+            jumpBufferCounter = 0;
+        }
+    }
+    private void PerformJump()
+    {
+        if (isGrounded || canDoubleJump)
+        {
+            if (!isGrounded && canDoubleJump)
+            {
+                canDoubleJump = false; // Use up double jump
+            }
+
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Reset vertical velocity
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            lastJumpTime = Time.time;
+            isJumping = false;
         }
     }
 
@@ -285,21 +275,82 @@ public class PController : MonoBehaviour
         }
     }
 
+    private void OnHoverHold(InputAction.CallbackContext context)
+    {
+        Debug.Log("Hovering started");
+        isHovering = true;
+    }
+    private void OnHoverRelease(InputAction.CallbackContext context)
+    {
+        Debug.Log("Hovering stopped");
+        isHovering = false;
+    }
+    private void Hover()
+    {
+        if (!isGrounded)
+        {
+            Vector3 hoverVelocity = rb.velocity;
+            hoverVelocity.y = Mathf.Max(hoverVelocity.y, -hoverFallSpeed);
+            rb.velocity = hoverVelocity;
+        }
+    }
+
+    private void OnInteractInput(InputAction.CallbackContext context)
+    {
+
+        if (interactable != null && !DialogueManager.isActive)
+        {
+            interactable.Interact();
+            Debug.Log("Interacted with object");
+        }
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Interactable"))
+        {
+            Debug.Log("Collided");
+            interactable = other.gameObject.GetComponent<IInteractable>();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Interactable"))
+        {
+            interactable = null;
+        }
+    }
+
+    private void OnJournalInput(InputAction.CallbackContext context)
+    {
+        DialogueManager.instance.OpenJournal();
+    }
+
+    private void OnPauseInput(InputAction.CallbackContext context)
+    {
+        pauseMenuHandler.PauseGame();
+    }
+
     private void WeaponHandler()
     {
-        if (automatic)
+        if(!DialogueManager.isActive)
         {
-            if (shooting.ReadValue<float>() > 0.1f && Time.time >= lastFireTime + fireCooldown)
+            if (automatic)
+            {
+                if (shoot.ReadValue<float>() > 0.1f && Time.time >= lastFireTime + fireCooldown)
+                {
+                    lastFireTime = Time.time;
+                    Shoot();
+                }
+            }
+            else if (shoot.triggered && Time.time >= lastFireTime + fireCooldown)
             {
                 lastFireTime = Time.time;
                 Shoot();
             }
-        }
-        else if (shooting.triggered && Time.time >= lastFireTime + fireCooldown)
-        {
-            lastFireTime = Time.time;
-            Shoot();
-        }
+        }   
     }
     private void Shoot()
     {
@@ -313,14 +364,13 @@ public class PController : MonoBehaviour
 
     public bool GroundCheck()
     {
-        float rayLength = 0.2f; // Adjust the length of the ray as needed
+        float rayLength = 0.2f;
         Vector3 rayOrigin = capsuleCollider.bounds.center;
-        rayOrigin.y = capsuleCollider.bounds.min.y + 0.1f; // Start the ray from just above the bottom of the collider
+        rayOrigin.y = capsuleCollider.bounds.min.y + 0.1f;
 
         if (Physics.Raycast(rayOrigin, Vector3.down, rayLength, Ground))
         {
             isGrounded = true;
-            curJumps = maxJumps;
         }
         else
         {

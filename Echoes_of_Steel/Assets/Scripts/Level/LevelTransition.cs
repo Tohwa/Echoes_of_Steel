@@ -5,25 +5,47 @@ using UnityEngine.SceneManagement;
 
 public class LevelTransition : MonoBehaviour
 {
+    private LoadingScreen loadScreen;
+
+    private void Start()
+    {
+        loadScreen = GameObject.FindObjectOfType<LoadingScreen>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Scene scene = SceneManager.GetActiveScene();
 
         if (other.gameObject.CompareTag("Player"))
         {
-            if (scene.buildIndex == 0)
+            if (scene.buildIndex == 1)
             {
-                SceneManager.LoadScene("Level Two");
+                loadScreen.LoadScene(2);
             }
-            else if (scene.buildIndex == 1)
+            else if (scene.buildIndex == 2)
             {
-                SceneManager.LoadScene("Level Three");
+                loadScreen.LoadScene(3);
             }
-            else if(scene.buildIndex == 2)
+            else if(scene.buildIndex == 3)
             {
-#if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-#endif
+                if(GameManager.Instance.corruptionMeter >= 0 && GameManager.Instance.corruptionMeter < 20)
+                {
+                    GameManager.Instance.endingOne = true;
+                }
+                else if (GameManager.Instance.corruptionMeter >= 20 && GameManager.Instance.corruptionMeter < 40)
+                {
+                    GameManager.Instance.endingTwo = true;
+                }
+                else if (GameManager.Instance.corruptionMeter >= 49 && GameManager.Instance.corruptionMeter < 60)
+                {
+                    GameManager.Instance.endingThree = true;
+                }
+                else if (GameManager.Instance.corruptionMeter >= 60 && GameManager.Instance.corruptionMeter < 80)
+                {
+                    GameManager.Instance.endingFour = true;
+                }
+
+                loadScreen.LoadScene(4);
             }
         }
     }
