@@ -155,11 +155,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8501573929071782792, guid: e3e1c00b240e72b45ac41cc49556e65f, type: 3}
---- !u!1 &291844522 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2993020490428160970, guid: db93ef2060d5bcb439f60e7ba07cf941, type: 3}
-  m_PrefabInstance: {fileID: 2135717629}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &471912539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -423,7 +418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 448d15ac1ae088e409f7442c3f5cc018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawn: {fileID: 291844522}
 --- !u!65 &954114901
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1814,6 +1808,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 7826696301553968565, guid: db93ef2060d5bcb439f60e7ba07cf941, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a7b66c3c92db5474dac13474dae656db, type: 2}
     - target: {fileID: 7829928614675455322, guid: db93ef2060d5bcb439f60e7ba07cf941, type: 3}
       propertyPath: m_Layer
       value: 7

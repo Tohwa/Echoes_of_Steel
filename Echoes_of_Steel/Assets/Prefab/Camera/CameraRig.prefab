@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b715c40d7f6474f96b6ab4be94d446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilt: {fileID: 1357940436864786441}
   cameraPlayerHeight: 1.75
   cameraChildHeight: 2
   cameraChildOffset: 0.25
@@ -226,16 +227,15 @@ MonoBehaviour:
   currentTilt: 10
   currentDist: 5
   rotationDivider: 100
-  tilt: {fileID: 1357940436864786441}
+  collisionCushion: 0.5
+  adjustedDistance: 0
+  collisionDebug: 0
   RMBstate: 0
   mouseAxis: {x: 0, y: 0}
   scrollWheelValue: {x: 0, y: 0}
   camState: 0
   camCorrect: 0
   basePosition: 0
-  collisionDebug: 0
-  collisionCushion: 0.5
-  adjustedDistance: 0
   collisionMask:
     serializedVersion: 2
     m_Bits: 8
