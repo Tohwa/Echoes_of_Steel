@@ -7,11 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Stylized Water
-  m_Shader: {fileID: -6465566751694194690, guid: 714e667c44f08ca4695d65f4f2855074, type: 3}
+  m_Name: StylizedWaterTwo
+  m_Shader: {fileID: -6465566751694194690, guid: 9810e2d603a0f814ebb58e6dfc3ccf03, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _ALPHAPREMULTIPLY_ON
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -70,6 +71,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _refractionNormal:
+        m_Texture: {fileID: 2800000, guid: cbb2dabf7c4f56e45bae331166132dd1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -99,7 +104,7 @@ Material:
     - _DstBlend: 10
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FoamCutoff: 0.99
+    - _FoamCutoff: 1.22
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -112,33 +117,36 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 5
+    - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 1
-    - _WaterDepth: 10
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
-    - _foamAmount: 1
-    - _foamScale: 1000
+    - _foamAmount: 10.02
+    - _foamScale: 19.4
     - _foamSpeed: 1
-    - _refractionScale: 1
+    - _frequencyMultiplier: 6.28
+    - _heightFrequency: 1
     - _refractionSpeed: 0.05
-    - _refractionStrength: 2
-    - _waterDepth: 60
+    - _refractionStrength: 0.12
+    - _smoothness: 1
+    - _waterDepth: 4.9
+    - _waveAmplitude: 0.005
+    - _waveSpeed: 2.5
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DeepWater: {r: 0.105968766, g: 0.10926426, b: 0.5911949, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShallowWater: {r: 0.33198825, g: 0.9338031, b: 0.96855336, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _deepWaterColor: {r: 0.045488577, g: 0.15123926, b: 0.57861626, a: 0.5019608}
+    - _deepWaterColor: {r: 0.105968736, g: 0.10926423, b: 0.5911949, a: 0.5019608}
     - _foamColor: {r: 1, g: 1, b: 1, a: 1}
-    - _shallowWaterColor: {r: 0.10466352, g: 0.50626296, b: 0.5283019, a: 0.5019608}
+    - _foamScale: {r: 45, g: 45, b: 0, a: 0}
+    - _refractionScale: {r: 3, g: 10, b: 0, a: 0}
+    - _shallowWaterColor: {r: 0.33198822, g: 0.9338031, b: 0.96855336, a: 0.5019608}
   m_BuildTextureStacks: []
---- !u!114 &5943525728694959700
+--- !u!114 &2804598580021884707
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
