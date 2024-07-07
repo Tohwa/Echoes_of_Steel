@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 831592620660138376}
   - component: {fileID: 1152188050769291419}
   - component: {fileID: 2348526457647928613}
-  - component: {fileID: 2416422483634972328}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -84,28 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2416422483634972328
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3495887564782817859}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &9136085080441246640
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +92,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1365892751879415313}
-  m_Layer: 0
+  - component: {fileID: 7670089961376268429}
+  m_Layer: 7
   m_Name: Hochhaus04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,6 +239,27 @@ Transform:
   - {fileID: 831592620660138376}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7670089961376268429
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9136085080441246640}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 53.7556, y: 91.246414, z: 53.198288}
+  m_Center: {x: -24.162498, y: 45.123207, z: 12.442619}
 --- !u!1001 &141519612861912887
 PrefabInstance:
   m_ObjectHideFlags: 0
