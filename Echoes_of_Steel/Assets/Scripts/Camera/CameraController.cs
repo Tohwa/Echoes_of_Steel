@@ -5,52 +5,63 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-    #region Fields
+    #region Variables
 
+    [Header("Transform Variables")]
+    public Transform tilt;
+
+    [Header("Float Variables")]
     [SerializeField] private float cameraPlayerHeight = 1.75f;
     [SerializeField] private float cameraChildHeight = 2f;
     [SerializeField] private float cameraChildOffset = 0.25f;
     [SerializeField] private float cameraMaxDist = 25f;
     [SerializeField] private float cameraMinDist = 2f;
     [SerializeField] private float cameraMaxTilt = 90f;
-    [Range(0f, 4f)] public float cameraSpeed = 2f;
+    [Range(0f, 4f)][SerializeField] private float cameraSpeed = 2f;
     [Range(0f, 4f)][SerializeField] private float zoomSpeed = 2f;
-    [SerializeField] float currentPan;
+    [SerializeField] private float currentPan;
     [SerializeField] private float currentTilt = 10f;
     [SerializeField] private float currentDist = 5f;
-
+    [SerializeField] private float rotationDivider = 100;
+    [SerializeField] private float collisionCushion = 0.35f;
+    [SerializeField] private float adjustedDistance;
     private float panAngle;
     private float panOffSet;
-    private bool camXAdjust;
-    private bool camYAdjust;
     private float rotationXCushion = 3;
     private float rotationXSpeed = 0;
     private float rotationYSpeed = 0;
     private float yRotationMin = 0;
     private float yRotationMax = 20;
-    [SerializeField] private float rotationDivider = 100;
-
-    private PController player;
-    public Transform tilt;
-    private Camera mainCamera;
-
-    [SerializeField] public bool RMBstate = false;
-    [SerializeField] private Vector2 mouseAxis;
     private float mouseX;
     private float mouseY;
-    [SerializeField] private Vector2 scrollWheelValue;
     private float scrollValue;
 
+    [Header("boolean Variables")]
+    [SerializeField] private bool collisionDebug;
+    public bool RMBstate = false;
+    private bool camXAdjust;
+    private bool camYAdjust;
+
+    [Header("Script Variables")]
+    private PController player;
+    private Camera mainCamera;
+
+    [Header("Vector2 Variables")]
+    [SerializeField] private Vector2 mouseAxis;
+    [SerializeField] private Vector2 scrollWheelValue;
+
+    [Header("State Variables")]
     public CameraStates camState = CameraStates.cameraIdle;
     public CameraCorrectState camCorrect = CameraCorrectState.OnlyWhileMoving;
     public CameraBasePosition basePosition = CameraBasePosition.PlayerPosition;
 
-    [SerializeField] private bool collisionDebug;
-    [SerializeField] private float collisionCushion = 0.35f;
-    [SerializeField] private float adjustedDistance;
+    [Header("LayerMask Variables")]
     [SerializeField] private LayerMask collisionMask;
+
+    [Header("Raycast Variables")]
     private Ray camRay;
     private RaycastHit hit;
+
     #endregion
 
     public enum CameraStates
