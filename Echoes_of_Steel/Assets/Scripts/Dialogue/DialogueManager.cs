@@ -235,6 +235,7 @@ public class DialogueManager : MonoBehaviour
             journalAnimator.SetBool("IsOpen", true);
             panelObject.SetActive(true);
             journalIsOpen = true;
+            GameManager.Instance.gamePaused = true;
             
         }
         else
@@ -242,7 +243,8 @@ public class DialogueManager : MonoBehaviour
             journalAnimator.SetBool("IsOpen", false);
             panelObject.SetActive(false);
             journalIsOpen = false;
-            
+            GameManager.Instance.gamePaused = false;
+
         }
     }
 }
