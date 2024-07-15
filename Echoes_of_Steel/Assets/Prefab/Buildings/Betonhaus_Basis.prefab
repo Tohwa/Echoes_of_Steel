@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9216893383843619531}
-  m_Layer: 0
+  - component: {fileID: 8321924850667600852}
+  m_Layer: 7
   m_Name: Betonhaus_Basis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,6 +77,27 @@ Transform:
   - {fileID: 1808442471450729128}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8321924850667600852
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3500208286101558042}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 53.39746, y: 40.309963, z: 54.554565}
+  m_Center: {x: -24.350586, y: 19.654978, z: -23.097351}
 --- !u!1001 &125077432956432390
 PrefabInstance:
   m_ObjectHideFlags: 0

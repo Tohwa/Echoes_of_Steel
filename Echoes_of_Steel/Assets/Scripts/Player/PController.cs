@@ -323,6 +323,16 @@ public class PController : MonoBehaviour
         }
     }
 
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("MapBorder"))
+    //    {
+    //        rb.velocity = Vector3.zero;
+
+    //        rb.MovePosition(rb.position - currentVelocity * Time.deltaTime);
+    //    }
+    //}
+
     private void OnJournalInput(InputAction.CallbackContext context)
     {
         DialogueManager.instance.OpenJournal();
