@@ -24,6 +24,7 @@ public class DialogueManager : MonoBehaviour
 
     private DialogueAsset[] dialogueAssets;
     private DialogueAsset currentDialogueAsset;
+    private DialogSettings dialogSettings;
     private bool skipLineTriggered;
     private bool lineFinished;
     private bool journalIsOpen;
@@ -74,7 +75,7 @@ public class DialogueManager : MonoBehaviour
         //}
     }
 
-    public void StartDialogue(DialogueAsset[] _dialogues)
+    public void StartDialogue(DialogueAsset[] _dialogues, DialogSettings _settings)
     {
         isActive = true;
         //dialogueBox.SetActive(true);
@@ -84,6 +85,7 @@ public class DialogueManager : MonoBehaviour
         choices.SetActive(false);
 
         dialogueAssets = _dialogues;
+        dialogSettings = _settings;
         currentDialogueAsset = dialogueAssets[dialogueAssetIndex];
 
         DisplayNextSentence();
@@ -104,7 +106,7 @@ public class DialogueManager : MonoBehaviour
         }
         Dialogue currentDialogue = currentDialogueAsset.sentences[dialogueIndex];
 
-        Character currentCharacter = currentDialogueAsset.characters[currentDialogue.characterId];
+        Character currentCharacter = dialogSettings.characters[currentDialogue.characterId];
         nameText.text = currentCharacter.name;
         charImage.sprite = currentCharacter.sprite;
 
