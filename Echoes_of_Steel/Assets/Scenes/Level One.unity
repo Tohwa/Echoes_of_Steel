@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.12076032, g: 0.18643649, b: 0.3352496, a: 1}
+  m_IndirectSpecularColor: {r: 0.12076026, g: 0.18643647, b: 0.33524987, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -334,13 +334,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.942159, z: -0.3351662, w: 0}
+  m_LocalRotation: {x: 0, y: 0.8660254, z: -0.5, w: 0}
   m_LocalPosition: {x: 384.8, y: 572, z: 2187}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 39.165, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 180, z: 0}
 --- !u!114 &705507996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,6 +454,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2335031836626429622, guid: 6650d39e4eef4234ea10bcba9e439d5d, type: 3}
+      propertyPath: settings
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ed9d3342895c0a41935eb7cace270ca, type: 2}
+    - target: {fileID: 2335031836626429622, guid: 6650d39e4eef4234ea10bcba9e439d5d, type: 3}
+      propertyPath: dialogues.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: eab6e5e76c7f403449b2781338acc810, type: 2}
+    - target: {fileID: 2335031836626429622, guid: 6650d39e4eef4234ea10bcba9e439d5d, type: 3}
+      propertyPath: dialogues.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: d71540555878215449d308c5ada1f55c, type: 2}
+    - target: {fileID: 2335031836626429622, guid: 6650d39e4eef4234ea10bcba9e439d5d, type: 3}
+      propertyPath: dialogues.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 30e5cca9b70d82247a6eec13f3e733f0, type: 2}
+    - target: {fileID: 2335031836626429622, guid: 6650d39e4eef4234ea10bcba9e439d5d, type: 3}
+      propertyPath: dialogues.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9856944750a8d994dbaa4bc221ab52db, type: 2}
+    - target: {fileID: 2335031836626429622, guid: 6650d39e4eef4234ea10bcba9e439d5d, type: 3}
+      propertyPath: dialogues.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 553ffb5783c05024598bb0db6e09833f, type: 2}
     - target: {fileID: 8690186026679165403, guid: 6650d39e4eef4234ea10bcba9e439d5d, type: 3}
       propertyPath: m_Name
       value: Memory 2
@@ -572,26 +596,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 252502851016502239, guid: 55f9abe806f0a1b4d852177082eac71e, type: 3}
+      propertyPath: artificialLoadingDuration
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 538575965336593023, guid: 55f9abe806f0a1b4d852177082eac71e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 709568950}
-    - target: {fileID: 1730985300732425556, guid: 55f9abe806f0a1b4d852177082eac71e, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3735138881397353973, guid: 55f9abe806f0a1b4d852177082eac71e, type: 3}
-      propertyPath: m_Type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4084256580780888135, guid: 55f9abe806f0a1b4d852177082eac71e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4084256580780888135, guid: 55f9abe806f0a1b4d852177082eac71e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4093490790917110360, guid: 55f9abe806f0a1b4d852177082eac71e, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -886,6 +898,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 17.508
       objectReference: {fileID: 0}
+    - target: {fileID: 2335031836626429622, guid: 6650d39e4eef4234ea10bcba9e439d5d, type: 3}
+      propertyPath: settings
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ed9d3342895c0a41935eb7cace270ca, type: 2}
     - target: {fileID: 8690186026679165403, guid: 6650d39e4eef4234ea10bcba9e439d5d, type: 3}
       propertyPath: m_Name
       value: Memory 1
