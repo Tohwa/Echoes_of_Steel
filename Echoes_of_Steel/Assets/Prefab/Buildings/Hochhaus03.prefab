@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3041969494091936158}
-  m_Layer: 0
+  - component: {fileID: 2225879477231691540}
+  m_Layer: 7
   m_Name: Hochhaus03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,6 +75,27 @@ Transform:
   - {fileID: 2386025996970351977}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2225879477231691540
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3515959048164828601}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 53.21753, y: 50.437084, z: 53.287125}
+  m_Center: {x: -25.031296, y: 9.918123, z: -10.899727}
 --- !u!1001 &140132347966284146
 PrefabInstance:
   m_ObjectHideFlags: 0
