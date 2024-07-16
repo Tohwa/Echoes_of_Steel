@@ -10,6 +10,7 @@ public class LoadingScreen : MonoBehaviour
 
     [Header("GameObject Variables")]
     private GameObject loadingScreen;
+    private GameObject progressBarObj;
 
     [Header("Image Variables")]
     [SerializeField] private Image progressBar;
@@ -27,11 +28,13 @@ public class LoadingScreen : MonoBehaviour
         if (loadingScreen == null)
         {
             loadingScreen = transform.Find("LoadingScreen").gameObject;
+
         }
 
         if (loadingScreen != null)
         {
-            progressBar = loadingScreen.GetComponentInChildren<Image>();
+            progressBarObj = loadingScreen.transform.GetChild(0).gameObject;
+            progressBar = progressBarObj.GetComponent<Image>();
             progressText = loadingScreen.GetComponentInChildren<TMP_Text>();
         }
         else

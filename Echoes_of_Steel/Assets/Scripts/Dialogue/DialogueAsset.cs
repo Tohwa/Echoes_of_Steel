@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "Dialogue Asset", menuName = "Dialogue/Dialogue Asset", order = 2)]
 public class DialogueAsset : ScriptableObject
 {
     public Dialogue[] sentences;
-    public Character[] characters;
     public Sprite memoryImage;
     public bool isChoiceDialogue;
     public bool isEndDialogue;
@@ -21,9 +20,4 @@ public class Dialogue
     public string dialogue;
 }
 
-[System.Serializable]
-public class Character
-{
-    public string name;
-    public Sprite sprite;
-}
+

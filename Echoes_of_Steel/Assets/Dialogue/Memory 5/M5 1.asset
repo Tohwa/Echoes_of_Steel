@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 192cf014dd24a3d4fb3639894cb2cf60, type: 3}
+  m_Name: M5 1
+  m_EditorClassIdentifier: 
+  sentences:
+  - characterId: 0
+    dialogue: "New memory aquired. Starting analysis\u2026"
+  - characterId: 0
+    dialogue: "Analysis completed. Awaiting order\u2026"
+  - characterId: 1
+    dialogue: Well, what did you see?
+  - characterId: 0
+    dialogue: Starting to reconstruct memory.
+  - characterId: 1
+    dialogue: "Wow, that\u2019s how the city looked like back then?! There are so
+      many people!"
+  - characterId: 0
+    dialogue: The city was one of the metropoles of the old time. About 30 million
+      people inhabited the city.
+  - characterId: 1
+    dialogue: "30 million?! I couldn\u2019t imagine that many even if I wanted to."
+  - characterId: 1
+    dialogue: "There are people gathering there. What\u2019s that all about?"
+  - characterId: 0
+    dialogue: Many people did not think highly of the advancements in robotics and
+      there were mayn protests against introducing robots into everday life.
+  - characterId: 1
+    dialogue: "Why? I don\u2019t understand. They made everyone\u2019s life easier."
+  - characterId: 0
+    dialogue: Many were forced to quit their jobs due to lack of demand from society
+      after robots fulfilled their job in their stead.
+  - characterId: 0
+    dialogue: Others were opposing the idea because they disliked us. Logical or
+      rational reason could not be found.
+  - characterId: 1
+    dialogue: "That\u2019s what humans tend to do when something unknown to them
+      emerges and changes everthing they knew up to this point. It\u2019s in our
+      nature that we are wary of others."
+  - characterId: 1
+    dialogue: That wariness mostly turns into hatred or fear.
+  - characterId: 0
+    dialogue: Affirmative, fear is another factor, my analysis showed that inflences
+      humans immensely.
+  - characterId: 1
+    dialogue: "In the center of the protest, are those\u2026 robots? Why are they
+      there? And why are they in such poor condition?"
+  memoryImage: {fileID: 21300000, guid: 2cccabbe254c8cf4ea4a93a33b3636e7, type: 3}
+  isChoiceDialogue: 1
+  isEndDialogue: 0
