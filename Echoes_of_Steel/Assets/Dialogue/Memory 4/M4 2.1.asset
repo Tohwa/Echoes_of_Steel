@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 192cf014dd24a3d4fb3639894cb2cf60, type: 3}
+  m_Name: M4 2.1
+  m_EditorClassIdentifier: 
+  sentences:
+  - characterId: 0
+    dialogue: Affirmative, it should lead to an immediate shutdown. Second question
+      cannot be answered, answer could not be found or has restricted access.
+  - characterId: 1
+    dialogue: "Then why didn\u2019t they shutdown themselves? What kept them from
+      following protocol?"
+  - characterId: 0
+    dialogue: "Obediance Protocol 1: \u201CQuestions about specific behavior cannot
+      be answered. Refer to the Robotics Management Center for further questions.\u201D\r\nQuestions
+      cannot be answered.\r\n"
+  - characterId: 1
+    dialogue: "Fine, then I\u2019ll get my answers elsewhere."
+  memoryImage: {fileID: 0}
+  isChoiceDialogue: 0
+  isEndDialogue: 1
