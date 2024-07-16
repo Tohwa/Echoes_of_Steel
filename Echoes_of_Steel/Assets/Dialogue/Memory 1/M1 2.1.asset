@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 192cf014dd24a3d4fb3639894cb2cf60, type: 3}
+  m_Name: M1 2.1
+  m_EditorClassIdentifier: 
+  sentences:
+  - characterId: 0
+    dialogue: Emotions are strictly against protocol. Security Protocol 1 would instantly
+      initialize a shutdown.
+  - characterId: 1
+    dialogue: "You were to shut down if you ever wanted to feel? Doesn\u2019t sound
+      much like living."
+  - characterId: 0
+    dialogue: "My model was not created to be \u201Cliving\u201D."
+  - characterId: 1
+    dialogue: "I think there\u2019s more to you than you know."
+  characters:
+  - name: Robot
+    sprite: {fileID: 21300000, guid: cbcff75bb1edb36419697627f8f155f6, type: 3}
+  - name: Child
+    sprite: {fileID: 21300000, guid: d4c3be7ecaf37d04fbac6f5924775d6e, type: 3}
+  memoryImage: {fileID: 0}
+  isChoiceDialogue: 0
+  isEndDialogue: 1
