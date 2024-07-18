@@ -43,6 +43,8 @@ public class PController : MonoBehaviour
     public float jumpBufferTime = 0.1f;
     private float lastGroundedTime;
     private float jumpBufferCounter;
+    public float manualGravity = -20f;
+    private bool applyManualGravity;
 
     [Header("Dash Variables")]
     public float dashSpeed = 20f;
@@ -90,7 +92,7 @@ public class PController : MonoBehaviour
         if (!GameManager.Instance.gamePaused)
         {
 
-        WeaponHandler();
+            WeaponHandler();
         }
 
         if (isHovering)
@@ -117,8 +119,13 @@ public class PController : MonoBehaviour
             {
                 PerformJump();
             }
+
+            // Manuelle Schwerkraft anwenden
+            if (applyManualGravity && rb.velocity.y <= 0)
+            {
+                rb.AddForce(Vector3.up * manualGravity, ForceMode.Acceleration);
+            }
         }
-        
     }
 
     void OnEnable()
@@ -201,7 +208,10 @@ public class PController : MonoBehaviour
 
     private void OnJumpInput(InputAction.CallbackContext context)
     {
-        isJumping = true;
+        if (isGrounded || (canDoubleJump && !isGrounded))
+        {
+            isJumping = true;
+        }
     }
     private void HandleJumpBuffering()
     {
@@ -220,10 +230,14 @@ public class PController : MonoBehaviour
             jumpBufferCounter -= Time.deltaTime;
         }
 
-        if (jumpBufferCounter > 0 && (isGrounded || (Time.time - lastGroundedTime <= coyoteTime)))
+        // Jump buffering logic
+        if (jumpBufferCounter > 0)
         {
-            isJumping = true;
-            jumpBufferCounter = 0;
+            if (isGrounded || (Time.time - lastGroundedTime <= coyoteTime))
+            {
+                isJumping = true;
+                jumpBufferCounter = 0; // Reset jump buffer counter
+            }
         }
     }
     private void PerformJump()
@@ -238,7 +252,8 @@ public class PController : MonoBehaviour
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Reset vertical velocity
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             lastJumpTime = Time.time;
-            isJumping = false;
+            isJumping = false; // Reset jumping flag after the jump is performed
+            applyManualGravity = true; // Start applying manual gravity after the jump
         }
     }
 
@@ -314,7 +329,6 @@ public class PController : MonoBehaviour
             interactable = other.gameObject.GetComponent<IInteractable>();
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Interactable"))
@@ -323,21 +337,10 @@ public class PController : MonoBehaviour
         }
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("MapBorder"))
-    //    {
-    //        rb.velocity = Vector3.zero;
-
-    //        rb.MovePosition(rb.position - currentVelocity * Time.deltaTime);
-    //    }
-    //}
-
     private void OnJournalInput(InputAction.CallbackContext context)
     {
         DialogueManager.instance.OpenJournal();
     }
-
     private void OnPauseInput(InputAction.CallbackContext context)
     {
         pauseMenuHandler.PauseGame();
@@ -345,7 +348,7 @@ public class PController : MonoBehaviour
 
     private void WeaponHandler()
     {
-        if(!DialogueManager.isActive)
+        if (!DialogueManager.isActive)
         {
             if (automatic)
             {
@@ -360,7 +363,7 @@ public class PController : MonoBehaviour
                 lastFireTime = Time.time;
                 Shoot();
             }
-        }   
+        }
     }
     private void Shoot()
     {
@@ -381,6 +384,7 @@ public class PController : MonoBehaviour
         if (Physics.Raycast(rayOrigin, Vector3.down, rayLength, Ground))
         {
             isGrounded = true;
+            applyManualGravity = false; // Stop applying manual gravity when grounded
         }
         else
         {
