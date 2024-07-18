@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelTransition : MonoBehaviour
 {
-    private LoadingScreen loadScreen;
+    [SerializeField] private LoadingScreen loadScreen;
 
     private void Start()
     {

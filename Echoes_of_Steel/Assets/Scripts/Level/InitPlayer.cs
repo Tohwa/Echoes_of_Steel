@@ -20,9 +20,9 @@ public class InitPlayer : MonoBehaviour
 
     void Start()
     {
-        if(playerSpawn == null) 
+        if (playerSpawn == null)
         {
-            playerSpawn = GameObject.Find("PlayerSpawn").transform;    
+            playerSpawn = GameObject.Find("PlayerSpawn").transform;
         }
         else
         {
@@ -35,6 +35,9 @@ public class InitPlayer : MonoBehaviour
         GameObject.Instantiate(playerPrefab, playerSpawn.position, playerSpawn.rotation);
         GameObject.Instantiate(cameraPrefab, playerSpawn.position, playerSpawn.rotation);
 
-        Debug.Log("You have interacted with: " + interactionStatus.GetInteractionCount());
+        if (interactionStatus.GetInteractionCount() > 0)
+        {
+            Debug.Log("You have interacted with: " + interactionStatus.GetInteractionCount());
+        }
     }
 }
