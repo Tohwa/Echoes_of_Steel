@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +10,12 @@ public class GameUIHandler : MonoBehaviour
     [SerializeField] private GameObject[] memories;
     [SerializeField] private Button[] buttons;
     [SerializeField] private Image memoryImage;
+    [SerializeField] private Image popUpImage;
+    [SerializeField] private TextMeshProUGUI popUpText;
+    [SerializeField] private Sprite corruptedImage;
     [SerializeField] private GameObject panel;
     [SerializeField] private Animator journalAnim;
+    [SerializeField] private Animator popUpAnimator;
 
     private void Start()
     {
@@ -54,6 +59,22 @@ public class GameUIHandler : MonoBehaviour
         {
             memories[5].SetActive(true);
         }
+    }
+
+    public void OpenPopUp(bool _corrupted)
+    {
+        if (_corrupted)
+        {
+            popUpImage.sprite = corruptedImage;
+            popUpText.text = "File corrupted!";
+        }
+        popUpAnimator.SetBool("OpenPopUp", true);
+    }
+
+    public void ClosePopUp()
+    {
+        DialogueManager.isActive = false;
+        popUpAnimator.SetBool("OpenPopUp", false);
     }
 
     public void OpenMemory(int _value)
