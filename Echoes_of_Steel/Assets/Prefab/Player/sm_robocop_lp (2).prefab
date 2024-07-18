@@ -1343,6 +1343,33 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  interact:
+    m_Name: Interact
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 26570d91-c941-4f90-a2c7-e01ebe1550cf
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  journal:
+    m_Name: Journal
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 199b1c95-047c-4e36-8973-836eb330ecb2
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  pause:
+    m_Name: Pause
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4e43e354-5e2c-4530-8f05-0ba7aee60f54
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   mainCamera: {fileID: 0}
   Ground:
     serializedVersion: 2
@@ -1357,6 +1384,7 @@ MonoBehaviour:
   jumpCooldown: 0.1
   coyoteTime: 0.1
   jumpBufferTime: 0.1
+  manualGravity: -20
   dashSpeed: 20
   dashDuration: 0.2
   dashCooldown: 1
@@ -1365,8 +1393,8 @@ MonoBehaviour:
   automatic: 0
   bulletPool: {fileID: 11400000, guid: 65e53de100fed2f4c8c3cc79e4fd9c87, type: 2}
   bulletSpawn: {fileID: 0}
-  hoverGravityScale: 0.1
   hoverFallSpeed: 2
+  pauseMenuHandler: {fileID: 0}
 --- !u!54 &3579647859345524224
 Rigidbody:
   m_ObjectHideFlags: 0

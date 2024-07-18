@@ -27,7 +27,6 @@ namespace BehaviorTree
             }),
             patrolNode,
         });
-
             return root;
         }
     }
