@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject panelObject;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI oneLinerText;
     [SerializeField] private TextMeshProUGUI choiceOneText;
     [SerializeField] private TextMeshProUGUI choiceTwoText;
     [SerializeField] private Image charImage;
@@ -20,6 +21,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Animator boxAnimator;
     [SerializeField] private Animator imageAnimator;
     [SerializeField] private Animator journalAnimator;
+    [SerializeField] private Animator oneLinerAnimator;
+    [SerializeField] private GameUIHandler gameUIHandler;
     [SerializeField] private float dialogueSpeed;
 
     private DialogueAsset[] dialogueAssets;
@@ -91,6 +94,15 @@ public class DialogueManager : MonoBehaviour
         DisplayNextSentence();
     }
 
+    public void PlayOneLiner(string _oneLiner)
+    {
+        oneLinerAnimator.SetBool("IsOpen", true);
+
+
+        StopAllCoroutines();
+        StartCoroutine(TypeSentece(_oneLiner, oneLinerText));
+    }
+
     public void DisplayNextSentence()
     {
         if (dialogueIndex > currentDialogueAsset.sentences.Length - 1)
@@ -113,30 +125,32 @@ public class DialogueManager : MonoBehaviour
 
 
         StopAllCoroutines();
-        StartCoroutine(TypeSentece(currentDialogue.dialogue));
+        StartCoroutine(TypeSentece(currentDialogue.dialogue, dialogueText));
 
         dialogueIndex++;
     }
 
-    IEnumerator TypeSentece(string sentence)
+    IEnumerator TypeSentece(string sentence, TextMeshProUGUI _text)
     {
         skipLineTriggered = false;
         lineFinished = false;
-        dialogueText.text = "";
+        _text.text = "";
 
         foreach (char letter in sentence.ToCharArray())
         {
             if (skipLineTriggered)
             {
-                dialogueText.text = sentence;
+                _text.text = sentence;
                 break;
             }
-            dialogueText.text += letter;
+            _text.text += letter;
 
             yield return new WaitForSeconds(1 / dialogueSpeed);
 
         }
         lineFinished = true;
+        yield return new WaitForSeconds(3);
+        oneLinerAnimator.SetBool("IsOpen", false);
 
     }
 
@@ -162,13 +176,23 @@ public class DialogueManager : MonoBehaviour
         {
 
             //test prupose only
-            dialogueAssetIndex = 0;
-            currentDialogueAsset = dialogueAssets[dialogueAssetIndex];
             //
             isActive = false;
             imageAnimator.SetBool("IsOpen", false);
             boxAnimator.SetBool("IsOpen", false);
             panelObject.SetActive(false);
+            if(currentDialogueAsset.enableShielding && currentDialogueAsset.enableShooting)
+            {
+                isActive = true;
+                gameUIHandler.OpenPopUp(false);
+            }
+            else if (currentDialogueAsset.enableShielding)
+            {
+                isActive = true;
+                gameUIHandler.OpenPopUp(true);
+            }
+            dialogueAssetIndex = 0;
+            currentDialogueAsset = dialogueAssets[dialogueAssetIndex];
         }
         dialogueIndex = 0;
         lineFinished = false;
