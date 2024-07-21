@@ -8,6 +8,7 @@ public class GameUIHandler : MonoBehaviour
 {
     [SerializeField] private InteractionStatus interactionStatus;
     [SerializeField] private GameObject[] memories;
+    [SerializeField] private TextMeshProUGUI memoryText;
     [SerializeField] private Button[] buttons;
     [SerializeField] private Image memoryImage;
     [SerializeField] private Image popUpImage;
@@ -80,6 +81,7 @@ public class GameUIHandler : MonoBehaviour
     public void OpenMemory(int _value)
     {
         memoryImage.sprite = memories[_value].GetComponentInChildren<Image>().sprite;
+        memoryText.text = memories[_value].GetComponentInChildren<TextMeshProUGUI>().text;
         journalAnim.SetBool("IsMemoryOpen", true);
         panel.SetActive(true);
     }
