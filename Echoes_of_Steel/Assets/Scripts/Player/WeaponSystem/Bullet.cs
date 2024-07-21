@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Bullet : MonoBehaviour
 {
@@ -6,9 +7,11 @@ public class Bullet : MonoBehaviour
     public float lifeTime = 5f;
     private float weaponDamage;
     private Rigidbody rb;
+    private TrailRenderer tr;
 
     private void OnEnable()
     {
+        tr = GetComponent<TrailRenderer>();
         rb = GetComponent<Rigidbody>();
         rb.velocity = transform.forward * speed;
         Invoke("Deactivate", lifeTime);
@@ -23,6 +26,7 @@ public class Bullet : MonoBehaviour
     void Deactivate()
     {
         gameObject.SetActive(false);
+        tr.Clear();
     }
 
     private void OnDisable()
