@@ -502,8 +502,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8055595591104072009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 40, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -703,7 +703,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5727006763831556720}
         m_TargetAssemblyTypeName: OptionsMenuUIHandler, Assembly-CSharp
         m_MethodName: QualityValueUp
         m_Mode: 1
@@ -978,7 +978,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2113997714715674690
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1414,7 +1414,7 @@ RectTransform:
   m_Father: {fileID: 6438008975118253592}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1623,7 +1623,7 @@ RectTransform:
   m_Father: {fileID: 9050841116509720722}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2508,7 +2508,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5727006763831556720}
         m_TargetAssemblyTypeName: OptionsMenuUIHandler, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 0
@@ -2746,7 +2746,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5727006763831556720}
         m_TargetAssemblyTypeName: OptionsMenuUIHandler, Assembly-CSharp
         m_MethodName: SetMasterVolume
         m_Mode: 0
@@ -3059,7 +3059,7 @@ RectTransform:
   m_Father: {fileID: 5276373976080833248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3221,7 +3221,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5727006763831556720}
         m_TargetAssemblyTypeName: OptionsMenuUIHandler, Assembly-CSharp
         m_MethodName: ResValueUp
         m_Mode: 1
@@ -3487,7 +3487,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5727006763831556720}
         m_TargetAssemblyTypeName: OptionsMenuUIHandler, Assembly-CSharp
         m_MethodName: ResValueDown
         m_Mode: 1
@@ -3852,8 +3852,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1615798369434080535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 40, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4315,7 +4315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6843162771868158310
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4582,7 +4582,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5727006763831556720}
         m_TargetAssemblyTypeName: OptionsMenuUIHandler, Assembly-CSharp
         m_MethodName: SetUIVolume
         m_Mode: 0
@@ -4715,7 +4715,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5727006763831556720}
         m_TargetAssemblyTypeName: OptionsMenuUIHandler, Assembly-CSharp
         m_MethodName: ToggleFullscreen
         m_Mode: 0
@@ -4848,7 +4848,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5727006763831556720}
         m_TargetAssemblyTypeName: OptionsMenuUIHandler, Assembly-CSharp
         m_MethodName: QualityValueDown
         m_Mode: 1
@@ -6118,7 +6118,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6962471845813030960
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6521,7 +6521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2103808719548047721
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6931,7 +6931,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6078677011984499550
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7488,7 +7488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3339206778292043916
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8340,8 +8340,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7383588520100685182}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 40, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8911,7 +8911,7 @@ RectTransform:
   m_Father: {fileID: 4985481053437249369}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9409,7 +9409,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5727006763831556720}
         m_TargetAssemblyTypeName: OptionsMenuUIHandler, Assembly-CSharp
         m_MethodName: SetSFXVolume
         m_Mode: 0
@@ -9874,9 +9874,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5727006763831556720}
         m_TargetAssemblyTypeName: OptionsMenuUIHandler, Assembly-CSharp
-        m_MethodName: ApplyChanges
+        m_MethodName: BackToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10089,8 +10089,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6871237357480703887}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 40, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10328,7 +10328,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5727006763831556720}
         m_TargetAssemblyTypeName: OptionsMenuUIHandler, Assembly-CSharp
         m_MethodName: ApplyChanges
         m_Mode: 1
