@@ -9,6 +9,11 @@ public class Bullet : MonoBehaviour
     private Rigidbody rb;
     private TrailRenderer tr;
 
+    private void Update()
+    {
+        
+    }
+
     private void OnEnable()
     {
         tr = GetComponent<TrailRenderer>();
