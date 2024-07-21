@@ -101,7 +101,6 @@ public class PController : MonoBehaviour
         }
     }
 
-
     private void FixedUpdate()
     {
         if (!DialogueManager.isActive && !GameManager.Instance.gamePaused)
