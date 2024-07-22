@@ -21,6 +21,9 @@ public class LoadingScreen : MonoBehaviour
     [Header("float Variables")]
     [SerializeField] private float artificialLoadingDuration = 3f;
 
+    [Header("bool Variables")]
+    private bool isLoading = false;
+
     #endregion
 
     void Start()
@@ -53,11 +56,20 @@ public class LoadingScreen : MonoBehaviour
 
     public void LoadScene(int _sceneId)
     {
-        StartCoroutine(LoadSceneAsync(_sceneId));
+        if(!isLoading)
+        {
+            Debug.Log("Loading scene with ID: " + _sceneId);
+            StartCoroutine(LoadSceneAsync(_sceneId));
+        }
+        else
+        {
+            Debug.LogWarning("Already loading a scene. New request ignored.");
+        }
     }
 
     IEnumerator LoadSceneAsync(int _sceneId)
     {
+        isLoading = true;
         loadingScreen.SetActive(true);
         float loadStartTime = Time.time;
 
@@ -68,6 +80,8 @@ public class LoadingScreen : MonoBehaviour
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
             UpdateLoadingUI(progress);
+
+            Debug.Log("Loading progress: " + progress);
 
             if (operation.progress >= 0.9f)
             {
@@ -91,7 +105,9 @@ public class LoadingScreen : MonoBehaviour
             }
         }
 
+        Debug.Log("Loading complete, activating scene.");
         operation.allowSceneActivation = true;
+        isLoading = false;
     }
 
     void UpdateLoadingUI(float progress)
@@ -100,7 +116,7 @@ public class LoadingScreen : MonoBehaviour
         {
             progressBar.fillAmount = progress;
             progressText.text = (progress * 100f).ToString("F2") + "%";
-            Debug.Log(progressBar.fillAmount);
+            Debug.Log("ProgressBar fill amount: " + progressBar.fillAmount);
         }
         else
         {
