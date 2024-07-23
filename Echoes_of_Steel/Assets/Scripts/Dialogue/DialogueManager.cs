@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -11,12 +12,13 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private GameObject choices;
     [SerializeField] private GameObject panelObject;
-    [SerializeField] private TextMeshProUGUI nameText;
+    //[SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI oneLinerText;
     [SerializeField] private TextMeshProUGUI choiceOneText;
     [SerializeField] private TextMeshProUGUI choiceTwoText;
-    [SerializeField] private Image charImage;
+    [SerializeField] private Image roboImage;
+    [SerializeField] private Image childImage;
     [SerializeField] private Image memoryImage;
     [SerializeField] private Animator boxAnimator;
     [SerializeField] private Animator imageAnimator;
@@ -27,7 +29,7 @@ public class DialogueManager : MonoBehaviour
 
     private DialogueAsset[] dialogueAssets;
     private DialogueAsset currentDialogueAsset;
-    private DialogSettings dialogSettings;
+    //private DialogSettings dialogSettings;
     private bool skipLineTriggered;
     private bool lineFinished;
     private bool journalIsOpen;
@@ -88,7 +90,7 @@ public class DialogueManager : MonoBehaviour
         choices.SetActive(false);
 
         dialogueAssets = _dialogues;
-        dialogSettings = _settings;
+        //dialogSettings = _settings;
         currentDialogueAsset = dialogueAssets[dialogueAssetIndex];
 
         DisplayNextSentence();
@@ -118,9 +120,35 @@ public class DialogueManager : MonoBehaviour
         }
         Dialogue currentDialogue = currentDialogueAsset.sentences[dialogueIndex];
 
-        Character currentCharacter = dialogSettings.characters[currentDialogue.characterId];
-        nameText.text = currentCharacter.name;
-        charImage.sprite = currentCharacter.sprite;
+        //Character currentCharacter = dialogSettings.characters[currentDialogue.characterId];
+        //nameText.text = currentCharacter.name;
+        //charImage.sprite = currentCharacter.sprite;
+        Color tempColor;
+        if(currentDialogue.characterId == 0)
+        {
+            tempColor = roboImage.color;
+            tempColor.a = 1f;
+            roboImage.color = tempColor;
+
+            tempColor = childImage.color;
+            tempColor.a = 0.5f;
+            childImage.color = tempColor;
+
+            //dialogueText.alignment = TextAlignmentOptions.Right;
+        }
+        else
+        {
+            tempColor = roboImage.color;
+            tempColor.a = 0.5f;
+            roboImage.color = tempColor;
+
+            tempColor = childImage.color;
+            tempColor.a = 1f;
+            childImage.color = tempColor;
+
+            //dialogueText.alignment = TextAlignmentOptions.Left;
+
+        }
 
 
 
@@ -165,8 +193,8 @@ public class DialogueManager : MonoBehaviour
         {
             choices.SetActive(true);
 
-            choiceOneText.text = DisplayChoice(0);
-            choiceTwoText.text = DisplayChoice(1);
+            choiceOneText.text = currentDialogueAsset.choiceOne;
+            choiceTwoText.text = currentDialogueAsset.choiceTwo;
 
 
 
