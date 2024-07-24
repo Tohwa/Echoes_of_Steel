@@ -9,7 +9,8 @@ public class DialogueAsset : ScriptableObject
     public Sprite memoryImage;
     public bool isChoiceDialogue;
     public bool isEndDialogue;
-
+    public bool enableShooting;
+    public bool enableShielding;
 }
 
 [System.Serializable]

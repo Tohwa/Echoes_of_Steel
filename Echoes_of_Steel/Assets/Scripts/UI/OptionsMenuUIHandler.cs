@@ -10,15 +10,9 @@ public class OptionsMenuUIHandler : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsMenu;
-    [SerializeField] private GameObject generalMenu;
-    [SerializeField] private GameObject audioMenu;
-    [SerializeField] private GameObject graphicsMenu;
 
     [SerializeField] private AudioMixer mainMixer;
-    //[SerializeField] private TMP_Dropdown resolutionDropdown;
-    //[SerializeField] private TMP_Dropdown qualityDropdown;
     [SerializeField] private Toggle fullscreenToggle;
-    //[SerializeField] private Slider volumeSlider;
 
     [SerializeField] private TextMeshProUGUI resText;
     [SerializeField] private TextMeshProUGUI qualityText;
@@ -35,6 +29,8 @@ public class OptionsMenuUIHandler : MonoBehaviour
 
     private void Start()
     {
+        //volumeSlider.onValueChanged.AddListener(delegate { SetMasterVolume(volumeValue); });
+
         resolutions = Screen.resolutions;
 
         resOptions = new List<string>();
@@ -50,10 +46,7 @@ public class OptionsMenuUIHandler : MonoBehaviour
             }
 
 
-            //if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-            //{
-            //    curResolutionIndex = i;
-            //}
+            
         }
         for (int i = 0; i < compatibleResolutions.Count; i++)
         {
@@ -62,38 +55,14 @@ public class OptionsMenuUIHandler : MonoBehaviour
                 curResolutionIndex = i;
             }
         }
-        //resolutionDropdown.AddOptions(resOptions);
         if (!resolutionSet)
         {
             resolutionIndex = curResolutionIndex;
-            //resolutionDropdown.value = resolutionIndex;
             resolutionSet = true;
         }
-        //resolutionDropdown.RefreshShownValue();
 
         resText.text = resOptions[resolutionIndex];
         qualityText.text = qualities[qualityIndex];
-    }
-
-    public void OpenGeneralSettings()
-    {
-        generalMenu.SetActive(true);
-        audioMenu.SetActive(false);
-        graphicsMenu.SetActive(false);
-    }
-
-    public void OpenAudioSettings()
-    {
-        audioMenu.SetActive(true);
-        generalMenu.SetActive(false);
-        graphicsMenu.SetActive(false);
-    }
-
-    public void OpenGraphicsSettings()
-    {
-        graphicsMenu.SetActive(true);
-        generalMenu.SetActive(false);
-        audioMenu.SetActive(false);
     }
 
     public void SetMasterVolume(float _volume)
@@ -184,9 +153,6 @@ public class OptionsMenuUIHandler : MonoBehaviour
     public void BackToMenu()
     {
         optionsMenu.SetActive(false);
-        generalMenu.SetActive(false);
-        audioMenu.SetActive(false);
-        graphicsMenu.SetActive(false);
         mainMenu.SetActive(true);
     }
 
