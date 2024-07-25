@@ -2695,9 +2695,14 @@ MonoBehaviour:
   mainMenu: {fileID: 1018400096}
   optionsMenu: {fileID: 150678229085322960}
   mainMixer: {fileID: 24100000, guid: 5baaeb691d3d5c84dbb9e0c090ea794c, type: 2}
-  fullscreenToggle: {fileID: 6012993839311454519}
   resText: {fileID: 7218467088897797686}
   qualityText: {fileID: 5566126900762417665}
+  fullscreenToggle: {fileID: 6012993839311454519}
+  volumeSlider:
+  - {fileID: 7554274999377302320}
+  - {fileID: 4154903724350832943}
+  - {fileID: 1747604571001917484}
+  - {fileID: 2483893205675304019}
 --- !u!1 &1308393793532279826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2985,7 +2990,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1277252188487210078}
         m_TargetAssemblyTypeName: OptionsMenuUIHandler, Assembly-CSharp
         m_MethodName: SetSFXVolume
         m_Mode: 0
@@ -3594,7 +3599,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1277252188487210078}
         m_TargetAssemblyTypeName: OptionsMenuUIHandler, Assembly-CSharp
         m_MethodName: SetUIVolume
         m_Mode: 0
@@ -4659,7 +4664,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1277252188487210078}
         m_TargetAssemblyTypeName: OptionsMenuUIHandler, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 0
@@ -6438,7 +6443,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1277252188487210078}
         m_TargetAssemblyTypeName: OptionsMenuUIHandler, Assembly-CSharp
         m_MethodName: SetMasterVolume
         m_Mode: 0
