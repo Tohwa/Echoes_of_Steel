@@ -80,7 +80,7 @@ public class DialogueManager : MonoBehaviour
         //}
     }
 
-    public void StartDialogue(DialogueAsset[] _dialogues, DialogSettings _settings)
+    public void StartDialogue(DialogueAsset[] _dialogues)
     {
         isActive = true;
         //dialogueBox.SetActive(true);
