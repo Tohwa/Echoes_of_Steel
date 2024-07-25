@@ -36,11 +36,10 @@ MonoBehaviour:
       any outside harm.
   - characterId: 1
     dialogue: Is there more cool stuff that you can do?
-  characters:
-  - name: Robot
-    sprite: {fileID: 21300000, guid: 96b00959fb2727f4eb394e543ad75c42, type: 3}
-  - name: Child
-    sprite: {fileID: 21300000, guid: 9fa508b6482f4c1419e8a060bc0b291f, type: 3}
   memoryImage: {fileID: 0}
   isChoiceDialogue: 1
+  choiceOne: Robotics Center
+  choiceTwo: Alternative Shield
   isEndDialogue: 0
+  enableShooting: 0
+  enableShielding: 0
