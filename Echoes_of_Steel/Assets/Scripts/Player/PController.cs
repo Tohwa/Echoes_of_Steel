@@ -107,7 +107,8 @@ public class PController : MonoBehaviour
         {
             if (isDashing)
             {
-                Dash();
+                //Dash();
+                return;
             }
             else
             {
@@ -141,7 +142,7 @@ public class PController : MonoBehaviour
         jump.performed += OnJumpInput;
         movement.performed += OnMovementInput;
         movement.canceled += OnMovementInput;
-        dash.performed += OnDashInput;
+        //dash.performed += OnDashInput;
         hover.performed += OnHoverHold;
         hover.canceled += OnHoverRelease;
         interact.performed += OnInteractInput;
@@ -162,7 +163,7 @@ public class PController : MonoBehaviour
         movement.performed -= OnMovementInput;
         movement.canceled -= OnMovementInput;
         jump.performed -= OnJumpInput;
-        dash.performed -= OnDashInput;
+        //dash.performed -= OnDashInput;
         hover.performed -= OnHoverHold;
         hover.canceled -= OnHoverRelease;
         interact.performed -= OnInteractInput;
@@ -256,38 +257,38 @@ public class PController : MonoBehaviour
         }
     }
 
-    private void OnDashInput(InputAction.CallbackContext context)
-    {
-        if (Time.time >= lastDashTime + dashCooldown)
-        {
-            isDashing = true;
-            dashTime = Time.time + dashDuration;
-            lastDashTime = Time.time;
-        }
-    }
-    private void Dash()
-    {
-        if (Time.time < dashTime)
-        {
-            Vector3 forward = mainCamera.transform.forward;
-            Vector3 right = mainCamera.transform.right;
+    //private void OnDashInput(InputAction.CallbackContext context)
+    //{
+    //    if (Time.time >= lastDashTime + dashCooldown)
+    //    {
+    //        isDashing = true;
+    //        dashTime = Time.time + dashDuration;
+    //        lastDashTime = Time.time;
+    //    }
+    //}
+    //private void Dash()
+    //{
+    //    if (Time.time < dashTime)
+    //    {
+    //        Vector3 forward = mainCamera.transform.forward;
+    //        Vector3 right = mainCamera.transform.right;
 
-            forward.y = 0;
-            right.y = 0;
+    //        forward.y = 0;
+    //        right.y = 0;
 
-            forward.Normalize();
-            right.Normalize();
+    //        forward.Normalize();
+    //        right.Normalize();
 
-            Vector3 dashDirection = forward * moveInput.y + right * moveInput.x;
-            dashDirection.Normalize();
+    //        Vector3 dashDirection = forward * moveInput.y + right * moveInput.x;
+    //        dashDirection.Normalize();
 
-            rb.MovePosition(rb.position + dashDirection * dashSpeed * Time.fixedDeltaTime);
-        }
-        else
-        {
-            isDashing = false;
-        }
-    }
+    //        rb.MovePosition(rb.position + dashDirection * dashSpeed * Time.fixedDeltaTime);
+    //    }
+    //    else
+    //    {
+    //        isDashing = false;
+    //    }
+    //}
 
     private void OnHoverHold(InputAction.CallbackContext context)
     {
