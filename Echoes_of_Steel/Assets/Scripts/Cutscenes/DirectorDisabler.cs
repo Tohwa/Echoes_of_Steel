@@ -40,7 +40,7 @@ public class DirectorDisabler : MonoBehaviour
     {
         if (director == playableDirector)
         {
-            GameObject.FindGameObjectWithTag("Player").gameObject.transform.position = new Vector3(223.01f, 57.09f, 1293.9f);
+            GameObject.FindGameObjectWithTag("Player").gameObject.transform.position = new Vector3(223.01f, -85.18f, 1293.9f);
            
             gameObject.SetActive(false);
 
