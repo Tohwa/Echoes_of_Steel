@@ -70,18 +70,11 @@ public class TimeLineDirector : MonoBehaviour
         _director.Play();
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            m_waitDureation -= Time.deltaTime;
-            
-            if(m_waitDureation <= 0)
-            {
-                m_waitDureation = 0;
-
-                CheckCorruptionMeter();
-            }
+                CheckCorruptionMeter();  
         }
     }
 
