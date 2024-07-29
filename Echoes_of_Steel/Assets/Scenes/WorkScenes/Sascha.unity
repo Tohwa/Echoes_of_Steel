@@ -18008,6 +18008,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2014244785866319589}
+  - component: {fileID: 6463608233975006043}
   m_Layer: 0
   m_Name: Beg_CutsceneSetup
   m_TagString: Untagged
@@ -18015,6 +18016,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6463608233975006043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6463608233975006042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c89596b5ebdadfa4f9365e56e8979b39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playableDirector: {fileID: 6995425482711821172}
 --- !u!1 &6471802618150867943
 GameObject:
   m_ObjectHideFlags: 0
@@ -19254,7 +19268,7 @@ PlayableDirector:
   m_InitialState: 1
   m_WrapMode: 0
   m_DirectorUpdateMode: 1
-  m_InitialTime: 0
+  m_InitialTime: 60
   m_SceneBindings:
   - key: {fileID: -1364040688101308263, guid: 65e9a7eb3eccf664f9d89885e025e956, type: 2}
     value: {fileID: 7387603160557176718}
