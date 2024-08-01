@@ -35,9 +35,6 @@ public class InitPlayer : MonoBehaviour
         GameObject.Instantiate(playerPrefab, playerSpawn.position, playerSpawn.rotation);
         GameObject.Instantiate(cameraPrefab, playerSpawn.position, playerSpawn.rotation);
 
-        //GameObject.FindGameObjectWithTag("Player").gameObject.SetActive(false);
-        //GameObject.FindGameObjectWithTag("MainCamera").gameObject.SetActive(false);
-
         if (interactionStatus.GetInteractionCount() > 0)
         {
             Debug.Log("You have interacted with: " + interactionStatus.GetInteractionCount());
