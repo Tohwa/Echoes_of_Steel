@@ -9,11 +9,6 @@ public class Bullet : MonoBehaviour
     private Rigidbody rb;
     private TrailRenderer tr;
 
-    private void Update()
-    {
-        
-    }
-
     private void OnEnable()
     {
         tr = GetComponent<TrailRenderer>();
@@ -42,22 +37,22 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         var target = collision.gameObject;
-        Debug.Log("Bullet collided with: " + target.name);
+        //Debug.Log("Bullet collided with: " + target.name);
 
         if (target.TryGetComponent(out Entity enemy))
         {
             enemy.Health -= weaponDamage;
-            Debug.Log("Target has Health. Remaining Health: " + enemy.Health);
+            //Debug.Log("Target has Health. Remaining Health: " + enemy.Health);
 
             if (enemy.Health <= 0)
             {
-                Debug.Log("Health is 0 or less. Applying BreakEffect.");
+                //Debug.Log("Health is 0 or less. Applying BreakEffect.");
                 ApplyBreakEffect(target);
             }
         }
         else
         {
-            Debug.Log("Target has no Health. Applying BreakEffect.");
+            //Debug.Log("Target has no Health. Applying BreakEffect.");
             ApplyBreakEffect(target);
         }
 
@@ -68,12 +63,12 @@ public class Bullet : MonoBehaviour
     {
         if (target.TryGetComponent(out MeshDestroy meshDestroy))
         {
-            Debug.Log("MeshDestroy component found. Destroying mesh.");
+            //Debug.Log("MeshDestroy component found. Destroying mesh.");
             meshDestroy.DestroyMesh();
         }
         else
         {
-            Debug.LogWarning("No MeshDestroy component found on target.");
+            //Debug.LogWarning("No MeshDestroy component found on target.");
         }
     }
 }

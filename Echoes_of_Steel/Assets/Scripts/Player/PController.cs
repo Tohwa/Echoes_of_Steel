@@ -292,12 +292,12 @@ public class PController : MonoBehaviour
 
     private void OnHoverHold(InputAction.CallbackContext context)
     {
-        Debug.Log("Hovering started");
+        //Debug.Log("Hovering started");
         isHovering = true;
     }
     private void OnHoverRelease(InputAction.CallbackContext context)
     {
-        Debug.Log("Hovering stopped");
+        //Debug.Log("Hovering stopped");
         isHovering = false;
     }
     private void Hover()
@@ -316,7 +316,7 @@ public class PController : MonoBehaviour
         if (interactable != null && !DialogueManager.isActive)
         {
             interactable.Interact();
-            Debug.Log("Interacted with object");
+            //Debug.Log("Interacted with object");
         }
 
     }
@@ -325,7 +325,7 @@ public class PController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Interactable"))
         {
-            Debug.Log("Collided");
+            //Debug.Log("Collided");
             interactable = other.gameObject.GetComponent<IInteractable>();
         }
     }
