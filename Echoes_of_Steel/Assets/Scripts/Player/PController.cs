@@ -12,6 +12,7 @@ public class PController : MonoBehaviour
     public InputAction movement;
     public InputAction jump;
     public InputAction dash;
+    public InputAction aim;
     public InputAction shoot;
     public InputAction shield;
     public InputAction hover;
@@ -38,7 +39,7 @@ public class PController : MonoBehaviour
 
     [Header("Jump Variables")]
     public float jumpForce = 5f;
-    [SerializeField]private bool canDoubleJump;
+    [SerializeField] private bool canDoubleJump;
     private bool isJumping;
     public float jumpCooldown = 0.1f;
     private float lastJumpTime;
@@ -136,6 +137,7 @@ public class PController : MonoBehaviour
         movement.Enable();
         jump.Enable();
         dash.Enable();
+        aim.Enable();
         shoot.Enable();
         shield.Enable();
         hover.Enable();
@@ -150,10 +152,15 @@ public class PController : MonoBehaviour
         hover.performed += OnHoverHold;
         hover.canceled += OnHoverRelease;
 
+        aim.performed += OnAimHold;
+        aim.canceled += OnAimRelease;
+        shoot.performed += OnShootInput;
+        shoot.canceled += OnShootCancel;
         shield.performed += OnShieldHold;
         shield.canceled += OnShieldRelease;
 
         interact.performed += OnInteractInput;
+        interact.canceled += OnInteractCancel;
         journal.performed += OnJournalInput;
         pause.performed += OnPauseInput;
     }
@@ -162,6 +169,7 @@ public class PController : MonoBehaviour
         movement.Disable();
         jump.Disable();
         dash.Disable();
+        aim.Disable();
         shoot.Disable();
         shield.Disable();
         hover.Disable();
@@ -174,12 +182,17 @@ public class PController : MonoBehaviour
         jump.performed -= OnJumpInput;
         dash.performed -= OnDashInput;
 
+        aim.performed -= OnAimHold;
+        aim.canceled -= OnAimRelease;
+        shoot.performed -= OnShootInput;
+        shoot.canceled -= OnShootCancel;
         shield.performed -= OnShieldHold;
         shield.canceled -= OnShieldRelease;
 
         hover.performed -= OnHoverHold;
         hover.canceled -= OnHoverRelease;
         interact.performed -= OnInteractInput;
+        interact.canceled -= OnInteractCancel;
         journal.performed -= OnJournalInput;
         pause.performed -= OnPauseInput;
     }
@@ -308,7 +321,15 @@ public class PController : MonoBehaviour
         }
     }
 
+    private void OnAimHold(InputAction.CallbackContext context)
+    {
+        animator.SetBool("IsAiming", true);
+    }
 
+    private void OnAimRelease(InputAction.CallbackContext context)
+    {
+        animator.SetBool("IsAiming", false);
+    }
 
     private void OnShieldHold(InputAction.CallbackContext context)
     {
@@ -317,6 +338,16 @@ public class PController : MonoBehaviour
     private void OnShieldRelease(InputAction.CallbackContext context)
     {
         animator.SetBool("IsShielding", false);
+
+    }
+
+    private void OnShootInput(InputAction.CallbackContext context)
+    {
+        animator.SetBool("IsShooting", true);
+    }
+    private void OnShootCancel(InputAction.CallbackContext context)
+    {
+        animator.SetBool("IsShooting", false);
 
     }
 
@@ -347,10 +378,21 @@ public class PController : MonoBehaviour
 
         if (interactable != null && !DialogueManager.isActive)
         {
+            
+
+            animator.SetBool("IsInteracting", true);
+            
             interactable.Interact();
+            interactable = null;
+            
             Debug.Log("Interacted with object");
         }
 
+    }
+
+    private void OnInteractCancel(InputAction.CallbackContext context)
+    {
+        animator.SetBool("IsInteracting", false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -405,6 +447,8 @@ public class PController : MonoBehaviour
 
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
         bulletComponent.Initialize(weaponDamage, bulletSpawn.forward);
+
+        
     }
 
     public bool GroundCheck()
