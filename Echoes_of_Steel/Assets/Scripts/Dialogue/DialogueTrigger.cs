@@ -5,10 +5,10 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     public DialogueAsset[] dialogues;
-    public DialogSettings settings;
+    //public DialogSettings settings;
 
     public void TriggerDialogue()
     {
-        DialogueManager.instance.StartDialogue(dialogues, settings);
+        DialogueManager.instance.StartDialogue(dialogues);
     }
 }

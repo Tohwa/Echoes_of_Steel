@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - characterId: 0
-    dialogue: "New memory aquired. Starting analysis\u2026"
+    dialogue: "New memory acquired. Starting analysis\u2026 "
   - characterId: 0
     dialogue: "Analysis completed. Awaiting order\u2026"
   - characterId: 1
@@ -31,10 +31,14 @@ MonoBehaviour:
       you belonged to?"
   - characterId: 0
     dialogue: "That would violate Society Protocol 1: \u201CRobots and humans must
-      be seperated for travel and transportation.\u201D"
+      be separated for travel and transportation.\u201D"
   - characterId: 1
     dialogue: So, befriending and understanding one another was nearly impossible,
       right?
   memoryImage: {fileID: 21300000, guid: 82fbf36e0cfc8cf4c81ec089173b1030, type: 3}
   isChoiceDialogue: 1
+  choiceOne: Obediance
+  choiceTwo: Probable solutions
   isEndDialogue: 0
+  enableShooting: 0
+  enableShielding: 0
