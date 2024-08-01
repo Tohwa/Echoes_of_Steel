@@ -15,12 +15,6 @@ public class TimeLineDirector : MonoBehaviour
     [SerializeField] private PlayableDirector m_goodDirector;
     [SerializeField] private PlayableDirector m_badDirector;
 
-    private void Start()
-    {
-        m_goodEnding = gameObject.transform.GetChild(0).gameObject;
-        m_badEnding = gameObject.transform.GetChild(1).gameObject;
-    }
-
     private void CheckCorruptionMeter()
     {
         m_Player = GameObject.FindGameObjectWithTag("Player");
@@ -31,7 +25,7 @@ public class TimeLineDirector : MonoBehaviour
             m_Player.SetActive(false);
             m_Camera.SetActive(false);
 
-            m_goodEnding.SetActive(true);
+            m_goodEnding.gameObject.transform.parent.gameObject.SetActive(true);
 
             PlayTimeLine(m_goodDirector);
 
@@ -42,7 +36,7 @@ public class TimeLineDirector : MonoBehaviour
             m_Player.SetActive(false);
             m_Camera.SetActive(false);
 
-            m_goodEnding.SetActive(true);
+            m_goodEnding.gameObject.transform.parent.gameObject.SetActive(true);
 
             PlayTimeLine(m_goodDirector);
 
@@ -53,7 +47,7 @@ public class TimeLineDirector : MonoBehaviour
             m_Player.SetActive(false);
             m_Camera.SetActive(false);
 
-            m_badEnding.SetActive(true);
+            m_badEnding.gameObject.transform.parent.gameObject.SetActive(true);
 
             PlayTimeLine(m_badDirector);
 
@@ -64,7 +58,7 @@ public class TimeLineDirector : MonoBehaviour
             m_Player.SetActive(false);
             m_Camera.SetActive(false);
 
-            m_badEnding.SetActive(true);
+            m_badEnding.gameObject.transform.parent.gameObject.SetActive(true);
 
             PlayTimeLine(m_badDirector);
 
