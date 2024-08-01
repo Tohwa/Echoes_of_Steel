@@ -53,7 +53,7 @@ public class TimeLineDirector : MonoBehaviour
 
             SteamUserStats.SetAchievement("ACH_TRAVEL_FAR_SINGLE");
         }
-        else if (GameManager.Instance.corruptionMeter >= 45 && GameManager.Instance.corruptionMeter < 60 && m_badDirector.state != PlayState.Playing)
+        else if (GameManager.Instance.corruptionMeter >= 45 && m_badDirector.state != PlayState.Playing)
         {
             m_Player.SetActive(false);
             m_Camera.SetActive(false);
