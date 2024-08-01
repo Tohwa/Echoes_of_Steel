@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - characterId: 0
-    dialogue: "New memory aquired. Starting analysis\u2026"
+    dialogue: "New memory acquired. Starting analysis\u2026 "
   - characterId: 0
     dialogue: "Analysis completed. Awaiting order\u2026"
   - characterId: 1
@@ -27,8 +27,8 @@ MonoBehaviour:
     dialogue: It appears that the Robots refused to act on human command and the
       humans tried to get them under control.
   - characterId: 1
-    dialogue: How do you know that they refused to comply with the human orders and
-      why would they?
+    dialogue: How do you know that they refused to comply with the human orders?
+      And why would they?
   - characterId: 0
     dialogue: The lights imbued in our bodies indicate different program states.
       Yellow dictates the process of analysing data which cannot happen when receiving
@@ -36,12 +36,11 @@ MonoBehaviour:
   - characterId: 0
     dialogue: Second question cannot be answered.
   - characterId: 1
-    dialogue: Oh okay, are there other colors aswell?
-  characters:
-  - name: Robot
-    sprite: {fileID: 21300000, guid: 96b00959fb2727f4eb394e543ad75c42, type: 3}
-  - name: Child
-    sprite: {fileID: 21300000, guid: 9fa508b6482f4c1419e8a060bc0b291f, type: 3}
+    dialogue: 'Oh okay, are there other colors as well? '
   memoryImage: {fileID: 21300000, guid: d4c3a7bb13484ab409f46655b00b27e7, type: 3}
   isChoiceDialogue: 1
+  choiceOne: Robotics administrator
+  choiceTwo: Different states
   isEndDialogue: 0
+  enableShooting: 0
+  enableShielding: 0

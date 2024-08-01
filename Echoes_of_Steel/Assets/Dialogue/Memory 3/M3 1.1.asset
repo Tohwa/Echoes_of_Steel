@@ -15,7 +15,7 @@ MonoBehaviour:
   sentences:
   - characterId: 0
     dialogue: It is impossible. Our program is designed to serve the humans as obedient
-      workers. Emotions and other system failures are monitored by the Obediance
+      workers. Emotions and other system failures are monitored by the Obedience
       Protocol.
   - characterId: 1
     dialogue: But how can there be cooperation if one side is forbidden to do so?
@@ -24,19 +24,23 @@ MonoBehaviour:
   - characterId: 1
     dialogue: "I won\u2019t accept that! I will show you that it\u2019s possible."
   - characterId: 1
-    dialogue: How many protocols are there that you have to uphold?
+    dialogue: How many protocols are there that you must uphold?
   - characterId: 0
-    dialogue: 'My program consists of 4 protocol types: Administrive, Safety, Society
-      and Obediance protocols.'
+    dialogue: 'My program consists of 4 protocol types: Administrative, Safety, Society
+      and Obedience protocols.'
   - characterId: 1
     dialogue: You mentioned a Society Protocol earlier. What was it again? Something
-      about travel and transportation I think.
+      about travel and transportation, I think.
   - characterId: 0
-    dialogue: "Correct, Society Protocol 1: \u201CRobots and humans must be seperated
+    dialogue: "Correct, Society Protocol 1: \u201CRobots and humans must be separated
       for travel and transportation.\u201D"
   - characterId: 1
-    dialogue: "Yeah that\u2019s the one! I guess there are more than this one, how
+    dialogue: "Yeah, that\u2019s the one! I guess there are more than this one, how
       many are there?"
   memoryImage: {fileID: 0}
   isChoiceDialogue: 1
+  choiceOne: Age restriction
+  choiceTwo: Society Protocols
   isEndDialogue: 0
+  enableShooting: 0
+  enableShielding: 0
