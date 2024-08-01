@@ -1,3 +1,4 @@
+using Adobe.Substance;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ public class PController : MonoBehaviour
     public InputAction jump;
     public InputAction dash;
     public InputAction shoot;
+    public InputAction shield;
     public InputAction hover;
     public InputAction interact;
     public InputAction journal;
@@ -21,6 +23,7 @@ public class PController : MonoBehaviour
     public Camera mainCamera;
     private Rigidbody rb;
     private CapsuleCollider capsuleCollider;
+    private Animator animator;
     public LayerMask Ground;
     private Vector2 moveInput;
     public bool isMoving;
@@ -79,6 +82,7 @@ public class PController : MonoBehaviour
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
         rb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
         mainCamera = Camera.main;
         pCamera = Camera.main.transform;
         pauseMenuHandler = FindObjectOfType<PauseMenuHandler>();
@@ -133,6 +137,7 @@ public class PController : MonoBehaviour
         jump.Enable();
         dash.Enable();
         shoot.Enable();
+        shield.Enable();
         hover.Enable();
         interact.Enable();
         journal.Enable();
@@ -144,6 +149,10 @@ public class PController : MonoBehaviour
         dash.performed += OnDashInput;
         hover.performed += OnHoverHold;
         hover.canceled += OnHoverRelease;
+
+        shield.performed += OnShieldHold;
+        shield.canceled += OnShieldRelease;
+
         interact.performed += OnInteractInput;
         journal.performed += OnJournalInput;
         pause.performed += OnPauseInput;
@@ -154,6 +163,7 @@ public class PController : MonoBehaviour
         jump.Disable();
         dash.Disable();
         shoot.Disable();
+        shield.Disable();
         hover.Disable();
         interact.Disable();
         journal.Disable();
@@ -163,6 +173,10 @@ public class PController : MonoBehaviour
         movement.canceled -= OnMovementInput;
         jump.performed -= OnJumpInput;
         dash.performed -= OnDashInput;
+
+        shield.performed -= OnShieldHold;
+        shield.canceled -= OnShieldRelease;
+
         hover.performed -= OnHoverHold;
         hover.canceled -= OnHoverRelease;
         interact.performed -= OnInteractInput;
@@ -173,6 +187,7 @@ public class PController : MonoBehaviour
     private void OnMovementInput(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+
     }
     private void Move()
     {
@@ -190,10 +205,12 @@ public class PController : MonoBehaviour
         if (moveInput != Vector2.zero)
         {
             currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, acceleration * Time.deltaTime);
+            animator.SetBool("IsWalking", true);
         }
         else
         {
             currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, deceleration * Time.deltaTime);
+            animator.SetBool("IsWalking", false);
         }
 
         if (currentVelocity != Vector3.zero)
@@ -203,6 +220,7 @@ public class PController : MonoBehaviour
         }
 
         rb.MovePosition(rb.position + currentVelocity * Time.fixedDeltaTime);
+
     }
 
     private void OnJumpInput(InputAction.CallbackContext context)
@@ -253,6 +271,7 @@ public class PController : MonoBehaviour
             lastJumpTime = Time.time;
             isJumping = false; // Reset jumping flag after the jump is performed
             applyManualGravity = true; // Start applying manual gravity after the jump
+            animator.SetBool("IsJumping", true);
         }
     }
 
@@ -288,6 +307,20 @@ public class PController : MonoBehaviour
             isDashing = false;
         }
     }
+
+
+
+    private void OnShieldHold(InputAction.CallbackContext context)
+    {
+        animator.SetBool("IsShielding", true);
+    }
+    private void OnShieldRelease(InputAction.CallbackContext context)
+    {
+        animator.SetBool("IsShielding", false);
+
+    }
+
+
 
     private void OnHoverHold(InputAction.CallbackContext context)
     {
@@ -383,10 +416,12 @@ public class PController : MonoBehaviour
         if (Physics.Raycast(rayOrigin, Vector3.down, rayLength, Ground))
         {
             isGrounded = true;
+            animator.SetBool("IsJumping", false);
             applyManualGravity = false; // Stop applying manual gravity when grounded
         }
         else
         {
+
             isGrounded = false;
         }
 
