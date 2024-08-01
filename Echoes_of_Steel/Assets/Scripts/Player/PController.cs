@@ -35,7 +35,7 @@ public class PController : MonoBehaviour
 
     [Header("Jump Variables")]
     public float jumpForce = 5f;
-    private bool canDoubleJump;
+    [SerializeField]private bool canDoubleJump;
     private bool isJumping;
     public float jumpCooldown = 0.1f;
     private float lastJumpTime;
