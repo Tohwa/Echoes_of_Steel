@@ -1,11 +1,22 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Patrol : MonoBehaviour
 {
     public Transform[] waypoints;
     private int currentWaypointIndex = 0;
-    public float speed = 2f;
-    public float rotationSpeed = 5f;
+    public float roamRadius = 5f;
+    public float waypointTolerance = 0.5f;
+    public float roamTime = 2f; // Time spent roaming at a waypoint
+    private float roamTimer = 0f;
+
+    private NavMeshAgent agent;
+
+    void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        MoveToNextWaypoint();
+    }
 
     public NodeState MoveToNextWaypoint()
     {
@@ -14,38 +25,39 @@ public class Patrol : MonoBehaviour
             return NodeState.FAILURE;
         }
 
-        Transform targetWaypoint = waypoints[currentWaypointIndex];
-        Vector3 direction = targetWaypoint.position - transform.position;
-        direction.y = 0; // Ignore vertical differences
-
-        RotateInDirection(direction);
-
-        if (Vector3.Distance(transform.position, targetWaypoint.position) < 0.1f)
+        if (!agent.pathPending && agent.remainingDistance < waypointTolerance)
         {
-            currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
+            // Roam for a while after reaching the waypoint
+            if (roamTimer <= 0)
+            {
+                roamTimer = roamTime;
+                RoamRandomly();
+            }
+            else
+            {
+                roamTimer -= Time.deltaTime;
+                if (roamTimer <= 0)
+                {
+                    currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
+                    agent.SetDestination(waypoints[currentWaypointIndex].position);
+                }
+            }
             return NodeState.SUCCESS;
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, speed * Time.deltaTime);
         return NodeState.RUNNING;
     }
 
-    public NodeState RoamRandomly()
+    public void RoamRandomly()
     {
-        Vector3 randomDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+        Vector3 randomDirection = Random.insideUnitSphere * roamRadius;
+        randomDirection += transform.position;
 
-        RotateInDirection(randomDirection);
-
-        transform.position += randomDirection * speed * Time.deltaTime;
-        return NodeState.RUNNING;
-    }
-
-    private void RotateInDirection(Vector3 direction)
-    {
-        if (direction.sqrMagnitude > 0.01f)
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomDirection, out hit, roamRadius, 1))
         {
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            Vector3 finalPosition = hit.position;
+            agent.SetDestination(finalPosition);
         }
     }
 }

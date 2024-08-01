@@ -12,16 +12,10 @@ public class EnemyAI : MonoBehaviour
     public BulletDetection bulletDetection;
     private Transform player;
 
-    public float rotationSpeed = 5f;
-
     void Start()
     {
-        // Erstelle den Behavior Tree
         rootNode = CreateBehaviorTree();
         player = playerDetection.player.transform;
-
-        Rigidbody rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
     void Update()
@@ -37,12 +31,11 @@ public class EnemyAI : MonoBehaviour
     private void LookAtPlayer()
     {
         Vector3 direction = player.position - transform.position;
-        direction.y = 0; // Ignore vertical differences
-
+        direction.y = 0;
         if (direction.sqrMagnitude > 0.01f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
         }
     }
 
@@ -50,8 +43,6 @@ public class EnemyAI : MonoBehaviour
     {
         // Patrouillieren und Roamen
         ActionNode moveToNextWaypoint = new ActionNode(patrol.MoveToNextWaypoint);
-        ActionNode roamRandomly = new ActionNode(patrol.RoamRandomly);
-        BTSequence patrolSequence = new BTSequence(new List<BTNode> { moveToNextWaypoint, roamRandomly });
 
         // Spielerdetektion
         ActionNode updateDetectionMeter = new ActionNode(playerDetection.UpdateDetectionMeter);
@@ -69,7 +60,7 @@ public class EnemyAI : MonoBehaviour
         // Zusammensetzen des Behavior Trees
         BTSelector attackSelector = new BTSelector(new List<BTNode> { dashSequence, shoot });
         BTSequence attackSequence = new BTSequence(new List<BTNode> { playerDetected, attackSelector });
-        BTSelector mainSelector = new BTSelector(new List<BTNode> { attackSequence, patrolSequence });
+        BTSelector mainSelector = new BTSelector(new List<BTNode> { attackSequence, moveToNextWaypoint });
 
         return mainSelector;
     }

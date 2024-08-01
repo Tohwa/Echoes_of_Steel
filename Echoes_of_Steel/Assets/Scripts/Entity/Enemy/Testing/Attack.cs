@@ -2,17 +2,18 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    public Transform firePoint;
-    public BulletPool bulletPool;
+    public GameObjectPool bulletPool;
+    public Transform bulletSpawnPoint;
+    public Transform player;
+    public float bulletDamage = 10f;
 
     public NodeState Shoot()
     {
-        GameObject bullet = bulletPool.GetBullet();
-        bullet.transform.position = firePoint.position;
-        bullet.transform.rotation = firePoint.rotation;
+        if (player == null) return NodeState.FAILURE;
 
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.velocity = firePoint.up * 10f; // Beispielgeschwindigkeit
+        Vector3 direction = (player.position - bulletSpawnPoint.position).normalized;
+        GameObject bullet = bulletPool.SpawnObject(bulletSpawnPoint.position, Quaternion.LookRotation(direction));
+        bullet.GetComponent<Bullet>().Initialize(bulletDamage, direction);
 
         return NodeState.SUCCESS;
     }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.VFX;
 
 public class Bullet : MonoBehaviour
 {
@@ -13,7 +12,6 @@ public class Bullet : MonoBehaviour
     {
         tr = GetComponent<TrailRenderer>();
         rb = GetComponent<Rigidbody>();
-        rb.velocity = transform.forward * speed;
         Invoke("Deactivate", lifeTime);
     }
 
@@ -26,7 +24,7 @@ public class Bullet : MonoBehaviour
     void Deactivate()
     {
         gameObject.SetActive(false);
-        tr.Clear();
+        if (tr != null) tr.Clear();
     }
 
     private void OnDisable()
@@ -37,22 +35,18 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         var target = collision.gameObject;
-        //Debug.Log("Bullet collided with: " + target.name);
 
         if (target.TryGetComponent(out Entity enemy))
         {
             enemy.Health -= weaponDamage;
-            //Debug.Log("Target has Health. Remaining Health: " + enemy.Health);
 
             if (enemy.Health <= 0)
             {
-                //Debug.Log("Health is 0 or less. Applying BreakEffect.");
                 ApplyBreakEffect(target);
             }
         }
         else
         {
-            //Debug.Log("Target has no Health. Applying BreakEffect.");
             ApplyBreakEffect(target);
         }
 
@@ -63,12 +57,7 @@ public class Bullet : MonoBehaviour
     {
         if (target.TryGetComponent(out MeshDestroy meshDestroy))
         {
-            //Debug.Log("MeshDestroy component found. Destroying mesh.");
             meshDestroy.DestroyMesh();
-        }
-        else
-        {
-            //Debug.LogWarning("No MeshDestroy component found on target.");
         }
     }
 }
