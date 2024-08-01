@@ -54,9 +54,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _MaxNoiseIntensity: 1
+    - _MinNoiseIntensity: -0.5
+    - _NoiseIntensity: -0.3
+    - _NoiseScale: 1000
+    - _NoiseSpeed: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ScrollSpeed: 0.3
+    - _UseSimpleNoiseIntensity: 0
     m_Colors:
     - _BaseColor: {r: 0.12941167, g: 0.772549, b: 0.7507659, a: 0}
     - _HoloTiling: {r: 1, g: -5, b: 0, a: 0}
