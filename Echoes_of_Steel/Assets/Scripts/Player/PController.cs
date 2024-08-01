@@ -454,6 +454,7 @@ public class PController : MonoBehaviour
     public bool GroundCheck()
     {
         float rayLength = 0.2f;
+        float rayLengthLanding = 1f;
         Vector3 rayOrigin = capsuleCollider.bounds.center;
         rayOrigin.y = capsuleCollider.bounds.min.y + 0.1f;
 
@@ -461,11 +462,19 @@ public class PController : MonoBehaviour
         {
             isGrounded = true;
             animator.SetBool("IsJumping", false);
+            animator.SetBool("IsFalling", false);
+            animator.SetBool("IsLanding", false);
+
             applyManualGravity = false; // Stop applying manual gravity when grounded
+        }
+        else if(Physics.Raycast(rayOrigin, Vector3.down, rayLengthLanding, Ground))
+        {
+            animator.SetBool("IsLanding", true);
         }
         else
         {
-
+            animator.SetBool("IsFalling", true);
+            animator.SetBool("IsLanding", false);
             isGrounded = false;
         }
 

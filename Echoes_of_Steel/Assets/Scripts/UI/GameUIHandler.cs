@@ -39,7 +39,7 @@ public class GameUIHandler : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Finn"))
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
         {
             memories[0].SetActive(true);
             memories[1].SetActive(true);
