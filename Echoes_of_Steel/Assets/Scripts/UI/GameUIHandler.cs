@@ -46,11 +46,17 @@ public class GameUIHandler : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2))
         {
+            memories[0].SetActive(true);
+            memories[1].SetActive(true);
             memories[2].SetActive(true);
             memories[3].SetActive(true);
         }
         else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
         {
+            memories[0].SetActive(true);
+            memories[1].SetActive(true);
+            memories[2].SetActive(true);
+            memories[3].SetActive(true);
             memories[4].SetActive(true);
             memories[5].SetActive(true);
         }
