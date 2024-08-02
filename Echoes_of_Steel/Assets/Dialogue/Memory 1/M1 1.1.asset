@@ -14,25 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - characterId: 0
-    dialogue: Cannot comply with question, answer violates Obediance Protocol 1.
+    dialogue: 'Cannot comply with question, answer violates Obedience Protocol 1. '
   - characterId: 1
     dialogue: Oh okay, maybe another time then.
   - characterId: 1
     dialogue: Are you one of those new era robots?
   - characterId: 0
-    dialogue: Affirmative. I was designed to fulfill human wishes to every extend
-      of my programs capabilities.
+    dialogue: "Affirmative. I was designed to fulfil human wishes to every extend
+      of my program\u2019s capabilities. "
   - characterId: 1
     dialogue: Were you ever close with the humans you worked for?
   - characterId: 0
     dialogue: My model was not designed to feel any emotions towards humans.
   - characterId: 1
-    dialogue: Sounds lonely. Did you ever feel like you wanted to feel anything?
-  characters:
-  - name: Robot
-    sprite: {fileID: 21300000, guid: cbcff75bb1edb36419697627f8f155f6, type: 3}
-  - name: Child
-    sprite: {fileID: 21300000, guid: d4c3be7ecaf37d04fbac6f5924775d6e, type: 3}
+    dialogue: Sounds lonely. Did you ever think that you wanted to feel anything?
   memoryImage: {fileID: 0}
   isChoiceDialogue: 1
+  choiceOne: Safety Protocol
+  choiceTwo: Database analysis
   isEndDialogue: 0
+  enableShooting: 0
+  enableShielding: 0

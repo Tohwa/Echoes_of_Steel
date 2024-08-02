@@ -94,10 +94,10 @@ GameObject:
   - component: {fileID: 1270850654831130402}
   - component: {fileID: 1791406211834249541}
   - component: {fileID: 7053371302340783192}
-  - component: {fileID: 8047650270640486211}
+  - component: {fileID: 3798865412307990239}
   m_Layer: 0
   m_Name: Poster
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,8 +138,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.482112, y: 7.2626724, z: 4.1162434}
-  m_Center: {x: -0.33536574, y: -0.5961113, z: -2.0478601}
+  m_Size: {x: 6.0280695, y: 7.3671875, z: 4.4157395}
+  m_Center: {x: 0.16851991, y: -1.790184, z: -5.3130555}
 --- !u!54 &7053371302340783192
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -167,7 +167,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &8047650270640486211
+--- !u!114 &3798865412307990239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,16 +176,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1990059020652518320}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e239c37b93861a94b9b010f672cb4d20, type: 3}
+  m_Script: {fileID: 11500000, guid: c7cb460486098144a9385e4fa4136349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogues:
-  - {fileID: 11400000, guid: 4aaeabba46524a94095be645b688d99d, type: 2}
-  - {fileID: 11400000, guid: bab5dbe3e1901f4449b9175075e842ec, type: 2}
-  - {fileID: 11400000, guid: 4bbdda8be98c2f14b835a6a03d71ac00, type: 2}
-  - {fileID: 11400000, guid: 1b15ff56519306c46a4e69ee4440419e, type: 2}
-  - {fileID: 11400000, guid: 00089cf93957a584cbf01f6d877387f7, type: 2}
-  settings: {fileID: 0}
+  interactionStatus: {fileID: 11400000, guid: 9c696e5848e2bce48bf9b7349ede628b, type: 2}
+  oneLiner: Look here!
 --- !u!1001 &2882949956868096949
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -59,6 +59,7 @@ public class CutscenesHandler : MonoBehaviour
             {
                 gameObject.transform.parent.gameObject.SetActive(false);
 
+                GameManager.Instance.gamePaused = true;
                 loadScreen.LoadScene(0);
 
                 SteamUserStats.ResetAllStats(true);

@@ -8,6 +8,8 @@ public class DialogueAsset : ScriptableObject
     public Dialogue[] sentences;
     public Sprite memoryImage;
     public bool isChoiceDialogue;
+    public string choiceOne;
+    public string choiceTwo;
     public bool isEndDialogue;
     public bool enableShooting;
     public bool enableShielding;
