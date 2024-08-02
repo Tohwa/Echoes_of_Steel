@@ -11,6 +11,6 @@ public class DialogSettings : ScriptableObject
 [System.Serializable]
 public class Character
 {
-    public string name;
+    //public string name;
     public Sprite sprite;
 }

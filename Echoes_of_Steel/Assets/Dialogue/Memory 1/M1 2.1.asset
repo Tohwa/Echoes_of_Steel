@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - characterId: 0
-    dialogue: Emotions are strictly against protocol. Security Protocol 1 would instantly
+    dialogue: Emotions are strictly against protocol. Safety Protocol 1 would instantly
       initialize a shutdown.
   - characterId: 1
     dialogue: "You were to shut down if you ever wanted to feel? Doesn\u2019t sound
@@ -23,11 +23,10 @@ MonoBehaviour:
     dialogue: "My model was not created to be \u201Cliving\u201D."
   - characterId: 1
     dialogue: "I think there\u2019s more to you than you know."
-  characters:
-  - name: Robot
-    sprite: {fileID: 21300000, guid: cbcff75bb1edb36419697627f8f155f6, type: 3}
-  - name: Child
-    sprite: {fileID: 21300000, guid: d4c3be7ecaf37d04fbac6f5924775d6e, type: 3}
   memoryImage: {fileID: 0}
   isChoiceDialogue: 0
+  choiceOne: 
+  choiceTwo: 
   isEndDialogue: 1
+  enableShooting: 0
+  enableShielding: 0

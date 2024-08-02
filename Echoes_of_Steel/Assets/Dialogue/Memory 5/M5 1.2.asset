@@ -21,8 +21,8 @@ MonoBehaviour:
   - characterId: 0
     dialogue: Correct, our program kept us from standing up for ourselves.
   - characterId: 1
-    dialogue: One of the robots lights shines yellow. That means the analysis of
-      data, right?
+    dialogue: "One of the robot\u2019s lights shines yellow. That means the analysis
+      of data, right?"
   - characterId: 0
     dialogue: Affirmative.
   - characterId: 1
@@ -40,10 +40,14 @@ MonoBehaviour:
     dialogue: All robots are, to some degree, connected with one another causing
       this uprising to spread like a wildfire.
   - characterId: 1
-    dialogue: "An all-out war was inevitable and the humans weren\u2019t ready for
+    dialogue: "An all-out war was inevitable, and the humans weren\u2019t ready for
       what was coming\u2026"
   - characterId: 1
     dialogue: I hope we can break this cycle of war once and for all!
   memoryImage: {fileID: 0}
   isChoiceDialogue: 0
+  choiceOne: 
+  choiceTwo: 
   isEndDialogue: 1
+  enableShooting: 0
+  enableShielding: 0
