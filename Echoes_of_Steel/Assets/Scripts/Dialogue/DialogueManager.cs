@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject panelObject;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI oneLinerText;
     [SerializeField] private TextMeshProUGUI choiceOneText;
     [SerializeField] private TextMeshProUGUI choiceTwoText;
     [SerializeField] private Image charImage;
@@ -20,10 +21,13 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Animator boxAnimator;
     [SerializeField] private Animator imageAnimator;
     [SerializeField] private Animator journalAnimator;
+    [SerializeField] private Animator oneLinerAnimator;
+    [SerializeField] private GameUIHandler gameUIHandler;
     [SerializeField] private float dialogueSpeed;
 
     private DialogueAsset[] dialogueAssets;
     private DialogueAsset currentDialogueAsset;
+    private DialogSettings dialogSettings;
     private bool skipLineTriggered;
     private bool lineFinished;
     private bool journalIsOpen;
@@ -74,7 +78,7 @@ public class DialogueManager : MonoBehaviour
         //}
     }
 
-    public void StartDialogue(DialogueAsset[] _dialogues)
+    public void StartDialogue(DialogueAsset[] _dialogues, DialogSettings _settings)
     {
         isActive = true;
         //dialogueBox.SetActive(true);
@@ -84,9 +88,19 @@ public class DialogueManager : MonoBehaviour
         choices.SetActive(false);
 
         dialogueAssets = _dialogues;
+        dialogSettings = _settings;
         currentDialogueAsset = dialogueAssets[dialogueAssetIndex];
 
         DisplayNextSentence();
+    }
+
+    public void PlayOneLiner(string _oneLiner)
+    {
+        oneLinerAnimator.SetBool("IsOpen", true);
+
+
+        StopAllCoroutines();
+        StartCoroutine(TypeSentece(_oneLiner, oneLinerText));
     }
 
     public void DisplayNextSentence()
@@ -104,37 +118,39 @@ public class DialogueManager : MonoBehaviour
         }
         Dialogue currentDialogue = currentDialogueAsset.sentences[dialogueIndex];
 
-        Character currentCharacter = currentDialogueAsset.characters[currentDialogue.characterId];
+        Character currentCharacter = dialogSettings.characters[currentDialogue.characterId];
         nameText.text = currentCharacter.name;
         charImage.sprite = currentCharacter.sprite;
 
 
 
         StopAllCoroutines();
-        StartCoroutine(TypeSentece(currentDialogue.dialogue));
+        StartCoroutine(TypeSentece(currentDialogue.dialogue, dialogueText));
 
         dialogueIndex++;
     }
 
-    IEnumerator TypeSentece(string sentence)
+    IEnumerator TypeSentece(string sentence, TextMeshProUGUI _text)
     {
         skipLineTriggered = false;
         lineFinished = false;
-        dialogueText.text = "";
+        _text.text = "";
 
         foreach (char letter in sentence.ToCharArray())
         {
             if (skipLineTriggered)
             {
-                dialogueText.text = sentence;
+                _text.text = sentence;
                 break;
             }
-            dialogueText.text += letter;
+            _text.text += letter;
 
             yield return new WaitForSeconds(1 / dialogueSpeed);
 
         }
         lineFinished = true;
+        yield return new WaitForSeconds(3);
+        oneLinerAnimator.SetBool("IsOpen", false);
 
     }
 
@@ -160,13 +176,23 @@ public class DialogueManager : MonoBehaviour
         {
 
             //test prupose only
-            dialogueAssetIndex = 0;
-            currentDialogueAsset = dialogueAssets[dialogueAssetIndex];
             //
             isActive = false;
             imageAnimator.SetBool("IsOpen", false);
             boxAnimator.SetBool("IsOpen", false);
             panelObject.SetActive(false);
+            if(currentDialogueAsset.enableShielding && currentDialogueAsset.enableShooting)
+            {
+                isActive = true;
+                gameUIHandler.OpenPopUp(false);
+            }
+            else if (currentDialogueAsset.enableShielding)
+            {
+                isActive = true;
+                gameUIHandler.OpenPopUp(true);
+            }
+            dialogueAssetIndex = 0;
+            currentDialogueAsset = dialogueAssets[dialogueAssetIndex];
         }
         dialogueIndex = 0;
         lineFinished = false;
@@ -235,6 +261,7 @@ public class DialogueManager : MonoBehaviour
             journalAnimator.SetBool("IsOpen", true);
             panelObject.SetActive(true);
             journalIsOpen = true;
+            GameManager.Instance.gamePaused = true;
             
         }
         else
@@ -242,7 +269,8 @@ public class DialogueManager : MonoBehaviour
             journalAnimator.SetBool("IsOpen", false);
             panelObject.SetActive(false);
             journalIsOpen = false;
-            
+            GameManager.Instance.gamePaused = false;
+
         }
     }
 }

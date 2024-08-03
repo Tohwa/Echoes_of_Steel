@@ -1,10 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 
 public class LoadingScreen : MonoBehaviour
@@ -13,13 +10,14 @@ public class LoadingScreen : MonoBehaviour
 
     [Header("GameObject Variables")]
     private GameObject loadingScreen;
+    private GameObject progressBarObj;
 
     [Header("Image Variables")]
-    private Image progressBar;
+    [SerializeField] private Image progressBar;
 
     [Header("TMP Variables")]
-    private TMP_Text progressText;
-    
+    [SerializeField] private TMP_Text progressText;
+
     [Header("float Variables")]
     [SerializeField] private float artificialLoadingDuration = 3f;
 
@@ -27,28 +25,26 @@ public class LoadingScreen : MonoBehaviour
 
     void Start()
     {
-        if(loadingScreen == null)
+        if (loadingScreen == null)
         {
             loadingScreen = transform.Find("LoadingScreen").gameObject;
-        }
-        else
-        {
-            Debug.LogError("LoadingScreen Object could not be found!");
+
         }
 
-        if(loadingScreen != null)
+        if (loadingScreen != null)
         {
-            progressBar = loadingScreen.GetComponentInChildren<Image>();
+            progressBarObj = loadingScreen.transform.GetChild(0).gameObject;
+            progressBar = progressBarObj.GetComponent<Image>();
             progressText = loadingScreen.GetComponentInChildren<TMP_Text>();
         }
         else
         {
-            if(progressBar == null)
+            if (progressBar == null)
             {
                 Debug.LogError("Image Component could not be found!");
             }
 
-            if(progressText == null)
+            if (progressText == null)
             {
                 Debug.LogError("TMP_Text Component could not be found!");
             }
@@ -100,7 +96,15 @@ public class LoadingScreen : MonoBehaviour
 
     void UpdateLoadingUI(float progress)
     {
-        progressBar.fillAmount = progress;
-        progressText.text = (progress * 100f).ToString("F2") + "%";
+        if (progressBar != null && progressText != null)
+        {
+            progressBar.fillAmount = progress;
+            progressText.text = (progress * 100f).ToString("F2") + "%";
+            Debug.Log(progressBar.fillAmount);
+        }
+        else
+        {
+            Debug.LogWarning("ProgressBar or ProgressText is not assigned.");
+        }
     }
 }
