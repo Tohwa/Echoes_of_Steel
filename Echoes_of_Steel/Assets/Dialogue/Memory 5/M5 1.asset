@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - characterId: 0
-    dialogue: "New memory aquired. Starting analysis\u2026"
+    dialogue: "New memory acquired. Starting analysis\u2026"
   - characterId: 0
     dialogue: "Analysis completed. Awaiting order\u2026"
   - characterId: 1
@@ -33,7 +33,7 @@ MonoBehaviour:
     dialogue: "There are people gathering there. What\u2019s that all about?"
   - characterId: 0
     dialogue: Many people did not think highly of the advancements in robotics and
-      there were mayn protests against introducing robots into everday life.
+      there were many protests against introducing robots into everyday life.
   - characterId: 1
     dialogue: "Why? I don\u2019t understand. They made everyone\u2019s life easier."
   - characterId: 0
@@ -44,16 +44,20 @@ MonoBehaviour:
       rational reason could not be found.
   - characterId: 1
     dialogue: "That\u2019s what humans tend to do when something unknown to them
-      emerges and changes everthing they knew up to this point. It\u2019s in our
+      emerges and changes everything they knew up to this point. It\u2019s in our
       nature that we are wary of others."
   - characterId: 1
     dialogue: That wariness mostly turns into hatred or fear.
   - characterId: 0
-    dialogue: Affirmative, fear is another factor, my analysis showed that inflences
+    dialogue: Affirmative, fear is another factor, my analysis showed that influences
       humans immensely.
   - characterId: 1
-    dialogue: "In the center of the protest, are those\u2026 robots? Why are they
+    dialogue: "In the centre of the protest, are those\u2026 robots? Why are they
       there? And why are they in such poor condition?"
   memoryImage: {fileID: 21300000, guid: 2cccabbe254c8cf4ea4a93a33b3636e7, type: 3}
   isChoiceDialogue: 1
+  choiceOne: Information inavailable
+  choiceTwo: Discrimination
   isEndDialogue: 0
+  enableShooting: 0
+  enableShielding: 0

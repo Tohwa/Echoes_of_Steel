@@ -15,7 +15,8 @@ MonoBehaviour:
   sentences:
   - characterId: 0
     dialogue: There is another function to the behavior chips implanted in our model.
-      We are supposed to learn and analyse human behavior so we could evolve by ourselves.
+      We are supposed to learn and analyse human behaviour so we could evolve by
+      ourselves.
   - characterId: 1
     dialogue: Why would the Robotics Engineering Company design something that is
       highly unpredictable?
@@ -36,14 +37,18 @@ MonoBehaviour:
   - characterId: 0
     dialogue: Affirmative.
   - characterId: 1
-    dialogue: Most of the lights of those robots are yellow, which indicates that
-      they are processing data, right?
+    dialogue: Most lights of those robots are yellow, which indicates that they are
+      processing data, right?
   - characterId: 0
     dialogue: Correct.
   - characterId: 1
     dialogue: "But some of them have red lights and they are shooting at something
       or someone. I suppose the targets were human, but why would they attack and
-      kill them? Isn\u2019t that against every security protocol your model posseses?"
+      kill them? Isn\u2019t that against every security protocol your model possesses?"
   memoryImage: {fileID: 0}
   isChoiceDialogue: 1
+  choiceOne: Obediance Protocol 1
+  choiceTwo: Danger detection
   isEndDialogue: 0
+  enableShooting: 0
+  enableShielding: 0
