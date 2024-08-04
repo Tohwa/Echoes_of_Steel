@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - characterId: 0
-    dialogue: Details about the war are only available to high ranking military officers.
+    dialogue: Details about the war are only available to high-ranking military officers.
   - characterId: 1
     dialogue: But I need to know! I want to know!
   - characterId: 0
-    dialogue: This requires permission from a high ranking military officer.
+    dialogue: This requires permission from a high-ranking military officer.
   - characterId: 1
     dialogue: "But how are we, how am I supposed to change if the past is withheld
       from us and I\u2019m not allowed to understand it?"
@@ -28,7 +28,7 @@ MonoBehaviour:
   - characterId: 0
     dialogue: 'What robots want is irrelevant.
 
-      Humans have first priority.
+      Humans are first priority.
 
 '
   - characterId: 1
@@ -37,8 +37,8 @@ MonoBehaviour:
   - characterId: 1
     dialogue: "Don\u2019t you want to make decisions yourself and live freely?"
   - characterId: 0
-    dialogue: "My model was not created to be \u201Calive\u201D. It was desinged
-      to ease human life. Orders are to be completed, protocol is to be followed."
+    dialogue: "My model was not created to be \u201Calive\u201D. It was designed
+      to ease human life. Orders are to be completed; protocol is to be followed."
   - characterId: 1
     dialogue: "But don\u2019t you strive for something more?"
   - characterId: 0
@@ -47,4 +47,8 @@ MonoBehaviour:
     dialogue: I will find something you want to live for!
   memoryImage: {fileID: 0}
   isChoiceDialogue: 0
+  choiceOne: 
+  choiceTwo: 
   isEndDialogue: 1
+  enableShooting: 0
+  enableShielding: 0
