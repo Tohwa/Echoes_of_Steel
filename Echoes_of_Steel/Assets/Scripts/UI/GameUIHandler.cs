@@ -19,14 +19,8 @@ public class GameUIHandler : MonoBehaviour
     [SerializeField] private Animator journalAnim;
     [SerializeField] private Animator popUpAnimator;
 
-    private GameObject test;
-
     private void Start()
     {
-        //for (int i = 0; i < buttons.Length - 1; i++)
-        //{
-        //    buttons[i].onClick.AddListener(delegate { OpenMemory(i); });
-        //}
 
         buttons[0].onClick.AddListener(delegate { OpenMemory(0); });
         buttons[1].onClick.AddListener(delegate { OpenMemory(1); });
