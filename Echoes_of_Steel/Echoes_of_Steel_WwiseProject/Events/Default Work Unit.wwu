@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{EEDB7406-084E-48BB-84F3-935F2C282883}" SchemaVersion="119">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{EEDB7406-084E-48BB-84F3-935F2C282883}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_Music" ID="{D4339C96-EFA1-4156-998C-CE5274756199}">
+					<ChildrenList>
+						<Action Name="" ID="{2A19CD73-A374-4D75-8B17-E4312424A5B1}" ShortID="377323160">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Music" ID="{3A3B308C-98AF-44C2-B88A-498E46CA2F14}" WorkUnitID="{04583764-C90B-47F0-8A80-4B2B1083ED3E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Robo_Step" ID="{4BDA0B26-5BE4-46E9-9494-5385DA2D7477}">
+					<ChildrenList>
+						<Action Name="" ID="{463DCF69-439E-4FBB-84F6-BCDFA179F011}" ShortID="710364512">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Robo Step" ID="{2F13FEFC-7D3C-4063-BA8E-518A16062B5E}" WorkUnitID="{B5983D0B-6815-49FA-A4C3-323AC1F5C953}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Robo_Jump" ID="{A7C9E40A-C0FB-4407-9CFC-3E2D5C577F16}">
+					<ChildrenList>
+						<Action Name="" ID="{F71FDD1A-7934-4857-9123-6C3D472CB1D7}" ShortID="457297027">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Robo Jump" ID="{F0A4E02C-1B21-4645-9AF8-D6BAEF635F16}" WorkUnitID="{B5983D0B-6815-49FA-A4C3-323AC1F5C953}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Robo_Hover" ID="{56259D1A-E6E6-4181-9D72-753AD668332B}">
+					<ChildrenList>
+						<Action Name="" ID="{39EC1DBD-22E9-41B3-B134-93D70102362B}" ShortID="763369087">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Robo Hover" ID="{70D062B3-249C-458E-AA18-53DA6DC28D4B}" WorkUnitID="{B5983D0B-6815-49FA-A4C3-323AC1F5C953}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>
