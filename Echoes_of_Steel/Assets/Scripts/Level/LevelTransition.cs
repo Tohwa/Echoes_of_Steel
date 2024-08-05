@@ -7,6 +7,11 @@ public class LevelTransition : MonoBehaviour
 {
     [SerializeField] private LoadingScreen loadScreen;
 
+    private void Awake()
+    {
+        
+    }
+
     private void Start()
     {
         loadScreen = GameObject.FindObjectOfType<LoadingScreen>();
