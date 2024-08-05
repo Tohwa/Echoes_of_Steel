@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{138F5067-F901-426E-9481-7F6A5B34BAF6}" SchemaVersion="119">
 	<States>
-		<WorkUnit Name="Default Work Unit" ID="{138F5067-F901-426E-9481-7F6A5B34BAF6}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{138F5067-F901-426E-9481-7F6A5B34BAF6}" PersistMode="Standalone">
+			<ChildrenList>
+				<StateGroup Name="Level1" ID="{4A325D9E-77BC-49D2-9C5E-7B49F284C531}">
+					<ChildrenList>
+						<State Name="None" ID="{64613259-0F9C-42D1-A4B1-84D76B732787}"/>
+						<State Name="Yes" ID="{B8C4DFB3-B7A0-4697-9E02-9FF64BC556F3}"/>
+						<State Name="No" ID="{577206BF-686D-49FD-864C-6A34E04BFBF6}"/>
+					</ChildrenList>
+				</StateGroup>
+				<StateGroup Name="Level2" ID="{5B12EAFC-9D2F-4AB2-94CF-C6A0C41313A6}">
+					<ChildrenList>
+						<State Name="None" ID="{23AE470A-C1F1-4B80-AC0E-71935B2D5399}"/>
+						<State Name="Yes" ID="{5C08B602-0505-481F-8B68-30B79B31DC6B}"/>
+						<State Name="No" ID="{DD6F2F23-0617-4F6A-ADB1-35E5D2FEB5A9}"/>
+					</ChildrenList>
+				</StateGroup>
+				<StateGroup Name="Level3" ID="{CC9FB904-914B-42A4-9F9A-83328422C751}">
+					<ChildrenList>
+						<State Name="None" ID="{DB87CDA6-3920-490D-AC75-30DCB09701BB}"/>
+						<State Name="Yes" ID="{1DA6A79E-FE7E-4A52-B505-E8482B27A35B}"/>
+						<State Name="No" ID="{F3E0B20C-C17A-40C9-BD81-B79B425938C2}"/>
+					</ChildrenList>
+				</StateGroup>
+				<StateGroup Name="Battle" ID="{4F976276-6D58-485A-A2BB-E8E6246238A5}">
+					<ChildrenList>
+						<State Name="None" ID="{B4863E71-C227-4208-903E-5F868570D090}"/>
+						<State Name="Yes" ID="{AED64D1E-7DCD-4A1C-9BF8-51137782AD0F}"/>
+						<State Name="No" ID="{62B3589D-C9B8-4A3D-AF30-7DC795301D35}"/>
+					</ChildrenList>
+				</StateGroup>
+			</ChildrenList>
+		</WorkUnit>
 	</States>
 </WwiseDocument>
