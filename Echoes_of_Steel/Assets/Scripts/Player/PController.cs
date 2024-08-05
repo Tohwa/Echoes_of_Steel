@@ -62,6 +62,16 @@ public class PController : MonoBehaviour
     public float hoverFallSpeed = 2f;
     private bool isHovering;
 
+    [Header("Wwise Events")]
+    public AK.Wwise.Event robotStep;
+    public AK.Wwise.Event robotJump;
+    public AK.Wwise.Event robotHover;
+    public float timeBetweenSteps;
+    private float lastFootstepTime = 0;
+    private bool roboStepIsPlaying = false;
+    private bool roboHoverIsPlaying = false;
+
+
     [Header("Interactable Variables")]
     private IInteractable interactable;
 
@@ -69,7 +79,10 @@ public class PController : MonoBehaviour
     public PauseMenuHandler pauseMenuHandler;
 
     #endregion
-
+    private void Awake()
+    {
+        lastFootstepTime = Time.time;
+    }
     private void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -199,6 +212,19 @@ public class PController : MonoBehaviour
         {
             currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, acceleration * Time.deltaTime);
             animator.SetBool("IsWalking", true);
+            if (!roboStepIsPlaying && isGrounded)
+            {
+                robotStep.Post(gameObject);
+                lastFootstepTime = Time.time;
+                roboStepIsPlaying = true;
+            }
+            else
+            {
+                if (Time.time - lastFootstepTime > timeBetweenSteps / moveSpeed)
+                {
+                    roboStepIsPlaying = false;
+                }
+            }
         }
         else
         {
@@ -265,6 +291,8 @@ public class PController : MonoBehaviour
             isJumping = false; // Reset jumping flag after the jump is performed
             applyManualGravity = true; // Start applying manual gravity after the jump
             animator.SetBool("IsJumping", true);
+
+            robotJump.Post(gameObject);
         }
     }
 
@@ -306,6 +334,8 @@ public class PController : MonoBehaviour
     {
         //Debug.Log("Hovering stopped");
         isHovering = false;
+        robotHover.Stop(gameObject);
+        roboHoverIsPlaying = false;
     }
     private void Hover()
     {
@@ -314,6 +344,11 @@ public class PController : MonoBehaviour
             Vector3 hoverVelocity = rb.velocity;
             hoverVelocity.y = Mathf.Max(hoverVelocity.y, -hoverFallSpeed);
             rb.velocity = hoverVelocity;
+            if (!roboHoverIsPlaying)
+            {
+                robotHover.Post(gameObject);
+                roboHoverIsPlaying = true;
+            }
         }
     }
 
