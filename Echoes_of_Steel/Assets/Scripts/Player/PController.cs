@@ -50,19 +50,10 @@ public class PController : MonoBehaviour
     public float manualGravity = -20f;
     private bool applyManualGravity;
 
-    [Header("Dash Variables")]
-    public float dashSpeed = 20f;
-    public float dashDuration = 0.2f;
-    public float dashCooldown = 1f;
-    private float dashTime;
-    private bool isDashing;
-    private float lastDashTime;
-
     [Header("Weapon Variables")]
     public float weaponDamage;
     public float fireCooldown = 0.5f;
     private float lastFireTime;
-    public bool automatic;
     public GameObjectPool bulletPool;
     public Transform bulletSpawn;
     private Transform pCamera;
@@ -110,15 +101,7 @@ public class PController : MonoBehaviour
     {
         if (!DialogueManager.isActive && !GameManager.Instance.gamePaused)
         {
-            if (isDashing)
-            {
-                //Dash();
-                return;
-            }
-            else
-            {
-                Move();
-            }
+            Move();
 
             if (isJumping)
             {
@@ -137,7 +120,6 @@ public class PController : MonoBehaviour
     {
         movement.Enable();
         jump.Enable();
-        dash.Enable();
         aim.Enable();
         shoot.Enable();
         shield.Enable();
@@ -149,7 +131,6 @@ public class PController : MonoBehaviour
         jump.performed += OnJumpInput;
         movement.performed += OnMovementInput;
         movement.canceled += OnMovementInput;
-        //dash.performed += OnDashInput;
         hover.performed += OnHoverHold;
         hover.canceled += OnHoverRelease;
 
@@ -169,7 +150,6 @@ public class PController : MonoBehaviour
     {
         movement.Disable();
         jump.Disable();
-        dash.Disable();
         aim.Disable();
         shoot.Disable();
         shield.Disable();
@@ -181,7 +161,6 @@ public class PController : MonoBehaviour
         movement.performed -= OnMovementInput;
         movement.canceled -= OnMovementInput;
         jump.performed -= OnJumpInput;
-        dash.performed -= OnDashInput;
 
         aim.performed -= OnAimHold;
         aim.canceled -= OnAimRelease;
@@ -289,44 +268,10 @@ public class PController : MonoBehaviour
         }
     }
 
-    //private void OnDashInput(InputAction.CallbackContext context)
-    //{
-    //    if (Time.time >= lastDashTime + dashCooldown)
-    //    {
-    //        isDashing = true;
-    //        dashTime = Time.time + dashDuration;
-    //        lastDashTime = Time.time;
-    //    }
-    //}
-    //private void Dash()
-    //{
-    //    if (Time.time < dashTime)
-    //    {
-    //        Vector3 forward = mainCamera.transform.forward;
-    //        Vector3 right = mainCamera.transform.right;
-
-    //        forward.y = 0;
-    //        right.y = 0;
-
-    //        forward.Normalize();
-    //        right.Normalize();
-
-    //        Vector3 dashDirection = forward * moveInput.y + right * moveInput.x;
-    //        dashDirection.Normalize();
-
-    //        rb.MovePosition(rb.position + dashDirection * dashSpeed * Time.fixedDeltaTime);
-    //    }
-    //    else
-    //    {
-    //        isDashing = false;
-    //    }
-    //}
-
     private void OnAimHold(InputAction.CallbackContext context)
     {
         animator.SetBool("IsAiming", true);
     }
-
     private void OnAimRelease(InputAction.CallbackContext context)
     {
         animator.SetBool("IsAiming", false);
@@ -351,8 +296,6 @@ public class PController : MonoBehaviour
         animator.SetBool("IsShooting", false);
 
     }
-
-
 
     private void OnHoverHold(InputAction.CallbackContext context)
     {
@@ -379,18 +322,17 @@ public class PController : MonoBehaviour
 
         if (interactable != null && !DialogueManager.isActive)
         {
-            
+
 
             animator.SetBool("IsInteracting", true);
-            
+
             interactable.Interact();
             interactable = null;
-            
+
             Debug.Log("Interacted with object");
         }
 
     }
-
     private void OnInteractCancel(InputAction.CallbackContext context)
     {
         animator.SetBool("IsInteracting", false);
@@ -425,14 +367,12 @@ public class PController : MonoBehaviour
     {
         if (!DialogueManager.isActive)
         {
-            if (automatic)
+            if (shoot.ReadValue<float>() > 0.1f && Time.time >= lastFireTime + fireCooldown)
             {
-                if (shoot.ReadValue<float>() > 0.1f && Time.time >= lastFireTime + fireCooldown)
-                {
-                    lastFireTime = Time.time;
-                    Shoot();
-                }
+                lastFireTime = Time.time;
+                Shoot();
             }
+
             else if (shoot.triggered && Time.time >= lastFireTime + fireCooldown)
             {
                 lastFireTime = Time.time;
@@ -448,8 +388,6 @@ public class PController : MonoBehaviour
 
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
         bulletComponent.Initialize(weaponDamage, bulletSpawn.forward);
-
-        
     }
 
     public bool GroundCheck()
@@ -468,7 +406,7 @@ public class PController : MonoBehaviour
 
             applyManualGravity = false; // Stop applying manual gravity when grounded
         }
-        else if(Physics.Raycast(rayOrigin, Vector3.down, rayLengthLanding, Ground))
+        else if (Physics.Raycast(rayOrigin, Vector3.down, rayLengthLanding, Ground))
         {
             animator.SetBool("IsLanding", true);
         }

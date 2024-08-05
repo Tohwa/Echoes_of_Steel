@@ -6,11 +6,9 @@ public class Bullet : MonoBehaviour
     public float lifeTime = 5f;
     private float weaponDamage;
     private Rigidbody rb;
-    private TrailRenderer tr;
 
     private void OnEnable()
     {
-        tr = GetComponent<TrailRenderer>();
         rb = GetComponent<Rigidbody>();
         Invoke("Deactivate", lifeTime);
     }
@@ -24,7 +22,6 @@ public class Bullet : MonoBehaviour
     void Deactivate()
     {
         gameObject.SetActive(false);
-        if (tr != null) tr.Clear();
     }
 
     private void OnDisable()
