@@ -7,6 +7,7 @@ public class MemoryInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private InteractionStatus interactionStatus;
     [SerializeField] private DialogueTrigger dialogueTrigger;
+    [SerializeField] private GameObject interactMessage;
     public void Interact()
     {
         interactionStatus.AddInteractedObject(gameObject.name);
@@ -14,4 +15,11 @@ public class MemoryInteractable : MonoBehaviour, IInteractable
         dialogueTrigger.TriggerDialogue();
         gameObject.SetActive(false);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        interactMessage.SetActive(true);
+    }
+
+    private void OnTriggerExit(Collider other) { interactMessage.SetActive(false); }
 }
