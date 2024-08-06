@@ -56,7 +56,6 @@ public class PController : MonoBehaviour
     private float lastFireTime;
     public GameObjectPool bulletPool;
     public Transform bulletSpawn;
-    private Transform pCamera;
 
     [Header("Hover Variables")]
     public float hoverFallSpeed = 2f;
@@ -89,7 +88,6 @@ public class PController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         mainCamera = Camera.main;
-        pCamera = Camera.main.transform;
         pauseMenuHandler = FindObjectOfType<PauseMenuHandler>();
     }
     private void Update()
@@ -472,26 +470,5 @@ public class PController : MonoBehaviour
         rayOrigin.y = capsuleCollider.bounds.min.y + 0.1f; // Start the ray from just above the bottom of the collider
         float rayLength = 0.2f;
         Gizmos.DrawLine(rayOrigin, rayOrigin + Vector3.down * rayLength);
-
-        if (pCamera == null)
-        {
-            pCamera = Camera.main.transform;
-        }
-
-        Gizmos.color = Color.yellow;
-        Vector3 cameraRayOrigin = pCamera.position;
-        Vector3 cameraRayDirection = pCamera.forward;
-        Gizmos.DrawLine(cameraRayOrigin, cameraRayOrigin + cameraRayDirection * 10);
-
-        if (Physics.Raycast(cameraRayOrigin, pCamera.forward, out RaycastHit hitInfo))
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(hitInfo.point, 0.1f);
-        }
-        else
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(cameraRayOrigin + cameraRayDirection * 10, 0.1f);
-        }
     }
 }
