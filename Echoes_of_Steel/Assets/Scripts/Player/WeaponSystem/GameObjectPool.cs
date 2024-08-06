@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,39 +13,39 @@ public class GameObjectPool : ScriptableObject
     {
         PooledObject currentObject;
 
-        //create a new object if none are available in the pool
+        // Create a new object if none are available in the pool
         if (objectsInPool.Count <= 0)
         {
             GameObject newGO = Instantiate(prefab);
             currentObject = newGO.AddComponent<PooledObject>();
             currentObject.pool = this;
         }
-        //grab oldest object of the list
         else
         {
+            // Grab the oldest object in the pool
             currentObject = objectsInPool[0];
-            objectsInPool.Remove(currentObject);
+            objectsInPool.RemoveAt(0);
         }
 
-        //return object with new pos and rot data
         objectsInUse.Add(currentObject);
 
+        // Set the position and rotation of the object
+        currentObject.transform.position = position;
+        currentObject.transform.rotation = rotation;
         currentObject.gameObject.SetActive(true);
-        currentObject.gameObject.transform.position = position;
-        currentObject.gameObject.transform.rotation = rotation;
 
         return currentObject.gameObject;
     }
 
     public void ReturnToPool(PooledObject objectToReturn)
     {
-        //if object is already in pool return
+        // If the object is already in the pool, return
         if (objectsInPool.Contains(objectToReturn))
         {
             return;
         }
 
-        //if not in pool, disable it and return it to the pool
+        // If not in the pool, disable it and return it to the pool
         objectToReturn.gameObject.SetActive(false);
         objectsInUse.Remove(objectToReturn);
         objectsInPool.Add(objectToReturn);
