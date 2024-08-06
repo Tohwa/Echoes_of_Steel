@@ -22,7 +22,7 @@ public class OptionsMenuUIHandler : MonoBehaviour
 
     private Resolution[] resolutions;
     private List<Resolution> compatibleResolutions = new List<Resolution>();
-    private string[] qualities = {"Very Low", "Low", "Medium", "High", "Very High", "Ultra"};
+    private string[] qualities = { "Very Low", "Low", "Medium", "High", "Very High", "Ultra" };
     //private bool resolutionSet;
     //private int resolutionIndex;
     //private int qualityIndex = 0;
@@ -50,15 +50,17 @@ public class OptionsMenuUIHandler : MonoBehaviour
         for (int i = 0; i < resolutions.Length; i++)
         {
             string resOption = resolutions[i].width + "x" + resolutions[i].height;
-            if(resOption == "1280x720" || resOption == "1600x900" || resOption == "1920x1080")
+            if (resOption == "1280x720" || resOption == "1600x900" || resOption == "1920x1080")
             {
-                compatibleResolutions.Add(resolutions[i]);
-                resOptions.Add(resOption);
+                if (!resOptions.Contains(resOption))
+                {
+                    compatibleResolutions.Add(resolutions[i]);
+                    resOptions.Add(resOption);
+
+                }
             }
-
-
-            
         }
+
         for (int i = 0; i < compatibleResolutions.Count; i++)
         {
             if (compatibleResolutions[i].width == Screen.currentResolution.width && compatibleResolutions[i].height == Screen.currentResolution.height)
@@ -119,11 +121,11 @@ public class OptionsMenuUIHandler : MonoBehaviour
 
     public void ResValueUp()
     {
-        if(resolutionIndex < compatibleResolutions.Count - 1)
+        if (resolutionIndex < compatibleResolutions.Count - 1)
         {
 
-        resolutionIndex++;
-        resText.text = resOptions[resolutionIndex];
+            resolutionIndex++;
+            resText.text = resOptions[resolutionIndex];
         }
     }
 
@@ -138,7 +140,7 @@ public class OptionsMenuUIHandler : MonoBehaviour
 
     public void QualityValueUp()
     {
-        if(qualityIndex < 6)
+        if (qualityIndex < 6)
         {
             qualityIndex++;
             qualityText.text = qualities[qualityIndex];
@@ -147,7 +149,7 @@ public class OptionsMenuUIHandler : MonoBehaviour
 
     public void QualityValueDown()
     {
-        if(qualityIndex > 0)
+        if (qualityIndex > 0)
         {
             qualityIndex--;
             qualityText.text = qualities[qualityIndex];
@@ -164,7 +166,9 @@ public class OptionsMenuUIHandler : MonoBehaviour
     {
         resText.text = resOptions[resolutionIndex];
         qualityText.text = qualities[qualityIndex];
+        SetQuality(qualityIndex);
         fullscreenToggle.isOn = toggleFullscreen;
+        ToggleFullscreen(toggleFullscreen);
         volumeSlider[0].value = masterVolume;
         volumeSlider[1].value = musicVolume;
         volumeSlider[2].value = SFXVolume;
