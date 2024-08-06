@@ -982,6 +982,15 @@ MonoBehaviour:
       m_Action: Dash
       m_Flags: 0
     m_Flags: 0
+  aim:
+    m_Name: Aim
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4b9ef0f4-0ca3-4922-b5e0-0305242b61bf
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   shoot:
     m_Name: Shoot
     m_Type: 0
@@ -998,6 +1007,15 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Shoot
       m_Flags: 0
+    m_Flags: 0
+  shield:
+    m_Name: Shield
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c448edb3-1a81-4f88-b377-d4fe84c56223
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
     m_Flags: 0
   hover:
     m_Name: Hover
@@ -1078,6 +1096,7 @@ MonoBehaviour:
   acceleration: 10
   deceleration: 10
   jumpForce: 15
+  canDoubleJump: 0
   jumpCooldown: 0.1
   coyoteTime: 0.1
   jumpBufferTime: 0.1
