@@ -6,61 +6,66 @@ using UnityEngine.Playables;
 
 public class TimeLineDirector : MonoBehaviour
 {
-    [SerializeField] private GameObject m_Player;
-    [SerializeField] private GameObject m_Camera;
+    [SerializeField] private GameObject playerObject;
+    [SerializeField] private GameObject cameraObject;
 
-    [SerializeField] private GameObject m_goodEnding;
-    [SerializeField] private GameObject m_badEnding;
+    [SerializeField] private GameObject goodEnding;
+    [SerializeField] private GameObject badEnding;
+    [SerializeField] private GameObject hologramObject;
 
-    [SerializeField] private PlayableDirector m_goodDirector;
-    [SerializeField] private PlayableDirector m_badDirector;
+    [SerializeField] private PlayableDirector goodDirector;
+    [SerializeField] private PlayableDirector badDirector;
 
     private void CheckCorruptionMeter()
     {
-        m_Player = GameObject.FindGameObjectWithTag("Player");
-        m_Camera = FindObjectOfType<CameraController>().gameObject;
+        playerObject = GameObject.FindGameObjectWithTag("Player");
+        cameraObject = FindObjectOfType<CameraController>().gameObject;
 
-        if (GameManager.Instance.corruptionMeter >= 0 && GameManager.Instance.corruptionMeter < 15 && m_goodDirector.state != PlayState.Playing)
+        if (GameManager.Instance.corruptionMeter >= 0 && GameManager.Instance.corruptionMeter < 15 && goodDirector.state != PlayState.Playing)
         {
-            m_Player.SetActive(false);
-            m_Camera.SetActive(false);
+            playerObject.SetActive(false);
+            cameraObject.SetActive(false);
+            hologramObject.SetActive(false);
 
-            m_goodEnding.gameObject.transform.parent.gameObject.SetActive(true);
+            goodEnding.gameObject.transform.parent.gameObject.SetActive(true);
 
-            PlayTimeLine(m_goodDirector);
+            PlayTimeLine(goodDirector);
 
             SteamUserStats.SetAchievement("ACH_WIN_ONE_GAME");
         }
-        else if (GameManager.Instance.corruptionMeter >= 15 && GameManager.Instance.corruptionMeter < 30 && m_goodDirector.state != PlayState.Playing)
+        else if (GameManager.Instance.corruptionMeter >= 15 && GameManager.Instance.corruptionMeter < 30 && goodDirector.state != PlayState.Playing)
         {
-            m_Player.SetActive(false);
-            m_Camera.SetActive(false);
+            playerObject.SetActive(false);
+            cameraObject.SetActive(false);
+            hologramObject.SetActive(false);
 
-            m_goodEnding.gameObject.transform.parent.gameObject.SetActive(true);
+            goodEnding.gameObject.transform.parent.gameObject.SetActive(true);
 
-            PlayTimeLine(m_goodDirector);
+            PlayTimeLine(goodDirector);
 
             SteamUserStats.SetAchievement("ACH_WIN_100_GAMES");
         }
-        else if (GameManager.Instance.corruptionMeter >= 30 && GameManager.Instance.corruptionMeter < 45 && m_badDirector.state != PlayState.Playing)
+        else if (GameManager.Instance.corruptionMeter >= 30 && GameManager.Instance.corruptionMeter < 45 && badDirector.state != PlayState.Playing)
         {
-            m_Player.SetActive(false);
-            m_Camera.SetActive(false);
+            playerObject.SetActive(false);
+            cameraObject.SetActive(false);
+            hologramObject.SetActive(false);
 
-            m_badEnding.gameObject.transform.parent.gameObject.SetActive(true);
+            badEnding.gameObject.transform.parent.gameObject.SetActive(true);
 
-            PlayTimeLine(m_badDirector);
+            PlayTimeLine(badDirector);
 
             SteamUserStats.SetAchievement("ACH_TRAVEL_FAR_SINGLE");
         }
-        else if (GameManager.Instance.corruptionMeter >= 45 && m_badDirector.state != PlayState.Playing)
+        else if (GameManager.Instance.corruptionMeter >= 45 && badDirector.state != PlayState.Playing)
         {
-            m_Player.SetActive(false);
-            m_Camera.SetActive(false);
+            playerObject.SetActive(false);
+            cameraObject.SetActive(false);
+            hologramObject.SetActive(false);
 
-            m_badEnding.gameObject.transform.parent.gameObject.SetActive(true);
+            badEnding.gameObject.transform.parent.gameObject.SetActive(true);
 
-            PlayTimeLine(m_badDirector);
+            PlayTimeLine(badDirector);
 
             SteamUserStats.SetAchievement("ACH_TRAVEL_FAR_ACCUM");
         }
