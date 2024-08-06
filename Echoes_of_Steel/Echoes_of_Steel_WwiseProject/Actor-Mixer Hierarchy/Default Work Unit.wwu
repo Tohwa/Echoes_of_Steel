@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{B5983D0B-6815-49FA-A4C3-323AC1F5C953}" SchemaVersion="119">
+	<AudioObjects>
+		<WorkUnit Name="Default Work Unit" ID="{B5983D0B-6815-49FA-A4C3-323AC1F5C953}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="Robo Step" ID="{2F13FEFC-7D3C-4063-BA8E-518A16062B5E}" ShortID="303062316">
+					<PropertyList>
+						<Property Name="Pitch" Type="int32">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{B94EA1B0-FFA7-46E0-90AC-B32F9969C24D}">
+										<PropertyList>
+											<Property Name="Enabled" Type="bool" Value="True"/>
+											<Property Name="Max" Type="Real64" Value="150"/>
+											<Property Name="Min" Type="Real64" Value="-150"/>
+										</PropertyList>
+									</Modifier>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4ADEB179-D2A5-4745-AEA3-4B4AAE53F876}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{A46F08A0-35BD-463C-8859-B9D0BA4FF2E6}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Robo Step Bounce" ID="{17957373-8066-4A36-BC17-00A61062C51D}">
+							<Language>SFX</Language>
+							<AudioFile>Robo Step Bounce.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="948792964"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Robo Step Bounce" ID="{17957373-8066-4A36-BC17-00A61062C51D}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="Robo Jump" ID="{F0A4E02C-1B21-4645-9AF8-D6BAEF635F16}" ShortID="826645129">
+					<PropertyList>
+						<Property Name="Pitch" Type="int32">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{CB8037A2-50EF-46D5-8CAB-231146F62FFB}">
+										<PropertyList>
+											<Property Name="Enabled" Type="bool" Value="True"/>
+											<Property Name="Max" Type="Real64" Value="100"/>
+											<Property Name="Min" Type="Real64" Value="-100"/>
+										</PropertyList>
+									</Modifier>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4ADEB179-D2A5-4745-AEA3-4B4AAE53F876}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{A46F08A0-35BD-463C-8859-B9D0BA4FF2E6}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Robo Jump 1" ID="{4F99B0E0-6E60-43EA-9411-4433F6901828}">
+							<PropertyList>
+								<Property Name="FadeOutDuration" Type="Real64" Value="0.0376881134133042"/>
+								<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+								<Property Name="TrimEnd" Type="Real64" Value="0.563925845147219"/>
+							</PropertyList>
+							<Language>SFX</Language>
+							<AudioFile>Robo Jump 1.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="791378521"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Robo Jump 1" ID="{4F99B0E0-6E60-43EA-9411-4433F6901828}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="Robo Hover" ID="{70D062B3-249C-458E-AA18-53DA6DC28D4B}" ShortID="934433851">
+					<PropertyList>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>9</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4ADEB179-D2A5-4745-AEA3-4B4AAE53F876}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{A46F08A0-35BD-463C-8859-B9D0BA4FF2E6}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Robo hover 1" ID="{80DFC0B4-954A-45CB-89B7-B6D028A14C88}">
+							<PropertyList>
+								<Property Name="FadeInDuration" Type="Real64" Value="0.257581970192657"/>
+								<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+								<Property Name="TrimBegin" Type="Real64" Value="0.386372955288986"/>
+							</PropertyList>
+							<Language>SFX</Language>
+							<AudioFile>Robo hover 1.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="449807354"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Robo hover 1" ID="{80DFC0B4-954A-45CB-89B7-B6D028A14C88}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>
