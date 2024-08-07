@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class GameUIHandler : MonoBehaviour
 {
     [SerializeField] private InteractionStatus interactionStatus;
+    [SerializeField] private MemoryAsset memoryAsset;
     [SerializeField] private GameObject[] memories;
     [SerializeField] private TextMeshProUGUI memoryText;
     [SerializeField] private Button[] buttons;
@@ -100,8 +101,8 @@ public class GameUIHandler : MonoBehaviour
 
     public void OpenMemory(int _value)
     {
-        memoryImage.sprite = memories[_value].transform.GetChild(1).GetComponentInChildren<Image>().sprite;
-        memoryText.text = memories[_value].GetComponentInChildren<TextMeshProUGUI>().text;
+        memoryImage.sprite = memoryAsset.memorySprites[_value];
+        memoryText.text = memoryAsset.infoTexts[_value];
         journalAnim.SetBool("IsMemoryOpen", true);
         panel.SetActive(true);
     }
