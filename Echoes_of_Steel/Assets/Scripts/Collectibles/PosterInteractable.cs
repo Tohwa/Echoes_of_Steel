@@ -39,8 +39,8 @@ public class PosterInteractable : MonoBehaviour, IInteractable
         
         while (elapsedTime < zoomDuration)
         {
-            m_camera.GetComponent<CameraController>().currentDist = Mathf.Lerp(m_cameraOriginalDist, m_camera.GetComponent<CameraController>().cameraMinDist, elapsedTime / zoomDuration);
-            elapsedTime += Time.deltaTime;
+            m_camera.GetComponent<CameraController>().currentDist = Mathf.Lerp(m_cameraOriginalDist, m_camera.GetComponent<CameraController>().cameraMinDist, elapsedTime / zoomDuration * 3);
+            elapsedTime += Time.deltaTime * 2;
             yield return null;
         }
 
@@ -79,6 +79,15 @@ public class PosterInteractable : MonoBehaviour, IInteractable
                 m_holoObj.SetActive(true);
                 m_camera.GetComponent<CameraController>().enabled = true;
             }
+            yield return null;
+        }
+
+        elapsedTime = 0;
+
+        while (elapsedTime < zoomDuration)
+        {
+            m_camera.GetComponent<CameraController>().currentDist = Mathf.Lerp(m_camera.GetComponent<CameraController>().currentDist, m_cameraOriginalDist, elapsedTime / zoomDuration);
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
     }
