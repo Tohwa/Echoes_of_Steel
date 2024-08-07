@@ -13,13 +13,16 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Header("Integer Variables")]
+    public int consciousMeter = 0;
     public int corruptionMeter = 0;
+    public int consciousThreshold = 100;
+    public int corruptionThreshold = 100;
 
-    [Header("boolean Variables")]
-    public bool endingOne = false;
-    public bool endingTwo = false;
-    public bool endingThree = false;
-    public bool endingFour = false;
+    //[Header("boolean Variables")]
+    //public bool endingOne = false;
+    //public bool endingTwo = false;
+    //public bool endingThree = false;
+    //public bool endingFour = false;
     public bool gamePaused = false;
     #endregion
 

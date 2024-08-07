@@ -13,22 +13,10 @@ MonoBehaviour:
   m_Name: DialogueIntro
   m_EditorClassIdentifier: 
   sentences:
-  - characterId: 0
-    dialogue: Facial recognition successful. Setting up new administrator
-  - characterId: 0
-    dialogue: "Primary systems \u2013 functional. Weapon system \u2013 ERROR, PROTOCOL
-      NOT FOUND. Scanner \u2013 functional. Electromagnetic field \u2013 stable.
-      Memory storage \u2013 CORRUPTED, NO MEMORY FOUND. Searching for administrator"
-  - characterId: 0
-    dialogue: Administrator found. Initiating Safety Protocol
-  - characterId: 1
-    dialogue: Do you want me to climb that?
-  - characterId: 0
-    dialogue: Affirmitive.
   - characterId: 1
     dialogue: What should I call you?
   - characterId: 0
-    dialogue: "Searching name data storage \u2013 ERROR storage is empty.\nCannot
+    dialogue: "Searching name data storage \u2013 ERROR storage is empty.\r\nCannot
       comply with question.\r\n"
   - characterId: 1
     dialogue: What about ROBOT? That sounds nice.
@@ -38,8 +26,10 @@ MonoBehaviour:
     dialogue: ROBOT, maybe you can help me find other people.
   - characterId: 0
     dialogue: 'New order received: Find other human life.'
-  characters:
-  - name: Robot
-    sprite: {fileID: 21300000, guid: 54f099ae23f9a684ba8f0c8609f80a93, type: 3}
-  - name: Child
-    sprite: {fileID: 21300000, guid: c89e4cf21762ce04eb1615fc922ca16b, type: 3}
+  memoryImage: {fileID: 0}
+  isChoiceDialogue: 0
+  choiceOne: 
+  choiceTwo: 
+  isEndDialogue: 0
+  enableShooting: 0
+  enableShielding: 0

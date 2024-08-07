@@ -9,6 +9,7 @@ public class CutscenesHandler : MonoBehaviour
 {
     [SerializeField] private PlayableDirector playableDirector;
     [SerializeField] private LoadingScreen loadScreen;
+    [SerializeField] private DialogueTrigger dialogueTrigger;
     void Start()
     {
         if (playableDirector == null)
@@ -54,6 +55,8 @@ public class CutscenesHandler : MonoBehaviour
                 GameObject.FindGameObjectWithTag("Player").gameObject.transform.position = new Vector3(223.01f, -85.18f, 1293.9f);
 
                 gameObject.transform.parent.gameObject.SetActive(false);
+
+                dialogueTrigger.TriggerDialogue();
             }
             else if (scene.buildIndex == 3)
             {
