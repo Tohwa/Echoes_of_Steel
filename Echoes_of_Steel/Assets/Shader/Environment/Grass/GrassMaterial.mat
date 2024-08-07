@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material
+  m_Name: GrassMaterial
   m_Shader: {fileID: -6465566751694194690, guid: 780d7a4a71d07af4186db93e873d4f17, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -61,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e647d4e2dba6e1a4ebc7679d64c7f7c4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3c667607c36ce9342b3ba428b8310a08, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -124,14 +124,14 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HeightBlend: 1
+    - _HeightBlend: 0.1
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0
+    - _Smoothness: 0.1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -140,22 +140,22 @@ Material:
     - _TerrainOffset: 0
     - _TerrainSize: 100
     - _USETERRAINCOLOR: 0
-    - _WindHeight: 0.5
-    - _WindIntensity: 0.2
+    - _WindHeight: 0.1
+    - _WindIntensity: 1
     - _WindNoiseSpeed: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BottomColor: {r: 0.10893556, g: 0.4528302, b: 0.16053471, a: 0}
+    - _BottomColor: {r: 0, g: 0.46226418, b: 0.019209133, a: 0}
     - _Color: {r: 0.13563535, g: 0.7075472, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FarColor: {r: 0.19302686, g: 0.5377358, b: 0.15472585, a: 0}
-    - _NearColor: {r: 0.2833514, g: 0.7264151, b: 0.2706924, a: 0}
-    - _NearFarRange: {r: 3, g: 18, b: 0, a: 0}
+    - _FarColor: {r: 0.11974903, g: 0.6509434, b: 0.19258007, a: 0}
+    - _NearColor: {r: 0.014017441, g: 0.5943396, b: 0.05548035, a: 0}
+    - _NearFarRange: {r: 10, g: 30, b: 0, a: 0}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _WindNoiseContrast: {r: 0, g: 1, b: 0, a: 0}
+    - _WindNoiseContrast: {r: 0, g: 2, b: 0, a: 0}
     - _WindNoiseScale: {r: 40, g: 100, b: 0, a: 0}
     - _WindSpeed: {r: 0.1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
