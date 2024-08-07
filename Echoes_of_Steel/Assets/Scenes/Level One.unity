@@ -704,6 +704,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Poster 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3798865412307990239, guid: c542b6bc8d2e51c449c9ae93835326ff, type: 3}
+      propertyPath: m_holoObj
+      value: 
+      objectReference: {fileID: 968750666}
+    - target: {fileID: 3798865412307990239, guid: c542b6bc8d2e51c449c9ae93835326ff, type: 3}
+      propertyPath: m_cameraTarget
+      value: 
+      objectReference: {fileID: 1870729818}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1429,6 +1437,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &968750666 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4941247836684588052, guid: c542b6bc8d2e51c449c9ae93835326ff, type: 3}
+  m_PrefabInstance: {fileID: 471912539}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1047703312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1992,6 +2005,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1870729818 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5505827368767474785, guid: c542b6bc8d2e51c449c9ae93835326ff, type: 3}
+  m_PrefabInstance: {fileID: 471912539}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &34215506354449736
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,12 +13,11 @@ public class PosterInteractable : MonoBehaviour, IInteractable
     [SerializeField] private GameObject m_holoObj;
 
     public float zoomDuration = 5.0f;
+    private float m_cameraOriginalDist;
 
     private Vector3 m_originalCameraPos;
     private Quaternion m_originalCameraRota;
-    [SerializeField]private Transform m_cameraTarget;
-
-    public bool m_isInteracting;
+    [SerializeField] private Transform m_cameraTarget;
 
     public void Interact()
     {
@@ -33,16 +32,28 @@ public class PosterInteractable : MonoBehaviour, IInteractable
 
     private IEnumerator ObservePoster()
     {
-        m_player.SetActive(false);
-        m_holoObj.SetActive(false);
+        float elapsedTime = 0;
+        float rotationSpeedFactor = 0.15f;
+        
+        m_cameraOriginalDist = m_camera.GetComponent<CameraController>().currentDist;
+        
+        while (elapsedTime < zoomDuration)
+        {
+            m_camera.GetComponent<CameraController>().currentDist = Mathf.Lerp(m_cameraOriginalDist, m_camera.GetComponent<CameraController>().cameraMinDist, elapsedTime / zoomDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
         m_originalCameraRota = m_camera.transform.rotation;
         m_originalCameraPos = m_camera.transform.position;
         Vector3 targetPos = m_cameraTarget.position;
+
+        m_player.SetActive(false);
+        m_holoObj.SetActive(false);
+
         m_camera.GetComponent<CameraController>().enabled = false;
 
-
-        float elapsedTime = 0;
-        float rotationSpeedFactor = 0.15f;
+        elapsedTime = 0;
 
         while (elapsedTime < zoomDuration)
         {
@@ -62,7 +73,7 @@ public class PosterInteractable : MonoBehaviour, IInteractable
             m_camera.transform.rotation = Quaternion.Lerp(m_camera.transform.rotation, m_originalCameraRota, elapsedTime / zoomDuration * rotationSpeedFactor);
             elapsedTime += Time.deltaTime;
 
-            if(m_camera.transform.position == m_originalCameraPos && m_camera.transform.rotation == m_originalCameraRota)
+            if (m_camera.transform.position == m_originalCameraPos && m_camera.transform.rotation == m_originalCameraRota)
             {
                 m_player.SetActive(true);
                 m_holoObj.SetActive(true);

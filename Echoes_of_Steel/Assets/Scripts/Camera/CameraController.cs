@@ -15,13 +15,13 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float cameraChildHeight = 2f;
     [SerializeField] private float cameraChildOffset = 0.25f;
     [SerializeField] private float cameraMaxDist = 25f;
-    [SerializeField] private float cameraMinDist = 2f;
+    public float cameraMinDist = 2f;
     [SerializeField] private float cameraMaxTilt = 90f;
     [Range(0f, 4f)][SerializeField] private float cameraSpeed = 2f;
     [Range(0f, 4f)][SerializeField] private float zoomSpeed = 2f;
     [SerializeField] private float currentPan;
     [SerializeField] private float currentTilt = 10f;
-    [SerializeField] private float currentDist = 5f;
+    public float currentDist = 5f;
     [SerializeField] private float rotationDivider = 100;
     [SerializeField] private float collisionCushion = 0.35f;
     [SerializeField] private float adjustedDistance;
