@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class PooledObject : MonoBehaviour
+public class PlayerPooledObject : MonoBehaviour
 {
-    public GameObjectPool pool;
-
+    public PlayerBulletPool pool;
     private void OnDisable()
     {
         pool.ReturnToPool(this);

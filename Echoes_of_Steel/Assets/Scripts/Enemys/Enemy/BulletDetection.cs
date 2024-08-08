@@ -7,7 +7,9 @@ public class BulletDetection : MonoBehaviour
 
     public bool IsBulletIncoming()
     {
+        Debug.Log("IsBulletIncoming called");
         Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, bulletLayer);
+        Debug.Log($"Detected {hits.Length} bullets in IsBulletIncoming.");
         return hits.Length > 0;
     }
 

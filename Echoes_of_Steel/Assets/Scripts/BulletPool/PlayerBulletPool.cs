@@ -1,23 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "My Assets/GameObject Pool")]
-public class GameObjectPool : ScriptableObject
+[CreateAssetMenu(menuName = "BulletPools/Player Bullet Pool")]
+public class PlayerBulletPool : ScriptableObject
 {
     public GameObject prefab;
 
-    private List<PooledObject> objectsInPool = new List<PooledObject>();
-    private List<PooledObject> objectsInUse = new List<PooledObject>();
+    private List<PlayerPooledObject> objectsInPool = new List<PlayerPooledObject>();
+    private List<PlayerPooledObject> objectsInUse = new List<PlayerPooledObject>();
 
     public GameObject SpawnObject(Vector3 position, Quaternion rotation)
     {
-        PooledObject currentObject;
+        PlayerPooledObject currentObject;
 
         // Create a new object if none are available in the pool
         if (objectsInPool.Count <= 0)
         {
             GameObject newGO = Instantiate(prefab);
-            currentObject = newGO.AddComponent<PooledObject>();
+            currentObject = newGO.AddComponent<PlayerPooledObject>();
             currentObject.pool = this;
         }
         else
@@ -37,7 +37,7 @@ public class GameObjectPool : ScriptableObject
         return currentObject.gameObject;
     }
 
-    public void ReturnToPool(PooledObject objectToReturn)
+    public void ReturnToPool(PlayerPooledObject objectToReturn)
     {
         // If the object is already in the pool, return
         if (objectsInPool.Contains(objectToReturn))
@@ -51,7 +51,7 @@ public class GameObjectPool : ScriptableObject
         objectsInPool.Add(objectToReturn);
     }
 
-    public void RemoveObject(PooledObject objectToRemove)
+    public void RemoveObject(PlayerPooledObject objectToRemove)
     {
         objectsInPool.Remove(objectToRemove);
         objectsInUse.Remove(objectToRemove);

@@ -1,20 +1,36 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    public GameObjectPool bulletPool;
-    public Transform bulletSpawnPoint;
-    public Transform player;
+    public EnemyBulletPool enemyBulletPool;
+    public float fireRate = 1f;
     public float bulletDamage = 10f;
+    private float nextFireTime;
+    public Transform firePoint; // Der Punkt, von dem die Kugeln abgefeuert werden
+
+    private Transform player;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
     public NodeState Shoot()
     {
-        if (player == null) return NodeState.FAILURE;
+        if (Time.time > nextFireTime)
+        {
+            nextFireTime = Time.time + fireRate;
 
-        Vector3 direction = (player.position - bulletSpawnPoint.position).normalized;
-        GameObject bullet = bulletPool.SpawnObject(bulletSpawnPoint.position, Quaternion.LookRotation(direction));
-        bullet.GetComponent<Bullet>().Initialize(bulletDamage, direction);
+            // Berechne die Richtung zum Spieler
+            Vector3 direction = (player.position - firePoint.position).normalized;
 
-        return NodeState.SUCCESS;
+            // Hole eine Kugel aus dem Pool und initialisiere sie
+            GameObject bullet = enemyBulletPool.SpawnObject(firePoint.position, Quaternion.LookRotation(direction));
+            bullet.GetComponent<Bullet>().Initialize(bulletDamage, direction);
+
+            return NodeState.SUCCESS;
+        }
+        return NodeState.RUNNING;
     }
 }

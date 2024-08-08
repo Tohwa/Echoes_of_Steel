@@ -4,62 +4,58 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     private BTNode rootNode;
-
-    public Patrol patrol;
     public PlayerDetection playerDetection;
+    public Patrol patrol;
     public Attack attack;
-    public Dash dash;
     public BulletDetection bulletDetection;
-    private Transform player;
+    public Dash dash;
 
-    void Start()
+    private bool playerDetected = false;
+
+    private void Start()
     {
         rootNode = CreateBehaviorTree();
-        player = playerDetection.player.transform;
     }
 
-    void Update()
+    private void Update()
     {
-        rootNode.Evaluate();
+        NodeState state = rootNode.Evaluate();
+        Debug.Log($"Root node evaluated with state: {state}");
 
-        if (playerDetection.detectionMeter >= playerDetection.detectionThreshold)
+        // Aktualisiere den playerDetected-Status
+        playerDetected = playerDetection.detectionMeter >= playerDetection.detectionThreshold;
+
+        // Steuere die Patrouille basierend auf playerDetected
+        if (playerDetected)
         {
-            LookAtPlayer();
+            patrol.StopPatrolling();
         }
-    }
-
-    private void LookAtPlayer()
-    {
-        Vector3 direction = player.position - transform.position;
-        direction.y = 0;
-        if (direction.sqrMagnitude > 0.01f)
+        else
         {
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+            patrol.ResumePatrolling();
         }
     }
 
     private BTNode CreateBehaviorTree()
     {
-        // Patrouillieren und Roamen
-        ActionNode moveToNextWaypoint = new ActionNode(patrol.MoveToNextWaypoint);
-
-        // Spielerdetektion
+        // Player detection
         ActionNode updateDetectionMeter = new ActionNode(playerDetection.UpdateDetectionMeter);
-        ConditionNode playerDetected = new ConditionNode(() => playerDetection.detectionMeter >= playerDetection.detectionThreshold);
+        ConditionNode playerDetectedCondition = new ConditionNode(() => playerDetection.detectionMeter >= playerDetection.detectionThreshold);
 
-        // Angriff
+        // Attack
         ActionNode shoot = new ActionNode(attack.Shoot);
 
-        // Ausweichen
-        ConditionNode bulletIncoming = new ConditionNode(bulletDetection.IsBulletIncoming);
-        ActionNode dashAction = new ActionNode(dash.PerformDash);
+        // Evade
+        ConditionNode bulletIncoming = new ConditionNode(() => bulletDetection.IsBulletIncoming());
+        ActionNode dashAction = new ActionNode(() => dash.PerformDash());
 
         BTSequence dashSequence = new BTSequence(new List<BTNode> { bulletIncoming, dashAction });
 
-        // Zusammensetzen des Behavior Trees
+        // Attack and Evade
         BTSelector attackSelector = new BTSelector(new List<BTNode> { dashSequence, shoot });
-        BTSequence attackSequence = new BTSequence(new List<BTNode> { playerDetected, attackSelector });
+        BTSequence attackSequence = new BTSequence(new List<BTNode> { playerDetectedCondition, attackSelector });
+
+        // Main: Attack if player is detected, else Patrol
         BTSelector mainSelector = new BTSelector(new List<BTNode> { attackSequence, moveToNextWaypoint });
 
         return mainSelector;

@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class BTSequence : BTNode
 {
-    private List<BTNode> nodes = new List<BTNode>();
+    private List<BTNode> nodes;
 
     public BTSequence(List<BTNode> nodes)
     {
@@ -11,19 +12,20 @@ public class BTSequence : BTNode
 
     public override NodeState Evaluate()
     {
-        bool anyNodeRunning = false;
-
+        Debug.Log("Evaluating BTSequence Node...");
         foreach (BTNode node in nodes)
         {
-            switch (node.Evaluate())
+            NodeState nodeState = node.Evaluate();
+            Debug.Log($"BTSequence Node {node.GetType().Name} evaluated with state: {nodeState}");
+            if (nodeState == NodeState.FAILURE)
             {
-                case NodeState.FAILURE:
-                    return NodeState.FAILURE;
-                case NodeState.RUNNING:
-                    anyNodeRunning = true;
-                    break;
+                return NodeState.FAILURE;
+            }
+            if (nodeState == NodeState.RUNNING)
+            {
+                return NodeState.RUNNING;
             }
         }
-        return anyNodeRunning ? NodeState.RUNNING : NodeState.SUCCESS;
+        return NodeState.SUCCESS;
     }
 }

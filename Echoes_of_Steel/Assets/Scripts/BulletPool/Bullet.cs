@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
     public void Initialize(float damage, Vector3 direction)
     {
         weaponDamage = damage;
-        rb.velocity = direction * speed;
+        rb.velocity = direction.normalized * speed; // Normalisiert die Richtung und multipliziert mit der Geschwindigkeit
     }
 
     void Deactivate()
@@ -36,25 +36,8 @@ public class Bullet : MonoBehaviour
         if (target.TryGetComponent(out Entity enemy))
         {
             enemy.Health -= weaponDamage;
-
-            if (enemy.Health <= 0)
-            {
-                ApplyBreakEffect(target);
-            }
-        }
-        else
-        {
-            ApplyBreakEffect(target);
         }
 
         Deactivate();
-    }
-
-    private void ApplyBreakEffect(GameObject target)
-    {
-        if (target.TryGetComponent(out MeshDestroy meshDestroy))
-        {
-            meshDestroy.DestroyMesh();
-        }
     }
 }

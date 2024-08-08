@@ -18,17 +18,29 @@ public class Dash : MonoBehaviour
     {
         if (Time.time > lastDashTime + dashCooldown)
         {
-            Vector3 dashDirection = transform.right * dashDistance; // Dash zur Seite
-            Vector3 dashTarget = transform.position + dashDirection;
+            Vector3 dashDirection = GetDashDirection();
+            Vector3 dashTarget = transform.position + dashDirection * dashDistance;
 
             NavMeshHit hit;
             if (NavMesh.SamplePosition(dashTarget, out hit, dashDistance, 1))
             {
                 agent.Warp(hit.position);
                 lastDashTime = Time.time;
+                Debug.Log("Dash successful.");
                 return NodeState.SUCCESS;
             }
+            Debug.Log("Dash failed: No valid target position.");
+        }
+        else
+        {
+            Debug.Log("Dash on cooldown.");
         }
         return NodeState.FAILURE;
+    }
+
+    private Vector3 GetDashDirection()
+    {
+        // Dash zur Seite (90°-Winkel nach rechts)
+        return Quaternion.Euler(0, 90, 0) * transform.forward;
     }
 }

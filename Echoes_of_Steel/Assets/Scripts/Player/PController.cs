@@ -54,7 +54,7 @@ public class PController : MonoBehaviour
     public float weaponDamage;
     public float fireCooldown = 0.5f;
     private float lastFireTime;
-    public GameObjectPool bulletPool;
+    public PlayerBulletPool playerBulletPool;
     public Transform bulletSpawn;
 
     [Header("Hover Variables")]
@@ -155,7 +155,7 @@ public class PController : MonoBehaviour
         interact.performed += OnInteractInput;
         interact.canceled += OnInteractCancel;
         journal.performed += OnJournalInput;
-        pause.performed += OnPauseInput;
+        //pause.performed += OnPauseInput;
     }
     void OnDisable()
     {
@@ -185,7 +185,7 @@ public class PController : MonoBehaviour
         interact.performed -= OnInteractInput;
         interact.canceled -= OnInteractCancel;
         journal.performed -= OnJournalInput;
-        pause.performed -= OnPauseInput;
+        //pause.performed -= OnPauseInput;
     }
 
     private void OnMovementInput(InputAction.CallbackContext context)
@@ -391,10 +391,10 @@ public class PController : MonoBehaviour
     {
         DialogueManager.instance.OpenJournal();
     }
-    private void OnPauseInput(InputAction.CallbackContext context)
-    {
-        pauseMenuHandler.PauseGame();
-    }
+    //private void OnPauseInput(InputAction.CallbackContext context)
+    //{
+    //    pauseMenuHandler.PauseGame();
+    //}
 
     private void WeaponHandler()
     {
@@ -417,13 +417,13 @@ public class PController : MonoBehaviour
     {
         Vector3 spawnPosition = bulletSpawn.position;
         Quaternion spawnRotation = bulletSpawn.rotation;
-        GameObject bullet = bulletPool.SpawnObject(spawnPosition, spawnRotation);
+        GameObject bullet = playerBulletPool.SpawnObject(spawnPosition, spawnRotation);
 
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
         bulletComponent.Initialize(weaponDamage, bulletSpawn.forward);
     }
 
-    public bool GroundCheck()
+    public void GroundCheck()
     {
         float rayLength = 0.2f;
         float rayLengthLanding = 1f;
@@ -449,8 +449,6 @@ public class PController : MonoBehaviour
             animator.SetBool("IsLanding", false);
             isGrounded = false;
         }
-
-        return isGrounded;
     }
 
     private void OnDrawGizmos()
