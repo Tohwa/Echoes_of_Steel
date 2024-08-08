@@ -8,26 +8,26 @@ using UnityEngine.UI;
 
 public class OptionsMenuUIHandler : MonoBehaviour
 {
+    #region Variables
+    [Header("Menu Objects")]
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsMenu;
+    [SerializeField] private GameObject credits;
 
-    [SerializeField] private AudioMixer mainMixer;
-
+    [Header("Options menu Objects")]
     [SerializeField] private TextMeshProUGUI resText;
     [SerializeField] private TextMeshProUGUI qualityText;
     [SerializeField] private Toggle fullscreenToggle;
     [SerializeField] private Slider[] volumeSlider;
+    [SerializeField] private AudioMixer mainMixer;
 
-    private List<string> resOptions;
-
+    // Resolution & quality variables
     private Resolution[] resolutions;
+    private List<string> resOptions;
     private List<Resolution> compatibleResolutions = new List<Resolution>();
     private string[] qualities = { "Very Low", "Low", "Medium", "High", "Very High", "Ultra" };
-    //private bool resolutionSet;
-    //private int resolutionIndex;
-    //private int qualityIndex = 0;
-    //private bool toggleFullscreen = true;
 
+    // Static option variables
     private static bool resolutionSet;
     private static int resolutionIndex;
     private static int qualityIndex = 5;
@@ -36,17 +36,16 @@ public class OptionsMenuUIHandler : MonoBehaviour
     private static float musicVolume = 1f;
     private static float SFXVolume = 1f;
     private static float UIVolume = 1f;
-
+    #endregion
 
     private void Start()
     {
-        //volumeSlider.onValueChanged.AddListener(delegate { SetMasterVolume(volumeValue); });
-
         resolutions = Screen.resolutions;
 
         resOptions = new List<string>();
         int curResolutionIndex = 0;
 
+        // Create list of available resolutions
         for (int i = 0; i < resolutions.Length; i++)
         {
             string resOption = resolutions[i].width + "x" + resolutions[i].height;
@@ -61,6 +60,7 @@ public class OptionsMenuUIHandler : MonoBehaviour
             }
         }
 
+        // Search for current resolution
         for (int i = 0; i < compatibleResolutions.Count; i++)
         {
             if (compatibleResolutions[i].width == Screen.currentResolution.width && compatibleResolutions[i].height == Screen.currentResolution.height)
@@ -68,6 +68,8 @@ public class OptionsMenuUIHandler : MonoBehaviour
                 curResolutionIndex = i;
             }
         }
+
+        // Set resolution, if not already been set
         if (!resolutionSet)
         {
             resolutionIndex = curResolutionIndex;
@@ -75,6 +77,18 @@ public class OptionsMenuUIHandler : MonoBehaviour
         }
 
         UpdateUI();
+    }
+    public void UpdateUI()
+    {
+        resText.text = resOptions[resolutionIndex];
+        qualityText.text = qualities[qualityIndex];
+        SetQuality(qualityIndex);
+        fullscreenToggle.isOn = toggleFullscreen;
+        ToggleFullscreen(toggleFullscreen);
+        volumeSlider[0].value = masterVolume;
+        volumeSlider[1].value = musicVolume;
+        volumeSlider[2].value = SFXVolume;
+        volumeSlider[3].value = UIVolume;
     }
 
     public void SetMasterVolume(float _volume)
@@ -119,6 +133,7 @@ public class OptionsMenuUIHandler : MonoBehaviour
         toggleFullscreen = _toggleFullscreen;
     }
 
+    #region Buttons
     public void ResValueUp()
     {
         if (resolutionIndex < compatibleResolutions.Count - 1)
@@ -140,7 +155,7 @@ public class OptionsMenuUIHandler : MonoBehaviour
 
     public void QualityValueUp()
     {
-        if (qualityIndex < 6)
+        if (qualityIndex < 5)
         {
             qualityIndex++;
             qualityText.text = qualities[qualityIndex];
@@ -161,23 +176,10 @@ public class OptionsMenuUIHandler : MonoBehaviour
         SetResolution(resolutionIndex);
         SetQuality(qualityIndex);
     }
-
-    public void UpdateUI()
-    {
-        resText.text = resOptions[resolutionIndex];
-        qualityText.text = qualities[qualityIndex];
-        SetQuality(qualityIndex);
-        fullscreenToggle.isOn = toggleFullscreen;
-        ToggleFullscreen(toggleFullscreen);
-        volumeSlider[0].value = masterVolume;
-        volumeSlider[1].value = musicVolume;
-        volumeSlider[2].value = SFXVolume;
-        volumeSlider[3].value = UIVolume;
-    }
-
     public void BackToMenu()
     {
         optionsMenu.SetActive(false);
+        credits.SetActive(false);
         mainMenu.SetActive(true);
     }
 
@@ -185,5 +187,7 @@ public class OptionsMenuUIHandler : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+    #endregion
+
 
 }

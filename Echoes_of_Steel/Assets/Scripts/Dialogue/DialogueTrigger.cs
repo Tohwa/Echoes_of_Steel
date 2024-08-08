@@ -5,10 +5,11 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     public DialogueAsset[] dialogues;
-    //public DialogSettings settings;
+    public bool autoContinue;
+    public bool pauseGame;
 
     public void TriggerDialogue()
     {
-        DialogueManager.instance.StartDialogue(dialogues);
+        DialogueManager.instance.StartDialogue(dialogues, autoContinue, pauseGame);
     }
 }
