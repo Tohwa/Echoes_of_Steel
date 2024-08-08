@@ -7,6 +7,7 @@ public class MainMenuUIHandler : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsMenu;
+    [SerializeField] private GameObject credits;
 
     [SerializeField] private LoadingScreen loadingScreen;
 
@@ -19,6 +20,12 @@ public class MainMenuUIHandler : MonoBehaviour
     {
         mainMenu.SetActive(false);
         optionsMenu.SetActive(true);
+    }
+
+    public void OpenCredits()
+    {
+        mainMenu.SetActive(false);
+        credits.SetActive(true);
     }
 
     public void ExitGame()

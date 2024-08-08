@@ -10,6 +10,7 @@ public class OptionsMenuUIHandler : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsMenu;
+    [SerializeField] private GameObject credits;
 
     [SerializeField] private AudioMixer mainMixer;
 
@@ -178,6 +179,7 @@ public class OptionsMenuUIHandler : MonoBehaviour
     public void BackToMenu()
     {
         optionsMenu.SetActive(false);
+        credits.SetActive(false);
         mainMenu.SetActive(true);
     }
 
