@@ -71,11 +71,11 @@ public class PController : MonoBehaviour
     private bool roboHoverIsPlaying = false;
 
 
-    [Header("Interactable Variables")]
+    [Header("Interfaces")]
     private IInteractable interactable;
 
-    [Header("PauseMenuHandler Variable")]
-    public PauseMenuHandler pauseMenuHandler;
+    [Header("Scripts")]
+    private GameUIHandler gameUIHandler;
 
     #endregion
     private void Awake()
@@ -88,7 +88,7 @@ public class PController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         mainCamera = Camera.main;
-        pauseMenuHandler = FindObjectOfType<PauseMenuHandler>();
+        gameUIHandler = FindObjectOfType<GameUIHandler>();
     }
     private void Update()
     {
@@ -276,7 +276,7 @@ public class PController : MonoBehaviour
     }
     private void PerformJump()
     {
-        if (isGrounded || canDoubleJump)
+        if (isGrounded )
         {
             if (!isGrounded && canDoubleJump)
             {
@@ -355,9 +355,16 @@ public class PController : MonoBehaviour
 
         if (interactable != null && !DialogueManager.isActive)
         {
+            string name = interactable.name;
+            if (name.Contains("Memory"))
+            {
+                animator.SetBool("IsMemory", true);
 
-
-            animator.SetBool("IsInteracting", true);
+            }
+            else if (name.Contains("Poster"))
+            {
+                animator.SetBool("IsPoster", true);
+            }
 
             interactable.Interact();
             interactable = null;
@@ -368,7 +375,8 @@ public class PController : MonoBehaviour
     }
     private void OnInteractCancel(InputAction.CallbackContext context)
     {
-        animator.SetBool("IsInteracting", false);
+        animator.SetBool("IsMemory", false);
+        animator.SetBool("IsPoster", false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -389,11 +397,11 @@ public class PController : MonoBehaviour
 
     private void OnJournalInput(InputAction.CallbackContext context)
     {
-        DialogueManager.instance.OpenJournal();
+        gameUIHandler.OpenJournal();
     }
     private void OnPauseInput(InputAction.CallbackContext context)
     {
-        pauseMenuHandler.PauseGame();
+        gameUIHandler.PauseGame();
     }
 
     private void WeaponHandler()
@@ -426,9 +434,9 @@ public class PController : MonoBehaviour
     public bool GroundCheck()
     {
         float rayLength = 0.2f;
-        float rayLengthLanding = 1f;
+        float rayLengthLanding = 2f;
         Vector3 rayOrigin = capsuleCollider.bounds.center;
-        rayOrigin.y = capsuleCollider.bounds.min.y + 0.1f;
+        rayOrigin.y = capsuleCollider.bounds.min.y + 0.01f;
 
         if (Physics.Raycast(rayOrigin, Vector3.down, rayLength, Ground))
         {
@@ -441,7 +449,11 @@ public class PController : MonoBehaviour
         }
         else if (Physics.Raycast(rayOrigin, Vector3.down, rayLengthLanding, Ground))
         {
+            if(!isGrounded)
+            {
+
             animator.SetBool("IsLanding", true);
+            }
         }
         else
         {
@@ -467,7 +479,7 @@ public class PController : MonoBehaviour
         // Draw the GroundCheck ray
         Gizmos.color = Color.red;
         Vector3 rayOrigin = capsuleCollider.bounds.center;
-        rayOrigin.y = capsuleCollider.bounds.min.y + 0.1f; // Start the ray from just above the bottom of the collider
+        rayOrigin.y = capsuleCollider.bounds.min.y; // Start the ray from just above the bottom of the collider
         float rayLength = 0.2f;
         Gizmos.DrawLine(rayOrigin, rayOrigin + Vector3.down * rayLength);
     }

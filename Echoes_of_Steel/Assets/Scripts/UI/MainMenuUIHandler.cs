@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuUIHandler : MonoBehaviour
 {
+    [Header("Menu Objects")]
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject credits;
@@ -14,6 +15,8 @@ public class MainMenuUIHandler : MonoBehaviour
     public void StartGame()
     {
         loadingScreen.LoadScene(1);
+        GameManager.Instance = null;
+        DialogueManager.instance = null;
     }
 
     public void OpenOptionsMenu()

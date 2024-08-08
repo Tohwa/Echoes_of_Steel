@@ -4,25 +4,35 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class GameUIHandler : MonoBehaviour
 {
+    [Header("Memory Objects")]
     [SerializeField] private InteractionStatus interactionStatus;
     [SerializeField] private MemoryAsset memoryAsset;
     [SerializeField] private GameObject[] memories;
-    [SerializeField] private TextMeshProUGUI memoryText;
     [SerializeField] private Button[] buttons;
+    [SerializeField] private TextMeshProUGUI memoryText;
     [SerializeField] private Image memoryImage;
-    [SerializeField] private Image popUpImage;
+    [SerializeField] private GameObject panelMemory;
+    [SerializeField] private GameObject panelJournal;
+    [SerializeField] private Animator journalAnimator;
+
+    [Header("Pop-up Objects")]
     [SerializeField] private TextMeshProUGUI popUpText;
-    [SerializeField] private Sprite corruptedImage;
-    [SerializeField] private GameObject panel;
-    [SerializeField] private Animator journalAnim;
+    [SerializeField] private GameObject corruptedImage;
+    [SerializeField] private VideoPlayer shieldVideo;
+    [SerializeField] private VideoPlayer weaponVideo;
     [SerializeField] private Animator popUpAnimator;
+
+    [Header("Pause menu Objects")]
+    [SerializeField] private GameObject pauseMenu;
+
+    private bool journalIsOpen;
 
     private void Start()
     {
-
         buttons[0].onClick.AddListener(delegate { OpenMemory(0); });
         buttons[1].onClick.AddListener(delegate { OpenMemory(1); });
         buttons[2].onClick.AddListener(delegate { OpenMemory(2); });
@@ -34,6 +44,7 @@ public class GameUIHandler : MonoBehaviour
 
     private void Update()
     {
+        // Memories will get enabled with each scene
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
         {
             memories[0].SetActive(true);
@@ -56,7 +67,7 @@ public class GameUIHandler : MonoBehaviour
             memories[5].SetActive(true);
         }
 
-
+        // Checks if memory was collected
         if (interactionStatus.HasInteracted(memories[0].name))
         {
             memories[0].transform.GetChild(1).gameObject.SetActive(true);
@@ -83,13 +94,39 @@ public class GameUIHandler : MonoBehaviour
         }
     }
 
+    public void OpenJournal()
+    {
+        if (!journalIsOpen)
+        {
+            journalAnimator.SetBool("IsOpen", true);
+            panelJournal.SetActive(true);
+            journalIsOpen = true;
+            GameManager.Instance.gamePaused = true;
+
+        }
+        else
+        {
+            journalAnimator.SetBool("IsOpen", false);
+            panelJournal.SetActive(false);
+            journalIsOpen = false;
+            GameManager.Instance.gamePaused = false;
+
+        }
+    }
+
     public void OpenPopUp(bool _corrupted)
     {
         if (_corrupted)
         {
-            popUpImage.sprite = corruptedImage;
+            weaponVideo.gameObject.SetActive(false);
+            corruptedImage.SetActive(true);
             popUpText.text = "File corrupted!";
         }
+        else
+        {
+            weaponVideo.Play();
+        }
+        shieldVideo.Play();
         popUpAnimator.SetBool("OpenPopUp", true);
     }
 
@@ -103,13 +140,26 @@ public class GameUIHandler : MonoBehaviour
     {
         memoryImage.sprite = memoryAsset.memorySprites[_value];
         memoryText.text = memoryAsset.infoTexts[_value];
-        journalAnim.SetBool("IsMemoryOpen", true);
-        panel.SetActive(true);
+        journalAnimator.SetBool("IsMemoryOpen", true);
+        panelMemory.SetActive(true);
     }
 
     public void CloseMemory()
     {
-        journalAnim.SetBool("IsMemoryOpen", false);
-        panel.SetActive(false);
+        journalAnimator.SetBool("IsMemoryOpen", false);
+        panelMemory.SetActive(false);
+    }
+    public void PauseGame()
+    {
+        if (!GameManager.Instance.gamePaused)
+        {
+            pauseMenu.SetActive(true);
+            GameManager.Instance.gamePaused = true;
+        }
+        else
+        {
+            pauseMenu.SetActive(false);
+            GameManager.Instance.gamePaused = false;
+        }
     }
 }

@@ -7,7 +7,6 @@ public class DialogueTrigger : MonoBehaviour
     public DialogueAsset[] dialogues;
     public bool autoContinue;
     public bool pauseGame;
-    //public DialogSettings settings;
 
     public void TriggerDialogue()
     {
