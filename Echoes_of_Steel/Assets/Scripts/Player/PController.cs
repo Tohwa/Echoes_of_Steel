@@ -1,3 +1,4 @@
+using Adobe.Substance;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +12,9 @@ public class PController : MonoBehaviour
     public InputAction movement;
     public InputAction jump;
     public InputAction dash;
+    public InputAction aim;
     public InputAction shoot;
+    public InputAction shield;
     public InputAction hover;
     public InputAction interact;
     public InputAction journal;
@@ -21,6 +24,7 @@ public class PController : MonoBehaviour
     public Camera mainCamera;
     private Rigidbody rb;
     private CapsuleCollider capsuleCollider;
+    private Animator animator;
     public LayerMask Ground;
     private Vector2 moveInput;
     public bool isMoving;
@@ -35,7 +39,7 @@ public class PController : MonoBehaviour
 
     [Header("Jump Variables")]
     public float jumpForce = 5f;
-    private bool canDoubleJump;
+    [SerializeField] private bool canDoubleJump;
     private bool isJumping;
     public float jumpCooldown = 0.1f;
     private float lastJumpTime;
@@ -46,26 +50,26 @@ public class PController : MonoBehaviour
     public float manualGravity = -20f;
     private bool applyManualGravity;
 
-    [Header("Dash Variables")]
-    public float dashSpeed = 20f;
-    public float dashDuration = 0.2f;
-    public float dashCooldown = 1f;
-    private float dashTime;
-    private bool isDashing;
-    private float lastDashTime;
-
     [Header("Weapon Variables")]
     public float weaponDamage;
     public float fireCooldown = 0.5f;
     private float lastFireTime;
-    public bool automatic;
     public GameObjectPool bulletPool;
     public Transform bulletSpawn;
-    private Transform pCamera;
 
     [Header("Hover Variables")]
     public float hoverFallSpeed = 2f;
     private bool isHovering;
+
+    [Header("Wwise Events")]
+    public AK.Wwise.Event robotStep;
+    public AK.Wwise.Event robotJump;
+    public AK.Wwise.Event robotHover;
+    public float timeBetweenSteps;
+    private float lastFootstepTime = 0;
+    private bool roboStepIsPlaying = false;
+    private bool roboHoverIsPlaying = false;
+
 
     [Header("Interactable Variables")]
     private IInteractable interactable;
@@ -74,13 +78,16 @@ public class PController : MonoBehaviour
     public PauseMenuHandler pauseMenuHandler;
 
     #endregion
-
+    private void Awake()
+    {
+        lastFootstepTime = Time.time;
+    }
     private void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
         rb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
         mainCamera = Camera.main;
-        pCamera = Camera.main.transform;
         pauseMenuHandler = FindObjectOfType<PauseMenuHandler>();
     }
     private void Update()
@@ -105,14 +112,7 @@ public class PController : MonoBehaviour
     {
         if (!DialogueManager.isActive && !GameManager.Instance.gamePaused)
         {
-            if (isDashing)
-            {
-                Dash();
-            }
-            else
-            {
-                Move();
-            }
+            Move();
 
             if (isJumping)
             {
@@ -131,8 +131,9 @@ public class PController : MonoBehaviour
     {
         movement.Enable();
         jump.Enable();
-        dash.Enable();
+        aim.Enable();
         shoot.Enable();
+        shield.Enable();
         hover.Enable();
         interact.Enable();
         journal.Enable();
@@ -141,10 +142,18 @@ public class PController : MonoBehaviour
         jump.performed += OnJumpInput;
         movement.performed += OnMovementInput;
         movement.canceled += OnMovementInput;
-        dash.performed += OnDashInput;
         hover.performed += OnHoverHold;
         hover.canceled += OnHoverRelease;
+
+        aim.performed += OnAimHold;
+        aim.canceled += OnAimRelease;
+        shoot.performed += OnShootInput;
+        shoot.canceled += OnShootCancel;
+        shield.performed += OnShieldHold;
+        shield.canceled += OnShieldRelease;
+
         interact.performed += OnInteractInput;
+        interact.canceled += OnInteractCancel;
         journal.performed += OnJournalInput;
         pause.performed += OnPauseInput;
     }
@@ -152,8 +161,9 @@ public class PController : MonoBehaviour
     {
         movement.Disable();
         jump.Disable();
-        dash.Disable();
+        aim.Disable();
         shoot.Disable();
+        shield.Disable();
         hover.Disable();
         interact.Disable();
         journal.Disable();
@@ -162,10 +172,18 @@ public class PController : MonoBehaviour
         movement.performed -= OnMovementInput;
         movement.canceled -= OnMovementInput;
         jump.performed -= OnJumpInput;
-        dash.performed -= OnDashInput;
+
+        aim.performed -= OnAimHold;
+        aim.canceled -= OnAimRelease;
+        shoot.performed -= OnShootInput;
+        shoot.canceled -= OnShootCancel;
+        shield.performed -= OnShieldHold;
+        shield.canceled -= OnShieldRelease;
+
         hover.performed -= OnHoverHold;
         hover.canceled -= OnHoverRelease;
         interact.performed -= OnInteractInput;
+        interact.canceled -= OnInteractCancel;
         journal.performed -= OnJournalInput;
         pause.performed -= OnPauseInput;
     }
@@ -173,6 +191,7 @@ public class PController : MonoBehaviour
     private void OnMovementInput(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+
     }
     private void Move()
     {
@@ -190,10 +209,25 @@ public class PController : MonoBehaviour
         if (moveInput != Vector2.zero)
         {
             currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, acceleration * Time.deltaTime);
+            animator.SetBool("IsWalking", true);
+            if (!roboStepIsPlaying && isGrounded)
+            {
+                robotStep.Post(gameObject);
+                lastFootstepTime = Time.time;
+                roboStepIsPlaying = true;
+            }
+            else
+            {
+                if (Time.time - lastFootstepTime > timeBetweenSteps / moveSpeed)
+                {
+                    roboStepIsPlaying = false;
+                }
+            }
         }
         else
         {
             currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, deceleration * Time.deltaTime);
+            animator.SetBool("IsWalking", false);
         }
 
         if (currentVelocity != Vector3.zero)
@@ -203,6 +237,7 @@ public class PController : MonoBehaviour
         }
 
         rb.MovePosition(rb.position + currentVelocity * Time.fixedDeltaTime);
+
     }
 
     private void OnJumpInput(InputAction.CallbackContext context)
@@ -253,51 +288,52 @@ public class PController : MonoBehaviour
             lastJumpTime = Time.time;
             isJumping = false; // Reset jumping flag after the jump is performed
             applyManualGravity = true; // Start applying manual gravity after the jump
+            animator.SetBool("IsJumping", true);
+
+            robotJump.Post(gameObject);
         }
     }
 
-    private void OnDashInput(InputAction.CallbackContext context)
+    private void OnAimHold(InputAction.CallbackContext context)
     {
-        if (Time.time >= lastDashTime + dashCooldown)
-        {
-            isDashing = true;
-            dashTime = Time.time + dashDuration;
-            lastDashTime = Time.time;
-        }
+        animator.SetBool("IsAiming", true);
     }
-    private void Dash()
+    private void OnAimRelease(InputAction.CallbackContext context)
     {
-        if (Time.time < dashTime)
-        {
-            Vector3 forward = mainCamera.transform.forward;
-            Vector3 right = mainCamera.transform.right;
+        animator.SetBool("IsAiming", false);
+    }
 
-            forward.y = 0;
-            right.y = 0;
+    private void OnShieldHold(InputAction.CallbackContext context)
+    {
+        animator.SetBool("IsShielding", true);
+    }
+    private void OnShieldRelease(InputAction.CallbackContext context)
+    {
+        animator.SetBool("IsShielding", false);
 
-            forward.Normalize();
-            right.Normalize();
+    }
 
-            Vector3 dashDirection = forward * moveInput.y + right * moveInput.x;
-            dashDirection.Normalize();
+    private void OnShootInput(InputAction.CallbackContext context)
+    {
+        animator.SetBool("IsShooting", true);
+    }
+    private void OnShootCancel(InputAction.CallbackContext context)
+    {
+        animator.SetBool("IsShooting", false);
 
-            rb.MovePosition(rb.position + dashDirection * dashSpeed * Time.fixedDeltaTime);
-        }
-        else
-        {
-            isDashing = false;
-        }
     }
 
     private void OnHoverHold(InputAction.CallbackContext context)
     {
-        Debug.Log("Hovering started");
+        //Debug.Log("Hovering started");
         isHovering = true;
     }
     private void OnHoverRelease(InputAction.CallbackContext context)
     {
-        Debug.Log("Hovering stopped");
+        //Debug.Log("Hovering stopped");
         isHovering = false;
+        robotHover.Stop(gameObject);
+        roboHoverIsPlaying = false;
     }
     private void Hover()
     {
@@ -306,6 +342,11 @@ public class PController : MonoBehaviour
             Vector3 hoverVelocity = rb.velocity;
             hoverVelocity.y = Mathf.Max(hoverVelocity.y, -hoverFallSpeed);
             rb.velocity = hoverVelocity;
+            if (!roboHoverIsPlaying)
+            {
+                robotHover.Post(gameObject);
+                roboHoverIsPlaying = true;
+            }
         }
     }
 
@@ -314,17 +355,27 @@ public class PController : MonoBehaviour
 
         if (interactable != null && !DialogueManager.isActive)
         {
+
+
+            animator.SetBool("IsInteracting", true);
+
             interactable.Interact();
+            interactable = null;
+
             Debug.Log("Interacted with object");
         }
 
+    }
+    private void OnInteractCancel(InputAction.CallbackContext context)
+    {
+        animator.SetBool("IsInteracting", false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Interactable"))
         {
-            Debug.Log("Collided");
+            //Debug.Log("Collided");
             interactable = other.gameObject.GetComponent<IInteractable>();
         }
     }
@@ -349,14 +400,12 @@ public class PController : MonoBehaviour
     {
         if (!DialogueManager.isActive)
         {
-            if (automatic)
+            if (shoot.ReadValue<float>() > 0.1f && Time.time >= lastFireTime + fireCooldown)
             {
-                if (shoot.ReadValue<float>() > 0.1f && Time.time >= lastFireTime + fireCooldown)
-                {
-                    lastFireTime = Time.time;
-                    Shoot();
-                }
+                lastFireTime = Time.time;
+                Shoot();
             }
+
             else if (shoot.triggered && Time.time >= lastFireTime + fireCooldown)
             {
                 lastFireTime = Time.time;
@@ -377,16 +426,27 @@ public class PController : MonoBehaviour
     public bool GroundCheck()
     {
         float rayLength = 0.2f;
+        float rayLengthLanding = 1f;
         Vector3 rayOrigin = capsuleCollider.bounds.center;
         rayOrigin.y = capsuleCollider.bounds.min.y + 0.1f;
 
         if (Physics.Raycast(rayOrigin, Vector3.down, rayLength, Ground))
         {
             isGrounded = true;
+            animator.SetBool("IsJumping", false);
+            animator.SetBool("IsFalling", false);
+            animator.SetBool("IsLanding", false);
+
             applyManualGravity = false; // Stop applying manual gravity when grounded
+        }
+        else if (Physics.Raycast(rayOrigin, Vector3.down, rayLengthLanding, Ground))
+        {
+            animator.SetBool("IsLanding", true);
         }
         else
         {
+            animator.SetBool("IsFalling", true);
+            animator.SetBool("IsLanding", false);
             isGrounded = false;
         }
 
@@ -410,26 +470,5 @@ public class PController : MonoBehaviour
         rayOrigin.y = capsuleCollider.bounds.min.y + 0.1f; // Start the ray from just above the bottom of the collider
         float rayLength = 0.2f;
         Gizmos.DrawLine(rayOrigin, rayOrigin + Vector3.down * rayLength);
-
-        if (pCamera == null)
-        {
-            pCamera = Camera.main.transform;
-        }
-
-        Gizmos.color = Color.yellow;
-        Vector3 cameraRayOrigin = pCamera.position;
-        Vector3 cameraRayDirection = pCamera.forward;
-        Gizmos.DrawLine(cameraRayOrigin, cameraRayOrigin + cameraRayDirection * 10);
-
-        if (Physics.Raycast(cameraRayOrigin, pCamera.forward, out RaycastHit hitInfo))
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(hitInfo.point, 0.1f);
-        }
-        else
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(cameraRayOrigin + cameraRayDirection * 10, 0.1f);
-        }
     }
 }

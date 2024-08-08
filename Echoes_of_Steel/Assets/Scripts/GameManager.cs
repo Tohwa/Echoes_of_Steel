@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Scene = UnityEngine.SceneManagement.Scene;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,7 +21,6 @@ public class GameManager : MonoBehaviour
     public bool endingThree = false;
     public bool endingFour = false;
     public bool gamePaused = false;
-
     #endregion
 
     private void Awake()
@@ -28,7 +30,7 @@ public class GameManager : MonoBehaviour
             Destroy(this);
             return;
         }
-        
+
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
@@ -46,5 +48,7 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+
+        
     }
 }

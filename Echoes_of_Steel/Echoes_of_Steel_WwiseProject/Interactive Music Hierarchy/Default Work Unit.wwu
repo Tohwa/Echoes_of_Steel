@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{04583764-C90B-47F0-8A80-4B2B1083ED3E}" SchemaVersion="119">
+	<InteractiveMusic>
+		<WorkUnit Name="Default Work Unit" ID="{04583764-C90B-47F0-8A80-4B2B1083ED3E}" PersistMode="Standalone">
+			<ChildrenList>
+				<MusicSwitchContainer Name="Music" ID="{3A3B308C-98AF-44C2-B88A-498E46CA2F14}" ShortID="976813836">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4ADEB179-D2A5-4745-AEA3-4B4AAE53F876}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{A46F08A0-35BD-463C-8859-B9D0BA4FF2E6}"/>
+						</Reference>
+						<Reference Name="TransitionRoot">
+							<Custom>
+								<MusicTransition Name="Root" ID="{0125FF14-FCE6-4E0E-9636-82B104398FCF}">
+									<PropertyList>
+										<Property Name="IsFolder" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<MusicTransition Name="Transition" ID="{92A2B7ED-D9F3-4D79-9CA2-BA50F747CE93}">
+											<TransitionInfo/>
+										</MusicTransition>
+									</ChildrenList>
+									<TransitionInfo/>
+								</MusicTransition>
+							</Custom>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<MusicSegment Name="Chris Christodoulou - The Rain Formerly Known as Purple ｜ Risk of Rain 2 (2020)" ID="{D9B04D47-2601-4E64-977A-FDCD00E2414D}" ShortID="640404348">
+							<PropertyList>
+								<Property Name="EndPosition" Type="Real64" Value="478632.9375"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4ADEB179-D2A5-4745-AEA3-4B4AAE53F876}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{A46F08A0-35BD-463C-8859-B9D0BA4FF2E6}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<MusicTrack Name="Chris Christodoulou - The Rain Formerly Known as Purple ｜ Risk of Rain 2 (2020)" ID="{4364B886-D7D2-4B4C-8DF0-6954EA805A5D}" ShortID="150806431">
+									<ReferenceList>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{A46F08A0-35BD-463C-8859-B9D0BA4FF2E6}"/>
+										</Reference>
+										<Reference Name="TransitionRoot">
+											<Custom>
+												<MusicTransition Name="Root" ID="{F4DB83E0-12AF-4F2C-A51D-A36E8F5CAE8A}">
+													<PropertyList>
+														<Property Name="IsFolder" Type="bool" Value="True"/>
+													</PropertyList>
+													<TransitionInfo/>
+												</MusicTransition>
+											</Custom>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Chris Christodoulou - The Rain Formerly Known as Purple ｜ Risk of Rain 2 (2020)" ID="{BD8F7E69-F0A5-492D-8D47-787998252CBB}">
+											<Language>SFX</Language>
+											<AudioFile>Chris Christodoulou - The Rain Formerly Known as Purple ｜ Risk of Rain 2 (2020).wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="777691681"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Sequences">
+											<Reference>
+												<Local>
+													<MusicTrackSequence Name="" ID="{864C0424-A3BA-4F07-9485-E7F41C35F8A3}">
+														<ObjectLists>
+															<ObjectList Name="Clips">
+																<Reference>
+																	<Local>
+																		<MusicClip Name="Chris Christodoulou - The Rain Formerly Known as Purple ｜ Risk of Rain 2 (2020)" ID="{A1D83B97-FE55-4242-9D9F-E21DD2C47F39}">
+																			<PropertyList>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="478632.9375"/>
+																				<Property Name="FadeInMode" Type="int16" Value="0"/>
+																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																			</PropertyList>
+																			<AudioSourceRef Name="Chris Christodoulou - The Rain Formerly Known as Purple ｜ Risk of Rain 2 (2020)" ID="{BD8F7E69-F0A5-492D-8D47-787998252CBB}"/>
+																		</MusicClip>
+																	</Local>
+																</Reference>
+															</ObjectList>
+														</ObjectLists>
+													</MusicTrackSequence>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
+								</MusicTrack>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="Cues">
+									<Reference>
+										<Local>
+											<MusicCue Name="Entry Cue" ID="{A2A3152B-419A-40BA-8771-B5D11920C0E4}"/>
+										</Local>
+									</Reference>
+									<Reference>
+										<Local>
+											<MusicCue Name="Exit Cue" ID="{2C5A5C98-0E68-4C31-ADBB-3A6A1698B5BD}">
+												<PropertyList>
+													<Property Name="CueType" Type="int16" Value="1"/>
+													<Property Name="TimeMs" Type="Real64" Value="478632.9375"/>
+												</PropertyList>
+											</MusicCue>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+						</MusicSegment>
+						<MusicSegment Name="Climbing the Ginso Tree" ID="{F4C7FF4A-DA88-4D6B-AD92-F2FB3AADA90C}" ShortID="390271331">
+							<PropertyList>
+								<Property Name="EndPosition" Type="Real64" Value="339683.208333333"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4ADEB179-D2A5-4745-AEA3-4B4AAE53F876}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{A46F08A0-35BD-463C-8859-B9D0BA4FF2E6}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<MusicTrack Name="Climbing the Ginso Tree" ID="{C86DCE5F-A997-42D6-84A3-2BE3E424A7AA}" ShortID="903815024">
+									<ReferenceList>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{A46F08A0-35BD-463C-8859-B9D0BA4FF2E6}"/>
+										</Reference>
+										<Reference Name="TransitionRoot">
+											<Custom>
+												<MusicTransition Name="Root" ID="{5999004C-C42C-4231-A16C-519B060FCC3C}">
+													<PropertyList>
+														<Property Name="IsFolder" Type="bool" Value="True"/>
+													</PropertyList>
+													<TransitionInfo/>
+												</MusicTransition>
+											</Custom>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Climbing the Ginso Tree" ID="{B1AB8D5D-EA66-4059-A0DC-F53E7CAC5B48}">
+											<Language>SFX</Language>
+											<AudioFile>Climbing the Ginso Tree.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="394045573"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Sequences">
+											<Reference>
+												<Local>
+													<MusicTrackSequence Name="" ID="{AB160F77-D511-407A-B84F-DA23C7F23243}">
+														<ObjectLists>
+															<ObjectList Name="Clips">
+																<Reference>
+																	<Local>
+																		<MusicClip Name="Climbing the Ginso Tree" ID="{F0918E00-ED1A-4310-9EE7-4BCC592FDB40}">
+																			<PropertyList>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="339683.208333333"/>
+																				<Property Name="FadeInMode" Type="int16" Value="0"/>
+																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																			</PropertyList>
+																			<AudioSourceRef Name="Climbing the Ginso Tree" ID="{B1AB8D5D-EA66-4059-A0DC-F53E7CAC5B48}"/>
+																		</MusicClip>
+																	</Local>
+																</Reference>
+															</ObjectList>
+														</ObjectLists>
+													</MusicTrackSequence>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
+								</MusicTrack>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="Cues">
+									<Reference>
+										<Local>
+											<MusicCue Name="Entry Cue" ID="{47ABFD50-F199-4C4B-879E-A55D76194883}"/>
+										</Local>
+									</Reference>
+									<Reference>
+										<Local>
+											<MusicCue Name="Exit Cue" ID="{33031280-5766-4BFF-99A7-8F3074507E06}">
+												<PropertyList>
+													<Property Name="CueType" Type="int16" Value="1"/>
+													<Property Name="TimeMs" Type="Real64" Value="339683.208333333"/>
+												</PropertyList>
+											</MusicCue>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+						</MusicSegment>
+						<MusicSegment Name="Fi's Farewell Theme - The Legend of Zelda： Skyward Sword" ID="{A700DDCF-15E0-44C3-9A7E-3E192B1BBA62}" ShortID="534010741">
+							<PropertyList>
+								<Property Name="EndPosition" Type="Real64" Value="149106.958333333"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4ADEB179-D2A5-4745-AEA3-4B4AAE53F876}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{A46F08A0-35BD-463C-8859-B9D0BA4FF2E6}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<MusicTrack Name="Fi's Farewell Theme - The Legend of Zelda： Skyward Sword" ID="{0A710E26-21E2-4E42-8AD8-086CA9166C4D}" ShortID="385749005">
+									<ReferenceList>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{A46F08A0-35BD-463C-8859-B9D0BA4FF2E6}"/>
+										</Reference>
+										<Reference Name="TransitionRoot">
+											<Custom>
+												<MusicTransition Name="Root" ID="{78AE443A-3DC7-4AA9-84ED-2AAFCC46E902}">
+													<PropertyList>
+														<Property Name="IsFolder" Type="bool" Value="True"/>
+													</PropertyList>
+													<TransitionInfo/>
+												</MusicTransition>
+											</Custom>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Fi's Farewell Theme - The Legend of Zelda： Skyward Sword" ID="{DFEE5E3A-CCA8-4FD3-AF67-2DD1B2FFE3DE}">
+											<Language>SFX</Language>
+											<AudioFile>Fi's Farewell Theme - The Legend of Zelda： Skyward Sword.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="645624257"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Sequences">
+											<Reference>
+												<Local>
+													<MusicTrackSequence Name="" ID="{580EE305-9FAD-4119-A9D6-5A3AD005FC9A}">
+														<ObjectLists>
+															<ObjectList Name="Clips">
+																<Reference>
+																	<Local>
+																		<MusicClip Name="Fi's Farewell Theme - The Legend of Zelda： Skyward Sword" ID="{AE004232-D991-477E-950C-477D1C5B6D1A}">
+																			<PropertyList>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="149106.958333333"/>
+																				<Property Name="FadeInMode" Type="int16" Value="0"/>
+																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																			</PropertyList>
+																			<AudioSourceRef Name="Fi's Farewell Theme - The Legend of Zelda： Skyward Sword" ID="{DFEE5E3A-CCA8-4FD3-AF67-2DD1B2FFE3DE}"/>
+																		</MusicClip>
+																	</Local>
+																</Reference>
+															</ObjectList>
+														</ObjectLists>
+													</MusicTrackSequence>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
+								</MusicTrack>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="Cues">
+									<Reference>
+										<Local>
+											<MusicCue Name="Entry Cue" ID="{2F269880-B546-4B41-9A24-3C3EAEECF724}"/>
+										</Local>
+									</Reference>
+									<Reference>
+										<Local>
+											<MusicCue Name="Exit Cue" ID="{B5B9E02F-3C78-48B4-9A6A-F3ADAD6150D1}">
+												<PropertyList>
+													<Property Name="CueType" Type="int16" Value="1"/>
+													<Property Name="TimeMs" Type="Real64" Value="149106.958333333"/>
+												</PropertyList>
+											</MusicCue>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+						</MusicSegment>
+						<MusicSegment Name="Horizon Zero Dawn OST： Battle Music 1" ID="{8AFFD4DC-ECC5-4362-B76B-9F88316DC225}" ShortID="265342777">
+							<PropertyList>
+								<Property Name="EndPosition" Type="Real64" Value="330118.104166667"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4ADEB179-D2A5-4745-AEA3-4B4AAE53F876}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{A46F08A0-35BD-463C-8859-B9D0BA4FF2E6}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<MusicTrack Name="Horizon Zero Dawn OST： Battle Music 1" ID="{5A4F41ED-D7F4-4440-8012-2C46C0855427}" ShortID="83361422">
+									<ReferenceList>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{A46F08A0-35BD-463C-8859-B9D0BA4FF2E6}"/>
+										</Reference>
+										<Reference Name="TransitionRoot">
+											<Custom>
+												<MusicTransition Name="Root" ID="{69EDD051-1282-4763-9ECC-07D07352AEE5}">
+													<PropertyList>
+														<Property Name="IsFolder" Type="bool" Value="True"/>
+													</PropertyList>
+													<TransitionInfo/>
+												</MusicTransition>
+											</Custom>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Horizon Zero Dawn OST： Battle Music 1" ID="{0EE01069-C1FF-4472-9122-FEDE71D454C2}">
+											<Language>SFX</Language>
+											<AudioFile>Horizon Zero Dawn OST： Battle Music 1.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="905726718"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Sequences">
+											<Reference>
+												<Local>
+													<MusicTrackSequence Name="" ID="{9928BB1F-433A-4943-87BB-5ABFAA470C25}">
+														<ObjectLists>
+															<ObjectList Name="Clips">
+																<Reference>
+																	<Local>
+																		<MusicClip Name="Horizon Zero Dawn OST： Battle Music 1" ID="{0B9738B7-4367-4815-85A2-21C7667C9850}">
+																			<PropertyList>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="330118.104166667"/>
+																				<Property Name="FadeInMode" Type="int16" Value="0"/>
+																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																			</PropertyList>
+																			<AudioSourceRef Name="Horizon Zero Dawn OST： Battle Music 1" ID="{0EE01069-C1FF-4472-9122-FEDE71D454C2}"/>
+																		</MusicClip>
+																	</Local>
+																</Reference>
+															</ObjectList>
+														</ObjectLists>
+													</MusicTrackSequence>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
+								</MusicTrack>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="Cues">
+									<Reference>
+										<Local>
+											<MusicCue Name="Entry Cue" ID="{18B3846E-133D-4FE2-BA18-BFB69E8655B5}"/>
+										</Local>
+									</Reference>
+									<Reference>
+										<Local>
+											<MusicCue Name="Exit Cue" ID="{39AE1BBE-A925-4B1D-9C18-34309F573595}">
+												<PropertyList>
+													<Property Name="CueType" Type="int16" Value="1"/>
+													<Property Name="TimeMs" Type="Real64" Value="330118.104166667"/>
+												</PropertyList>
+											</MusicCue>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+						</MusicSegment>
+						<MusicSegment Name="Tidecaller ｜ Music - League of Legends" ID="{F84DF46C-5977-43CF-B557-9E762D898C52}" ShortID="743781592">
+							<PropertyList>
+								<Property Name="EndPosition" Type="Real64" Value="247640.833333333"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4ADEB179-D2A5-4745-AEA3-4B4AAE53F876}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{A46F08A0-35BD-463C-8859-B9D0BA4FF2E6}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<MusicTrack Name="Tidecaller ｜ Music - League of Legends" ID="{F3BFC9A1-DBFD-41BF-A9CF-0F786FE6DE90}" ShortID="243127151">
+									<ReferenceList>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{A46F08A0-35BD-463C-8859-B9D0BA4FF2E6}"/>
+										</Reference>
+										<Reference Name="TransitionRoot">
+											<Custom>
+												<MusicTransition Name="Root" ID="{1979ED71-6A53-4C37-8DDB-677787EE0DBA}">
+													<PropertyList>
+														<Property Name="IsFolder" Type="bool" Value="True"/>
+													</PropertyList>
+													<TransitionInfo/>
+												</MusicTransition>
+											</Custom>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Tidecaller ｜ Music - League of Legends" ID="{C84989F0-0B98-48F1-AEBD-DF1ACCAA154F}">
+											<Language>SFX</Language>
+											<AudioFile>Tidecaller ｜ Music - League of Legends.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="394813369"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Sequences">
+											<Reference>
+												<Local>
+													<MusicTrackSequence Name="" ID="{B8995BED-1F20-47EA-A34C-9C950C5B74D6}">
+														<ObjectLists>
+															<ObjectList Name="Clips">
+																<Reference>
+																	<Local>
+																		<MusicClip Name="Tidecaller ｜ Music - League of Legends" ID="{3F29E626-4F22-4152-98AE-B511A6315115}">
+																			<PropertyList>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="247640.833333333"/>
+																				<Property Name="FadeInMode" Type="int16" Value="0"/>
+																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																			</PropertyList>
+																			<AudioSourceRef Name="Tidecaller ｜ Music - League of Legends" ID="{C84989F0-0B98-48F1-AEBD-DF1ACCAA154F}"/>
+																		</MusicClip>
+																	</Local>
+																</Reference>
+															</ObjectList>
+														</ObjectLists>
+													</MusicTrackSequence>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
+								</MusicTrack>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="Cues">
+									<Reference>
+										<Local>
+											<MusicCue Name="Entry Cue" ID="{872BC89B-B8FF-42A4-8ECB-CD02F450B71E}"/>
+										</Local>
+									</Reference>
+									<Reference>
+										<Local>
+											<MusicCue Name="Exit Cue" ID="{9242E743-0B76-4BA6-BF52-47C22FF84639}">
+												<PropertyList>
+													<Property Name="CueType" Type="int16" Value="1"/>
+													<Property Name="TimeMs" Type="Real64" Value="247640.833333333"/>
+												</PropertyList>
+											</MusicCue>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+						</MusicSegment>
+					</ChildrenList>
+					<StateInfo>
+						<StateGroupList>
+							<StateGroupInfo>
+								<StateGroupRef Name="Battle" ID="{4F976276-6D58-485A-A2BB-E8E6246238A5}"/>
+							</StateGroupInfo>
+							<StateGroupInfo>
+								<StateGroupRef Name="Level1" ID="{4A325D9E-77BC-49D2-9C5E-7B49F284C531}"/>
+							</StateGroupInfo>
+							<StateGroupInfo>
+								<StateGroupRef Name="Level2" ID="{5B12EAFC-9D2F-4AB2-94CF-C6A0C41313A6}"/>
+							</StateGroupInfo>
+							<StateGroupInfo>
+								<StateGroupRef Name="Level3" ID="{CC9FB904-914B-42A4-9F9A-83328422C751}"/>
+							</StateGroupInfo>
+						</StateGroupList>
+						<CustomStateList>
+							<CustomState>
+								<StateRef Name="No" ID="{F3E0B20C-C17A-40C9-BD81-B79B425938C2}"/>
+								<CustomState Name="" ID="{D0060430-9C02-4D4B-B233-166B1BA5D88B}" ShortID="772635339">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64" Value="-108"/>
+									</PropertyList>
+								</CustomState>
+							</CustomState>
+							<CustomState>
+								<StateRef Name="Yes" ID="{B8C4DFB3-B7A0-4697-9E02-9FF64BC556F3}"/>
+								<CustomState Name="" ID="{E452FDB0-A004-4F2E-988E-3B6546B14497}" ShortID="515093492"/>
+							</CustomState>
+							<CustomState>
+								<StateRef Name="Yes" ID="{5C08B602-0505-481F-8B68-30B79B31DC6B}"/>
+								<CustomState Name="" ID="{9646FD02-4E84-4EF4-BF74-1B5533686B15}" ShortID="966031500"/>
+							</CustomState>
+							<CustomState>
+								<StateRef Name="No" ID="{577206BF-686D-49FD-864C-6A34E04BFBF6}"/>
+								<CustomState Name="" ID="{23DA22F5-B5C1-4E26-A8B0-DA4D9AE94411}" ShortID="1001810855">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64" Value="-108"/>
+									</PropertyList>
+								</CustomState>
+							</CustomState>
+							<CustomState>
+								<StateRef Name="Yes" ID="{AED64D1E-7DCD-4A1C-9BF8-51137782AD0F}"/>
+								<CustomState Name="" ID="{E1140BA1-04F8-4B1E-B586-6F02774333B4}" ShortID="790224495"/>
+							</CustomState>
+							<CustomState>
+								<StateRef Name="No" ID="{62B3589D-C9B8-4A3D-AF30-7DC795301D35}"/>
+								<CustomState Name="" ID="{A5071C04-C30B-43F4-8431-1D2E47876573}" ShortID="970338755">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64" Value="-108"/>
+									</PropertyList>
+								</CustomState>
+							</CustomState>
+							<CustomState>
+								<StateRef Name="Yes" ID="{1DA6A79E-FE7E-4A52-B505-E8482B27A35B}"/>
+								<CustomState Name="" ID="{7ECE165B-10CD-400D-AA12-6E92A6E70D17}" ShortID="13992655"/>
+							</CustomState>
+							<CustomState>
+								<StateRef Name="No" ID="{DD6F2F23-0617-4F6A-ADB1-35E5D2FEB5A9}"/>
+								<CustomState Name="" ID="{5E2D21C8-D5E8-4CA4-B4B4-7EB830785018}" ShortID="629892035">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64" Value="-108"/>
+									</PropertyList>
+								</CustomState>
+							</CustomState>
+						</CustomStateList>
+					</StateInfo>
+				</MusicSwitchContainer>
+			</ChildrenList>
+		</WorkUnit>
+	</InteractiveMusic>
+</WwiseDocument>

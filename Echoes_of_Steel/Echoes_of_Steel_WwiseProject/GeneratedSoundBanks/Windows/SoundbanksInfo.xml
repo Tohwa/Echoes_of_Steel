@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
+	<RootPaths>
+		<ProjectRoot>../..</ProjectRoot>
+		<SourceFilesRoot>../../.cache/Windows</SourceFilesRoot>
+		<SoundBanksRoot>.</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>.</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<SoundBanks>
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{EAE5F9BC-A43D-EE3F-B92C-DE1663E84122}">
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+			<Plugins>
+				<AudioDevices>
+					<Plugin Id="2317455096" Name="No_Output" LibName="No Output" LibId="11862023"/>
+					<Plugin Id="3859886410" Name="System" LibName="System" LibId="11403271"/>
+				</AudioDevices>
+			</Plugins>
+			<Busses>
+				<Bus Id="3803692087" Name="Master Audio Bus"/>
+			</Busses>
+			<StateGroups>
+				<StateGroup Id="2678230380" Name="Level3">
+					<States>
+						<State Id="748895195" Name="None"/>
+						<State Id="979470758" Name="Yes"/>
+						<State Id="1668749452" Name="No"/>
+					</States>
+				</StateGroup>
+				<StateGroup Id="2678230381" Name="Level2">
+					<States>
+						<State Id="748895195" Name="None"/>
+						<State Id="979470758" Name="Yes"/>
+						<State Id="1668749452" Name="No"/>
+					</States>
+				</StateGroup>
+				<StateGroup Id="2678230382" Name="Level1">
+					<States>
+						<State Id="748895195" Name="None"/>
+						<State Id="979470758" Name="Yes"/>
+						<State Id="1668749452" Name="No"/>
+					</States>
+				</StateGroup>
+				<StateGroup Id="2937832959" Name="Battle">
+					<States>
+						<State Id="748895195" Name="None"/>
+						<State Id="979470758" Name="Yes"/>
+						<State Id="1668749452" Name="No"/>
+					</States>
+				</StateGroup>
+			</StateGroups>
+		</SoundBank>
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{C8C7B1FD-915A-9CC4-13C8-0C2F87D30706}">
+			<ShortName>Main</ShortName>
+			<Path>Main.bnk</Path>
+			<Media>
+				<File Id="449807354" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Robo hover 1.wav</ShortName>
+					<CachePath>SFX/Robo hover 1_813E9DA6.wem</CachePath>
+				</File>
+				<File Id="791378521" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Robo Jump 1.wav</ShortName>
+					<CachePath>SFX/Robo Jump 1_2A3D8510.wem</CachePath>
+				</File>
+				<File Id="948792964" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Robo Step Bounce.wav</ShortName>
+					<CachePath>SFX/Robo Step Bounce_818F3B66.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="2288942901" Name="Play_Robo_Hover" DurationType="OneShot" DurationMin="58.664295" DurationMax="58.664295">
+					<MediaRefs>
+						<MediaRef Id="449807354"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1722793177" Name="Play_Robo_Jump" DurationType="OneShot" DurationMin="0.5322751" DurationMax="0.59745866">
+					<MediaRefs>
+						<MediaRef Id="791378521"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="78199759" Name="Play_Robo_Step" DurationType="OneShot" DurationMin="1.8144454" DurationMax="2.1577513">
+					<MediaRefs>
+						<MediaRef Id="948792964"/>
+					</MediaRefs>
+				</Event>
+			</Events>
+		</SoundBank>
+	</SoundBanks>
+	<FileHash>{EDCE7FDD-6973-C594-EB42-3DC9B22BA46E}</FileHash>
+</SoundBanksInfo>
