@@ -5,20 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuUIHandler : MonoBehaviour
 {
+    [Header("Menu Objects")]
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsMenu;
+    [SerializeField] private GameObject credits;
 
     [SerializeField] private LoadingScreen loadingScreen;
 
     public void StartGame()
     {
         loadingScreen.LoadScene(1);
+        GameManager.Instance = null;
+        DialogueManager.instance = null;
     }
 
     public void OpenOptionsMenu()
     {
         mainMenu.SetActive(false);
         optionsMenu.SetActive(true);
+    }
+
+    public void OpenCredits()
+    {
+        mainMenu.SetActive(false);
+        credits.SetActive(true);
     }
 
     public void ExitGame()
