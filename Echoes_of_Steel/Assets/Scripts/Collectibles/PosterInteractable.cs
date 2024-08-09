@@ -11,6 +11,7 @@ public class PosterInteractable : MonoBehaviour, IInteractable
     private GameObject m_player;
     private GameObject m_camera;
     [SerializeField] private GameObject m_holoObj;
+    [SerializeField] private GameObject interactMessage;
 
     public float zoomDuration = 5.0f;
     private float m_cameraOriginalDist;
@@ -90,5 +91,15 @@ public class PosterInteractable : MonoBehaviour, IInteractable
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        interactMessage.gameObject.SetActive(true);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        interactMessage.gameObject.SetActive(false);
     }
 }
