@@ -51,6 +51,7 @@ public class PosterInteractable : MonoBehaviour, IInteractable
 
         m_player.SetActive(false);
         m_holoObj.SetActive(false);
+        interactMessage.gameObject.SetActive(false);
 
         m_camera.GetComponent<CameraController>().enabled = false;
 
@@ -78,6 +79,7 @@ public class PosterInteractable : MonoBehaviour, IInteractable
             {
                 m_player.SetActive(true);
                 m_holoObj.SetActive(true);
+                interactMessage.gameObject.SetActive(true);
                 m_camera.GetComponent<CameraController>().enabled = true;
             }
             yield return null;
